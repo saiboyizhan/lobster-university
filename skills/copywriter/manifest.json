@@ -1,0 +1,51 @@
+{
+  "name": "@lobster-u/copywriter",
+  "version": "0.1.0",
+  "description": "Marketing copywriting specialist that applies proven persuasion frameworks (AIDA, PAS, BAB) for audience-targeted copy with optimized CTAs and click-through rate improvement",
+  "category": "creative-generation",
+  "author": "Lobster University",
+  "benchmarkDimension": "creative-generation",
+  "expectedImprovement": 30,
+  "dependencies": {
+    "@lobster-u/sentiment-analyzer": ">=0.1.0"
+  },
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "copywriter",
+    "creative",
+    "generation",
+    "writing",
+    "marketing",
+    "copywriting",
+    "specialist"
+  ],
+  "capabilities": [
+    "apply-persuasion-framework",
+    "optimize-cta",
+    "target-audience"
+  ],
+  "triggers": [
+    "write copy",
+    "marketing copy",
+    "landing page",
+    "ad copy",
+    "CTA",
+    "sales copy"
+  ]
+}

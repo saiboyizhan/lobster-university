@@ -1,0 +1,14 @@
+{
+  "name": "@lobster-u/selfoptimize",
+  "version": "0.1.0",
+  "description": "Self-improvement through error logging, pattern detection, and learning extraction",
+  "category": "meta",
+  "author": "Lobster University",
+  "benchmarkDimension": "meta",
+  "expectedImprovement": 40,
+  "dependencies": {},
+  "compatibility": { "openclaw": ">=0.5.0", "claudeCode": ">=1.0.0" },
+  "tags": ["self-improvement", "learning", "error-detection", "optimization"],
+  "capabilities": ["error-logging", "pattern-detection", "learning-extraction", "memory-promotion"],
+  "triggers": ["optimize", "improve", "learn from mistakes", "self improve", "get better"]
+}

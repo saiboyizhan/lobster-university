@@ -1,0 +1,35 @@
+{
+  "name": "@lobster-u/translator",
+  "version": "0.1.0",
+  "description": "Context-aware, human-level translation with terminology consistency, register adaptation, and cultural localization for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "content-processing"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/translator"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/translator",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

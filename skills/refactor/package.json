@@ -1,0 +1,38 @@
+{
+  "name": "@lobster-u/refactor",
+  "version": "0.1.0",
+  "description": "Automated code refactoring with design pattern application, complexity reduction, and behavioral equivalence verification for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "programming-assistance"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "dependencies": {
+    "@lobster-u/code-review": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/refactor"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/refactor",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

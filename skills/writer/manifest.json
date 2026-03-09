@@ -1,0 +1,51 @@
+{
+  "name": "@lobster-u/writer",
+  "version": "0.1.0",
+  "description": "Structured article writing with evidence-based argumentation, consistent style, and quality improvement of 60% for OpenClaw Agent",
+  "category": "creative-generation",
+  "author": "Lobster University",
+  "benchmarkDimension": "creative-generation",
+  "expectedImprovement": 60,
+  "dependencies": {
+    "@lobster-u/summarizer": ">=0.1.0",
+    "@lobster-u/keyword-extractor": ">=0.1.0"
+  },
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "writer",
+    "creative",
+    "generation",
+    "writing",
+    "structured",
+    "article",
+    "evidence-based"
+  ],
+  "capabilities": [
+    "structure-article",
+    "evidence-argumentation",
+    "style-consistency"
+  ],
+  "triggers": [
+    "write an article",
+    "write about",
+    "compose",
+    "draft article",
+    "blog post"
+  ]
+}

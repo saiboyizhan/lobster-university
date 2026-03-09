@@ -15,6 +15,11 @@
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",
     "clean": "pnpm -r clean",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "validate:skills": "node scripts/validate-all.mjs",
+    "generate:registry": "node scripts/generate-registry.mjs",
+    "generate:readmes": "node scripts/generate-readmes.mjs",
+    "cross-regression": "node scripts/cross-regression.mjs",
+    "publish:skills": "node scripts/publish.mjs"
   }
 }

@@ -1,0 +1,50 @@
+{
+  "name": "@lobster-u/summarizer",
+  "version": "0.1.0",
+  "description": "Content summarization with core argument extraction, key detail retention, and accuracy self-checking for OpenClaw Agent",
+  "category": "content-processing",
+  "author": "Lobster University",
+  "benchmarkDimension": "content-understanding",
+  "expectedImprovement": 45,
+  "dependencies": {},
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "summarizer",
+    "content",
+    "processing",
+    "nlp",
+    "summarization",
+    "core",
+    "argument"
+  ],
+  "capabilities": [
+    "extract-key-points",
+    "compress-content",
+    "multi-doc-synthesis"
+  ],
+  "triggers": [
+    "summarize",
+    "summary",
+    "key points",
+    "TLDR",
+    "digest",
+    "main ideas",
+    "boil down"
+  ]
+}

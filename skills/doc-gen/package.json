@@ -1,0 +1,38 @@
+{
+  "name": "@lobster-u/doc-gen",
+  "version": "0.1.0",
+  "description": "Automated documentation generation for APIs, READMEs, changelogs, and code-level docs — raising doc completeness from 30% to 90% for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "programming-assistance"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "dependencies": {
+    "@lobster-u/code-gen": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/doc-gen"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/doc-gen",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

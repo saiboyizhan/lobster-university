@@ -1,0 +1,38 @@
+{
+  "name": "@lobster-u/social-media",
+  "version": "0.1.0",
+  "description": "Platform-adapted social media content creation with optimal hashtags, timing, and engagement optimization for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "creative-generation"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "dependencies": {
+    "@lobster-u/copywriter": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/social-media"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/social-media",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

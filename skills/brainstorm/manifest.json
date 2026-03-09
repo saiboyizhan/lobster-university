@@ -1,0 +1,50 @@
+{
+  "name": "@lobster-u/brainstorm",
+  "version": "0.1.0",
+  "description": "Multi-dimensional ideation and brainstorming with structured creativity frameworks, feasibility assessment, and idea clustering for OpenClaw Agent",
+  "category": "creative-generation",
+  "author": "Lobster University",
+  "benchmarkDimension": "creative-generation",
+  "expectedImprovement": 40,
+  "dependencies": {},
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "brainstorm",
+    "creative",
+    "generation",
+    "writing",
+    "multi-dimensional",
+    "ideation",
+    "brainstorming"
+  ],
+  "capabilities": [
+    "generate-ideas",
+    "lateral-thinking",
+    "concept-mapping"
+  ],
+  "triggers": [
+    "brainstorm",
+    "generate ideas",
+    "ideation",
+    "think of ways",
+    "creative solutions",
+    "come up with ideas",
+    "brainstorming session"
+  ]
+}

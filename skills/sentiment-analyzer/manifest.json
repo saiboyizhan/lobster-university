@@ -1,0 +1,52 @@
+{
+  "name": "@lobster-u/sentiment-analyzer",
+  "version": "0.1.0",
+  "description": "Fine-grained sentiment recognition and opinion mining with aspect-based analysis, sarcasm detection, and polarity classification for OpenClaw Agent",
+  "category": "content-processing",
+  "author": "Lobster University",
+  "benchmarkDimension": "content-understanding",
+  "expectedImprovement": 30,
+  "dependencies": {},
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "sentiment",
+    "analyzer",
+    "content",
+    "processing",
+    "nlp",
+    "fine-grained",
+    "recognition",
+    "opinion"
+  ],
+  "capabilities": [
+    "detect-sentiment",
+    "analyze-emotion",
+    "score-polarity"
+  ],
+  "triggers": [
+    "sentiment",
+    "opinion mining",
+    "analyze tone",
+    "polarity",
+    "sentiment analysis",
+    "emotional tone",
+    "opinion detection",
+    "feeling analysis"
+  ]
+}

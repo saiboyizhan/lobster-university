@@ -49,7 +49,9 @@ lobster-university/
 4. **Review** — 自查代码质量、安全、性能
 5. **Commit** — conventional commits 格式
 
-### 2. TDD Workflow (推荐)
+### 2. TDD Workflow (强制)
+
+所有代码逻辑必须 TDD，先写测试再写实现。纯内容/配置搬运除外。
 
 ```
 RED   → 先写一个会失败的测试

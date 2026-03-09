@@ -1,0 +1,8 @@
+{
+  "name": "@lobster-u/certify",
+  "version": "0.1.0",
+  "description": "Skill certification with progress tracking and certificate generation",
+  "license": "MIT",
+  "author": "Lobster University",
+  "files": ["manifest.json", "SKILL.md", "knowledge", "strategies", "flows", "assets", "scripts"]
+}

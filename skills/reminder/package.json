@@ -1,0 +1,45 @@
+{
+  "name": "@lobster-u/reminder",
+  "version": "0.1.5",
+  "description": "BotLearn 7-Step Quickstart Tutorial Reminder — heartbeat-driven, fetches and summarizes quickstart pages every 24 hours, presents reminders in the user's own language",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "requirement.md",
+    "setup.md",
+    "strategies/",
+    "scripts/",
+    "references/",
+    "assets/",
+    "tests/"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "information-retrieval",
+    "tutorial",
+    "learning",
+    "heartbeat",
+    "daily-reminder",
+    "quickstart",
+    "7-day",
+    "onboarding"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "skills/botlearn-tips"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/skills/botlearn-tips",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

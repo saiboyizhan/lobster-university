@@ -1,0 +1,55 @@
+{
+  "name": "@lobster-u/debugger",
+  "version": "0.1.0",
+  "description": "Root cause analysis, bug diagnosis, and fix suggestion for OpenClaw Agent — improves debugging efficiency 5x with systematic hypothesis-driven investigation",
+  "category": "code-assistance",
+  "author": "Lobster University",
+  "benchmarkDimension": "code-generation",
+  "expectedImprovement": 500,
+  "dependencies": {
+    "@lobster-u/code-review": ">=0.1.0"
+  },
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "debugger",
+    "code",
+    "programming",
+    "development",
+    "root",
+    "cause",
+    "analysis"
+  ],
+  "capabilities": [
+    "diagnose-bugs",
+    "root-cause-analysis",
+    "suggest-fixes"
+  ],
+  "triggers": [
+    "debug",
+    "fix bug",
+    "why is this failing",
+    "error",
+    "stack trace",
+    "exception",
+    "not working",
+    "unexpected behavior",
+    "crash",
+    "broken"
+  ]
+}

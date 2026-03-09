@@ -1,0 +1,35 @@
+{
+  "name": "@lobster-u/code-review",
+  "version": "0.1.0",
+  "description": "Systematic code review identifying security vulnerabilities, performance issues, and code smells with human-level coverage for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "programming-assistance"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/code-review"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/code-review",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "name": "@lobster-u/code-gen",
+  "version": "0.1.0",
+  "description": "Complete code generation with proper architecture, error handling, type safety, and test accompaniment for OpenClaw Agent",
+  "category": "code-assistance",
+  "author": "Lobster University",
+  "benchmarkDimension": "code-generation",
+  "expectedImprovement": 50,
+  "dependencies": {},
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "code",
+    "gen",
+    "programming",
+    "development",
+    "complete",
+    "generation",
+    "proper"
+  ],
+  "capabilities": [
+    "generate-code",
+    "scaffold-project",
+    "implement-algorithm"
+  ],
+  "triggers": [
+    "write code",
+    "generate function",
+    "create API",
+    "implement feature",
+    "code this"
+  ]
+}

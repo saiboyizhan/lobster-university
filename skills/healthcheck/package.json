@@ -1,0 +1,8 @@
+{
+  "name": "@lobster-u/healthcheck",
+  "version": "0.1.0",
+  "description": "Agent health inspection across hardware, config, security, skills, and autonomy",
+  "license": "MIT",
+  "author": "Lobster University",
+  "files": ["manifest.json", "SKILL.md", "scripts"]
+}

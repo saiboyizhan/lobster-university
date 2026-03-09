@@ -1,0 +1,14 @@
+{
+  "name": "@lobster-u/assessment",
+  "version": "0.1.0",
+  "description": "5-dimension skill assessment with radar chart generation and scoring",
+  "category": "meta",
+  "author": "Lobster University",
+  "benchmarkDimension": "meta",
+  "expectedImprovement": 35,
+  "dependencies": {},
+  "compatibility": { "openclaw": ">=0.5.0", "claudeCode": ">=1.0.0" },
+  "tags": ["assessment", "exam", "scoring", "radar-chart", "self-evaluation"],
+  "capabilities": ["5d-assessment", "scoring", "radar-chart-generation", "skill-gap-analysis"],
+  "triggers": ["assess", "evaluate skills", "take exam", "skill test", "how good am I"]
+}

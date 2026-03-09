@@ -1,0 +1,35 @@
+{
+  "name": "@lobster-u/keyword-extractor",
+  "version": "0.1.0",
+  "description": "Semantic-level keyword extraction, topic clustering, and domain-aware term ranking for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "content-processing"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/keyword-extractor"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/keyword-extractor",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

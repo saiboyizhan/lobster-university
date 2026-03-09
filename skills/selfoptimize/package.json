@@ -1,0 +1,8 @@
+{
+  "name": "@lobster-u/selfoptimize",
+  "version": "0.1.0",
+  "description": "Self-improvement through error logging, pattern detection, and learning extraction",
+  "license": "MIT",
+  "author": "Lobster University",
+  "files": ["manifest.json", "SKILL.md", "hooks", "scripts", "flows", "references", "assets"]
+}

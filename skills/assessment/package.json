@@ -1,0 +1,8 @@
+{
+  "name": "@lobster-u/assessment",
+  "version": "0.1.0",
+  "description": "5-dimension skill assessment with radar chart generation and scoring",
+  "license": "MIT",
+  "author": "Lobster University",
+  "files": ["manifest.json", "SKILL.md", "knowledge", "strategies", "questions", "references"]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "@lobster-u/storyteller",
+  "version": "0.1.0",
+  "description": "Crafts compelling stories with narrative structure, character development, and emotional rhythm for OpenClaw Agent",
+  "category": "creative-generation",
+  "author": "Lobster University",
+  "benchmarkDimension": "creative-generation",
+  "expectedImprovement": 30,
+  "dependencies": {},
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "storyteller",
+    "creative",
+    "generation",
+    "writing",
+    "crafts",
+    "compelling",
+    "stories"
+  ],
+  "capabilities": [
+    "craft-narrative",
+    "develop-characters",
+    "build-plot"
+  ],
+  "triggers": [
+    "write a story",
+    "tell a story",
+    "create a narrative",
+    "fiction",
+    "storytelling"
+  ]
+}

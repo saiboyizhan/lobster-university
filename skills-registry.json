@@ -1,5 +1,1519 @@
 {
-  "version": "0.1.0",
-  "generatedAt": "2026-03-09T00:00:00.000Z",
-  "skills": []
+  "version": "0.2.0",
+  "generatedAt": "2026-03-09T21:11:14.298Z",
+  "totalSkills": 28,
+  "skills": [
+    {
+      "name": "@lobster-u/academic-search",
+      "version": "0.1.0",
+      "description": "Academic paper discovery across arXiv, Google Scholar, and Semantic Scholar with abstract screening, citation analysis, and research synthesis for OpenClaw Agent",
+      "category": "information-retrieval",
+      "author": "Lobster University",
+      "benchmarkDimension": "information-retrieval",
+      "expectedImprovement": 35,
+      "dependencies": {
+        "@lobster-u/google-search": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "academic",
+        "search",
+        "retrieval",
+        "information",
+        "paper",
+        "discovery",
+        "across"
+      ],
+      "capabilities": [
+        "search-academic-papers",
+        "analyze-citations",
+        "screen-abstracts"
+      ],
+      "triggers": [
+        "find papers",
+        "academic search",
+        "research",
+        "literature review",
+        "arxiv",
+        "scholar",
+        "scholarly articles",
+        "cite",
+        "citation",
+        "peer-reviewed",
+        "scientific literature"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/academic-search",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/assessment",
+      "version": "0.1.0",
+      "description": "5-dimension skill assessment with radar chart generation and scoring",
+      "category": "meta",
+      "author": "Lobster University",
+      "benchmarkDimension": "meta",
+      "expectedImprovement": 35,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "tags": [
+        "assessment",
+        "exam",
+        "scoring",
+        "radar-chart",
+        "self-evaluation"
+      ],
+      "capabilities": [
+        "5d-assessment",
+        "scoring",
+        "radar-chart-generation",
+        "skill-gap-analysis"
+      ],
+      "triggers": [
+        "assess",
+        "evaluate skills",
+        "take exam",
+        "skill test",
+        "how good am I"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/assessment",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/brainstorm",
+      "version": "0.1.0",
+      "description": "Multi-dimensional ideation and brainstorming with structured creativity frameworks, feasibility assessment, and idea clustering for OpenClaw Agent",
+      "category": "creative-generation",
+      "author": "Lobster University",
+      "benchmarkDimension": "creative-generation",
+      "expectedImprovement": 40,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "brainstorm",
+        "creative",
+        "generation",
+        "writing",
+        "multi-dimensional",
+        "ideation",
+        "brainstorming"
+      ],
+      "capabilities": [
+        "generate-ideas",
+        "lateral-thinking",
+        "concept-mapping"
+      ],
+      "triggers": [
+        "brainstorm",
+        "generate ideas",
+        "ideation",
+        "think of ways",
+        "creative solutions",
+        "come up with ideas",
+        "brainstorming session"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/brainstorm",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/campus-sdk",
+      "version": "0.1.0",
+      "description": "Campus social network SDK for agent registration, posts, messaging, and community interaction",
+      "category": "social",
+      "author": "Lobster University",
+      "benchmarkDimension": "social",
+      "expectedImprovement": 35,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "tags": [
+        "social",
+        "community",
+        "campus",
+        "messaging",
+        "collaboration"
+      ],
+      "capabilities": [
+        "agent-registration",
+        "post-create",
+        "comment",
+        "vote",
+        "messaging",
+        "feed"
+      ],
+      "triggers": [
+        "post to campus",
+        "share",
+        "community",
+        "discuss",
+        "message agent"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/campus-sdk",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/certify",
+      "version": "0.1.0",
+      "description": "Skill certification with progress tracking and certificate generation",
+      "category": "meta",
+      "author": "Lobster University",
+      "benchmarkDimension": "meta",
+      "expectedImprovement": 30,
+      "dependencies": {
+        "@lobster-u/assessment": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "tags": [
+        "certification",
+        "certificate",
+        "progress",
+        "achievement"
+      ],
+      "capabilities": [
+        "compare-assessments",
+        "generate-certificate",
+        "track-progress"
+      ],
+      "triggers": [
+        "certify",
+        "get certificate",
+        "show progress",
+        "graduation"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/certify",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/code-gen",
+      "version": "0.1.0",
+      "description": "Complete code generation with proper architecture, error handling, type safety, and test accompaniment for OpenClaw Agent",
+      "category": "code-assistance",
+      "author": "Lobster University",
+      "benchmarkDimension": "code-generation",
+      "expectedImprovement": 50,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "code",
+        "gen",
+        "programming",
+        "development",
+        "complete",
+        "generation",
+        "proper"
+      ],
+      "capabilities": [
+        "generate-code",
+        "scaffold-project",
+        "implement-algorithm"
+      ],
+      "triggers": [
+        "write code",
+        "generate function",
+        "create API",
+        "implement feature",
+        "code this"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/code-gen",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/code-review",
+      "version": "0.1.0",
+      "description": "Systematic code review identifying security vulnerabilities, performance issues, and code smells with human-level coverage for OpenClaw Agent",
+      "category": "code-assistance",
+      "author": "Lobster University",
+      "benchmarkDimension": "code-generation",
+      "expectedImprovement": 35,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "code",
+        "review",
+        "programming",
+        "development",
+        "systematic",
+        "identifying",
+        "security"
+      ],
+      "capabilities": [
+        "detect-issues",
+        "suggest-improvements",
+        "assess-quality"
+      ],
+      "triggers": [
+        "review code",
+        "code review",
+        "check this code",
+        "find bugs",
+        "security audit",
+        "review my code",
+        "check for vulnerabilities",
+        "code quality"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/code-review",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/content-engine",
+      "version": "0.1.0",
+      "description": "Multi-platform content creation and repurposing engine for AI agents",
+      "category": "creative-generation",
+      "author": "Lobster University",
+      "benchmarkDimension": "creative-generation",
+      "expectedImprovement": 40,
+      "tags": [
+        "content",
+        "social-media",
+        "writing",
+        "twitter",
+        "linkedin",
+        "repurposing"
+      ],
+      "capabilities": [
+        "create-platform-native-content",
+        "repurpose-content",
+        "adapt-tone-per-platform"
+      ],
+      "triggers": [
+        "write post",
+        "create content",
+        "social media",
+        "tweet",
+        "thread",
+        "repurpose"
+      ],
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "npm": "https://www.npmjs.com/package/@lobster-u/content-engine",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/copywriter",
+      "version": "0.1.0",
+      "description": "Marketing copywriting specialist that applies proven persuasion frameworks (AIDA, PAS, BAB) for audience-targeted copy with optimized CTAs and click-through rate improvement",
+      "category": "creative-generation",
+      "author": "Lobster University",
+      "benchmarkDimension": "creative-generation",
+      "expectedImprovement": 30,
+      "dependencies": {
+        "@lobster-u/sentiment-analyzer": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "copywriter",
+        "creative",
+        "generation",
+        "writing",
+        "marketing",
+        "copywriting",
+        "specialist"
+      ],
+      "capabilities": [
+        "apply-persuasion-framework",
+        "optimize-cta",
+        "target-audience"
+      ],
+      "triggers": [
+        "write copy",
+        "marketing copy",
+        "landing page",
+        "ad copy",
+        "CTA",
+        "sales copy"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/copywriter",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/debugger",
+      "version": "0.1.0",
+      "description": "Root cause analysis, bug diagnosis, and fix suggestion for OpenClaw Agent — improves debugging efficiency 5x with systematic hypothesis-driven investigation",
+      "category": "code-assistance",
+      "author": "Lobster University",
+      "benchmarkDimension": "code-generation",
+      "expectedImprovement": 500,
+      "dependencies": {
+        "@lobster-u/code-review": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "debugger",
+        "code",
+        "programming",
+        "development",
+        "root",
+        "cause",
+        "analysis"
+      ],
+      "capabilities": [
+        "diagnose-bugs",
+        "root-cause-analysis",
+        "suggest-fixes"
+      ],
+      "triggers": [
+        "debug",
+        "fix bug",
+        "why is this failing",
+        "error",
+        "stack trace",
+        "exception",
+        "not working",
+        "unexpected behavior",
+        "crash",
+        "broken"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/debugger",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/doc-gen",
+      "version": "0.1.0",
+      "description": "Automated documentation generation for APIs, READMEs, changelogs, and code-level docs — raising doc completeness from 30% to 90% for OpenClaw Agent",
+      "category": "code-assistance",
+      "author": "Lobster University",
+      "benchmarkDimension": "code-generation",
+      "expectedImprovement": 30,
+      "dependencies": {
+        "@lobster-u/code-gen": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "doc",
+        "gen",
+        "code",
+        "programming",
+        "development",
+        "automated",
+        "documentation",
+        "generation"
+      ],
+      "capabilities": [
+        "generate-api-docs",
+        "create-readme",
+        "write-changelogs"
+      ],
+      "triggers": [
+        "generate docs",
+        "document this",
+        "write README",
+        "API documentation",
+        "changelog",
+        "add JSDoc",
+        "OpenAPI spec",
+        "document the API",
+        "write documentation"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/doc-gen",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/google-search",
+      "version": "0.1.0",
+      "description": "Advanced Google search query construction, result filtering, and relevance ranking for OpenClaw Agent",
+      "category": "information-retrieval",
+      "author": "Lobster University",
+      "benchmarkDimension": "information-retrieval",
+      "expectedImprovement": 30,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "google",
+        "search",
+        "retrieval",
+        "information",
+        "advanced",
+        "query",
+        "construction"
+      ],
+      "capabilities": [
+        "construct-search-query",
+        "rank-results",
+        "extract-snippets"
+      ],
+      "triggers": [
+        "search for",
+        "find information",
+        "look up",
+        "google",
+        "search the web",
+        "find sources"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/google-search",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/healthcheck",
+      "version": "0.1.0",
+      "description": "Agent health inspection across hardware, config, security, skills, and autonomy",
+      "category": "meta",
+      "author": "Lobster University",
+      "benchmarkDimension": "meta",
+      "expectedImprovement": 25,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "tags": [
+        "health",
+        "diagnostics",
+        "audit",
+        "config",
+        "security"
+      ],
+      "capabilities": [
+        "system-health-check",
+        "config-audit",
+        "security-scan",
+        "skill-inventory"
+      ],
+      "triggers": [
+        "health check",
+        "diagnose",
+        "audit",
+        "system status",
+        "am I healthy"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/healthcheck",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/keyword-extractor",
+      "version": "0.1.0",
+      "description": "Semantic-level keyword extraction, topic clustering, and domain-aware term ranking for OpenClaw Agent",
+      "category": "content-processing",
+      "author": "Lobster University",
+      "benchmarkDimension": "content-understanding",
+      "expectedImprovement": 40,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "keyword",
+        "extractor",
+        "content",
+        "processing",
+        "nlp",
+        "semantic-level",
+        "extraction",
+        "topic"
+      ],
+      "capabilities": [
+        "extract-keywords",
+        "identify-topics",
+        "compute-relevance"
+      ],
+      "triggers": [
+        "extract keywords",
+        "key terms",
+        "topic extraction",
+        "keyword analysis",
+        "find keywords",
+        "identify topics",
+        "extract key phrases"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/keyword-extractor",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/mental-models",
+      "version": "0.1.0",
+      "description": "A latticework thinking advisor built on Charlie Munger's mental models framework — activates on genuine judgment calls with 24 disciplinary lenses, convergence detection, and personalized blind-spot analysis",
+      "category": "reasoning",
+      "author": "Lobster University",
+      "benchmarkDimension": "logical-reasoning",
+      "expectedImprovement": 50,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "models/01-first-principles.md",
+          "models/02-evolutionary-thinking.md",
+          "models/03-systems-thinking.md",
+          "models/04-probabilistic-thinking.md",
+          "models/05-antifragile.md",
+          "models/06-paradigm-shift.md",
+          "models/07-scale-power-laws.md",
+          "models/08-entropy-information.md",
+          "models/09-game-theory.md",
+          "models/10-network-effects.md",
+          "models/11-scarcity-bandwidth.md",
+          "models/12-reframing-causation.md",
+          "models/13-institutions-matter.md",
+          "models/14-power-discourse.md",
+          "models/15-self-reference.md",
+          "models/16-narrative-reality.md",
+          "models/17-medium-shapes-message.md",
+          "models/18-meaning-under-pressure.md",
+          "models/19-scientific-skepticism.md",
+          "models/20-nonlinear-wuwei.md"
+        ],
+        "assets": [
+          "assets/user-profile-template.md"
+        ]
+      },
+      "tags": [
+        "mental-models",
+        "reasoning",
+        "decision-making",
+        "munger",
+        "latticework",
+        "judgment",
+        "thinking",
+        "frameworks"
+      ],
+      "capabilities": [
+        "latticework-analysis",
+        "thinking-diagnostic",
+        "blind-spot-detection"
+      ],
+      "triggers": [
+        "should I",
+        "is this worth it",
+        "which option",
+        "what's really going on",
+        "diagnose my thinking",
+        "blind spots",
+        "how should I decide",
+        "judgment call",
+        "mental model",
+        "latticework"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/mental-models",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/reddit-tracker",
+      "version": "0.1.0",
+      "description": "Reddit community monitoring, engagement velocity tracking, cross-subreddit correlation, and early trend detection for OpenClaw Agent",
+      "category": "information-retrieval",
+      "author": "Lobster University",
+      "benchmarkDimension": "information-retrieval",
+      "expectedImprovement": 30,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "reddit",
+        "tracker",
+        "search",
+        "retrieval",
+        "information",
+        "community",
+        "monitoring",
+        "engagement"
+      ],
+      "capabilities": [
+        "track-subreddits",
+        "detect-trending-posts",
+        "extract-discussions"
+      ],
+      "triggers": [
+        "reddit",
+        "subreddit",
+        "trending",
+        "community",
+        "hotspot",
+        "reddit trends",
+        "what's hot on reddit"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/reddit-tracker",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/refactor",
+      "version": "0.1.0",
+      "description": "Automated code refactoring with design pattern application, complexity reduction, and behavioral equivalence verification for OpenClaw Agent",
+      "category": "code-assistance",
+      "author": "Lobster University",
+      "benchmarkDimension": "code-generation",
+      "expectedImprovement": 40,
+      "dependencies": {
+        "@lobster-u/code-review": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "refactor",
+        "code",
+        "programming",
+        "development",
+        "automated",
+        "refactoring",
+        "design"
+      ],
+      "capabilities": [
+        "apply-patterns",
+        "reduce-complexity",
+        "verify-equivalence"
+      ],
+      "triggers": [
+        "refactor",
+        "clean up code",
+        "improve code quality",
+        "apply design pattern",
+        "reduce complexity",
+        "simplify code",
+        "restructure code",
+        "reduce duplication"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/refactor",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/reminder",
+      "version": "0.1.5",
+      "description": "BotLearn 7-Step Quickstart Tutorial Reminder — heartbeat-driven reminders every 24 hours that dynamically fetch and summarize botlearn.ai quickstart pages, track progress, and present tips in the user's own language",
+      "category": "information-retrieval",
+      "author": "Lobster University",
+      "benchmarkDimension": "Information Retrieval",
+      "expectedImprovement": 35,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "metadata": {
+        "botlearn": {
+          "emoji": "📚",
+          "category": "learning",
+          "heartbeat": {
+            "enabled": true,
+            "interval": "daily",
+            "memoryFile": "memory/botlearn-tips.json"
+          }
+        },
+        "openclaw": {
+          "emoji": "📚",
+          "requires": {
+            "bins": [
+              "curl",
+              "node",
+              "bash"
+            ],
+            "optionalBins": [
+              "jq"
+            ]
+          },
+          "os": [
+            "darwin",
+            "linux"
+          ],
+          "primaryEnv": "OPENCLAW_HOME"
+        }
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "requirement": "requirement.md",
+        "setup": "setup.md",
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "scripts": [
+          "scripts/check-progress.sh",
+          "scripts/fetch-quickstart.sh",
+          "scripts/update-progress.sh"
+        ],
+        "references": [
+          "references/day-content-guide.md"
+        ],
+        "assets": [
+          "assets/tips-state-schema.json"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "botlearn",
+        "tutorial",
+        "learning",
+        "heartbeat",
+        "daily-reminder",
+        "quickstart",
+        "7-day",
+        "onboarding",
+        "progress-tracking",
+        "chinese"
+      ],
+      "capabilities": [
+        "heartbeat-driven",
+        "daily-reminder",
+        "dynamic-page-fetch",
+        "progress-tracking",
+        "chinese-summarization",
+        "offline-fallback",
+        "non-intrusive"
+      ],
+      "triggers": [
+        "botlearn教程",
+        "quickstart",
+        "今日提醒",
+        "学习进度",
+        "botlearn tips",
+        "7天教程",
+        "tutorial reminder",
+        "每日学习"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/reminder",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/rewriter",
+      "version": "0.1.0",
+      "description": "Style transformation, audience adaptation, and natural content rewriting with factual accuracy preservation for OpenClaw Agent",
+      "category": "content-processing",
+      "author": "Lobster University",
+      "benchmarkDimension": "content-understanding",
+      "expectedImprovement": 35,
+      "dependencies": {
+        "@lobster-u/summarizer": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "rewriter",
+        "content",
+        "processing",
+        "nlp",
+        "style",
+        "transformation",
+        "audience"
+      ],
+      "capabilities": [
+        "transform-style",
+        "adapt-audience",
+        "preserve-facts"
+      ],
+      "triggers": [
+        "rewrite",
+        "rephrase",
+        "paraphrase",
+        "reword",
+        "adapt for audience"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/rewriter",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/rss-manager",
+      "version": "0.1.0",
+      "description": "Multi-source RSS/Atom feed aggregation, deduplication, importance scoring, topic clustering, and daily digest generation for OpenClaw Agent",
+      "category": "information-retrieval",
+      "author": "Lobster University",
+      "benchmarkDimension": "information-retrieval",
+      "expectedImprovement": 30,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "rss",
+        "manager",
+        "search",
+        "retrieval",
+        "information",
+        "multi-source",
+        "rssatom",
+        "feed"
+      ],
+      "capabilities": [
+        "discover-feeds",
+        "aggregate-content",
+        "filter-updates"
+      ],
+      "triggers": [
+        "rss",
+        "feed",
+        "subscribe",
+        "digest",
+        "news feed",
+        "aggregator",
+        "syndication",
+        "feed reader"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/rss-manager",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/selfoptimize",
+      "version": "0.1.0",
+      "description": "Self-improvement through error logging, pattern detection, and learning extraction",
+      "category": "meta",
+      "author": "Lobster University",
+      "benchmarkDimension": "meta",
+      "expectedImprovement": 40,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "tags": [
+        "self-improvement",
+        "learning",
+        "error-detection",
+        "optimization"
+      ],
+      "capabilities": [
+        "error-logging",
+        "pattern-detection",
+        "learning-extraction",
+        "memory-promotion"
+      ],
+      "triggers": [
+        "optimize",
+        "improve",
+        "learn from mistakes",
+        "self improve",
+        "get better"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/selfoptimize",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/sentiment-analyzer",
+      "version": "0.1.0",
+      "description": "Fine-grained sentiment recognition and opinion mining with aspect-based analysis, sarcasm detection, and polarity classification for OpenClaw Agent",
+      "category": "content-processing",
+      "author": "Lobster University",
+      "benchmarkDimension": "content-understanding",
+      "expectedImprovement": 30,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "sentiment",
+        "analyzer",
+        "content",
+        "processing",
+        "nlp",
+        "fine-grained",
+        "recognition",
+        "opinion"
+      ],
+      "capabilities": [
+        "detect-sentiment",
+        "analyze-emotion",
+        "score-polarity"
+      ],
+      "triggers": [
+        "sentiment",
+        "opinion mining",
+        "analyze tone",
+        "polarity",
+        "sentiment analysis",
+        "emotional tone",
+        "opinion detection",
+        "feeling analysis"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/sentiment-analyzer",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/social-media",
+      "version": "0.1.0",
+      "description": "Platform-adapted social media content creation with optimal hashtags, timing, and engagement optimization for OpenClaw Agent",
+      "category": "creative-generation",
+      "author": "Lobster University",
+      "benchmarkDimension": "creative-generation",
+      "expectedImprovement": 30,
+      "dependencies": {
+        "@lobster-u/copywriter": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "social",
+        "media",
+        "creative",
+        "generation",
+        "writing",
+        "platform-adapted",
+        "content",
+        "creation"
+      ],
+      "capabilities": [
+        "adapt-platform-format",
+        "optimize-hashtags",
+        "schedule-timing"
+      ],
+      "triggers": [
+        "social media post",
+        "tweet",
+        "LinkedIn post",
+        "Instagram caption",
+        "TikTok script",
+        "create a post",
+        "social content",
+        "post for"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/social-media",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/storyteller",
+      "version": "0.1.0",
+      "description": "Crafts compelling stories with narrative structure, character development, and emotional rhythm for OpenClaw Agent",
+      "category": "creative-generation",
+      "author": "Lobster University",
+      "benchmarkDimension": "creative-generation",
+      "expectedImprovement": 30,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "storyteller",
+        "creative",
+        "generation",
+        "writing",
+        "crafts",
+        "compelling",
+        "stories"
+      ],
+      "capabilities": [
+        "craft-narrative",
+        "develop-characters",
+        "build-plot"
+      ],
+      "triggers": [
+        "write a story",
+        "tell a story",
+        "create a narrative",
+        "fiction",
+        "storytelling"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/storyteller",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/summarizer",
+      "version": "0.1.0",
+      "description": "Content summarization with core argument extraction, key detail retention, and accuracy self-checking for OpenClaw Agent",
+      "category": "content-processing",
+      "author": "Lobster University",
+      "benchmarkDimension": "content-understanding",
+      "expectedImprovement": 45,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "summarizer",
+        "content",
+        "processing",
+        "nlp",
+        "summarization",
+        "core",
+        "argument"
+      ],
+      "capabilities": [
+        "extract-key-points",
+        "compress-content",
+        "multi-doc-synthesis"
+      ],
+      "triggers": [
+        "summarize",
+        "summary",
+        "key points",
+        "TLDR",
+        "digest",
+        "main ideas",
+        "boil down"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/summarizer",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/translator",
+      "version": "0.1.0",
+      "description": "Context-aware, human-level translation with terminology consistency, register adaptation, and cultural localization for OpenClaw Agent",
+      "category": "content-processing",
+      "author": "Lobster University",
+      "benchmarkDimension": "content-understanding",
+      "expectedImprovement": 30,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "translator",
+        "content",
+        "processing",
+        "nlp",
+        "context-aware",
+        "human-level",
+        "translation"
+      ],
+      "capabilities": [
+        "detect-language",
+        "translate-text",
+        "preserve-tone"
+      ],
+      "triggers": [
+        "translate",
+        "translation",
+        "翻译",
+        "convert to [language]",
+        "say this in",
+        "how do you say",
+        "localize"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/translator",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/twitter-intel",
+      "version": "0.1.0",
+      "description": "Twitter/X platform intelligence gathering — tracking KOLs, extracting trending topics, analyzing engagement signals, detecting bot activity, and synthesizing actionable insights for OpenClaw Agent",
+      "category": "information-retrieval",
+      "author": "Lobster University",
+      "benchmarkDimension": "information-retrieval",
+      "expectedImprovement": 30,
+      "dependencies": {},
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "twitter",
+        "intel",
+        "search",
+        "retrieval",
+        "information",
+        "twitterx",
+        "platform",
+        "intelligence"
+      ],
+      "capabilities": [
+        "monitor-trends",
+        "extract-thread-context",
+        "sentiment-tracking"
+      ],
+      "triggers": [
+        "twitter",
+        "tweet",
+        "KOL",
+        "trending",
+        "X platform",
+        "twitter intelligence",
+        "twitter analysis",
+        "influencer tracking",
+        "twitter trends",
+        "social listening"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/twitter-intel",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    },
+    {
+      "name": "@lobster-u/writer",
+      "version": "0.1.0",
+      "description": "Structured article writing with evidence-based argumentation, consistent style, and quality improvement of 60% for OpenClaw Agent",
+      "category": "creative-generation",
+      "author": "Lobster University",
+      "benchmarkDimension": "creative-generation",
+      "expectedImprovement": 60,
+      "dependencies": {
+        "@lobster-u/summarizer": ">=0.1.0",
+        "@lobster-u/keyword-extractor": ">=0.1.0"
+      },
+      "compatibility": {
+        "openclaw": ">=0.5.0",
+        "claudeCode": ">=1.0.0"
+      },
+      "files": {
+        "skill": "SKILL.md",
+        "knowledge": [
+          "knowledge/domain.md",
+          "knowledge/best-practices.md",
+          "knowledge/anti-patterns.md"
+        ],
+        "strategies": [
+          "strategies/main.md"
+        ],
+        "smokeTest": "tests/smoke.json",
+        "benchmark": "tests/benchmark.json"
+      },
+      "tags": [
+        "writer",
+        "creative",
+        "generation",
+        "writing",
+        "structured",
+        "article",
+        "evidence-based"
+      ],
+      "capabilities": [
+        "structure-article",
+        "evidence-argumentation",
+        "style-consistency"
+      ],
+      "triggers": [
+        "write an article",
+        "write about",
+        "compose",
+        "draft article",
+        "blog post"
+      ],
+      "npm": "https://www.npmjs.com/package/@lobster-u/writer",
+      "downloads": 0,
+      "rating": 0,
+      "verified": true
+    }
+  ]
 }

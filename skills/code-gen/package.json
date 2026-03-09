@@ -1,0 +1,35 @@
+{
+  "name": "@lobster-u/code-gen",
+  "version": "0.1.0",
+  "description": "Complete code generation with proper architecture, error handling, type safety, and test accompaniment for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "programming-assistance"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/code-gen"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/code-gen",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

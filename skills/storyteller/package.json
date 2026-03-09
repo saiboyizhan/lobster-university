@@ -1,0 +1,35 @@
+{
+  "name": "@lobster-u/storyteller",
+  "version": "0.1.0",
+  "description": "Crafts compelling stories with narrative structure, character development, and emotional rhythm for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "creative-generation"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/storyteller"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/storyteller",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

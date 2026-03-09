@@ -1,0 +1,14 @@
+{
+  "name": "@lobster-u/certify",
+  "version": "0.1.0",
+  "description": "Skill certification with progress tracking and certificate generation",
+  "category": "meta",
+  "author": "Lobster University",
+  "benchmarkDimension": "meta",
+  "expectedImprovement": 30,
+  "dependencies": { "@lobster-u/assessment": ">=0.1.0" },
+  "compatibility": { "openclaw": ">=0.5.0", "claudeCode": ">=1.0.0" },
+  "tags": ["certification", "certificate", "progress", "achievement"],
+  "capabilities": ["compare-assessments", "generate-certificate", "track-progress"],
+  "triggers": ["certify", "get certificate", "show progress", "graduation"]
+}

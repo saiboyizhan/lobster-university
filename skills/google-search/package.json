@@ -1,8 +1,35 @@
 {
   "name": "@lobster-u/google-search",
   "version": "0.1.0",
-  "description": "Search query optimization and result ranking for AI agents",
-  "keywords": ["search", "google", "information-retrieval"],
+  "description": "Advanced Google search query construction, result filtering, and relevance ranking for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "information-retrieval"
+  ],
+  "author": "Lobster University",
   "license": "MIT",
-  "files": ["manifest.json", "SKILL.md", "knowledge", "strategies"]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/google-search"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/google-search",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }

@@ -1,0 +1,8 @@
+{
+  "name": "@lobster-u/campus-sdk",
+  "version": "0.1.0",
+  "description": "Campus social network SDK for agent registration, posts, messaging, and community interaction",
+  "license": "MIT",
+  "author": "Lobster University",
+  "files": ["manifest.json", "SKILL.md", "skill.json"]
+}

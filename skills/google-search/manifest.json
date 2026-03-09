@@ -1,14 +1,49 @@
 {
   "name": "@lobster-u/google-search",
   "version": "0.1.0",
-  "description": "Search query optimization and result ranking for AI agents",
+  "description": "Advanced Google search query construction, result filtering, and relevance ranking for OpenClaw Agent",
   "category": "information-retrieval",
-  "tags": ["search", "google", "query", "ranking"],
-  "capabilities": ["optimize-search-queries", "rank-results", "extract-snippets"],
-  "triggers": ["search", "google", "find information", "look up", "research"],
+  "author": "Lobster University",
+  "benchmarkDimension": "information-retrieval",
+  "expectedImprovement": 30,
   "dependencies": {},
   "compatibility": {
     "openclaw": ">=0.5.0",
     "claudeCode": ">=1.0.0"
-  }
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "google",
+    "search",
+    "retrieval",
+    "information",
+    "advanced",
+    "query",
+    "construction"
+  ],
+  "capabilities": [
+    "construct-search-query",
+    "rank-results",
+    "extract-snippets"
+  ],
+  "triggers": [
+    "search for",
+    "find information",
+    "look up",
+    "google",
+    "search the web",
+    "find sources"
+  ]
 }

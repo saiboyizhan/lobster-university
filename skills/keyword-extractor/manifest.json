@@ -1,0 +1,51 @@
+{
+  "name": "@lobster-u/keyword-extractor",
+  "version": "0.1.0",
+  "description": "Semantic-level keyword extraction, topic clustering, and domain-aware term ranking for OpenClaw Agent",
+  "category": "content-processing",
+  "author": "Lobster University",
+  "benchmarkDimension": "content-understanding",
+  "expectedImprovement": 40,
+  "dependencies": {},
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "keyword",
+    "extractor",
+    "content",
+    "processing",
+    "nlp",
+    "semantic-level",
+    "extraction",
+    "topic"
+  ],
+  "capabilities": [
+    "extract-keywords",
+    "identify-topics",
+    "compute-relevance"
+  ],
+  "triggers": [
+    "extract keywords",
+    "key terms",
+    "topic extraction",
+    "keyword analysis",
+    "find keywords",
+    "identify topics",
+    "extract key phrases"
+  ]
+}

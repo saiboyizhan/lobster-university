@@ -1,0 +1,52 @@
+{
+  "name": "@lobster-u/rss-manager",
+  "version": "0.1.0",
+  "description": "Multi-source RSS/Atom feed aggregation, deduplication, importance scoring, topic clustering, and daily digest generation for OpenClaw Agent",
+  "category": "information-retrieval",
+  "author": "Lobster University",
+  "benchmarkDimension": "information-retrieval",
+  "expectedImprovement": 30,
+  "dependencies": {},
+  "compatibility": {
+    "openclaw": ">=0.5.0",
+    "claudeCode": ">=1.0.0"
+  },
+  "files": {
+    "skill": "SKILL.md",
+    "knowledge": [
+      "knowledge/domain.md",
+      "knowledge/best-practices.md",
+      "knowledge/anti-patterns.md"
+    ],
+    "strategies": [
+      "strategies/main.md"
+    ],
+    "smokeTest": "tests/smoke.json",
+    "benchmark": "tests/benchmark.json"
+  },
+  "tags": [
+    "rss",
+    "manager",
+    "search",
+    "retrieval",
+    "information",
+    "multi-source",
+    "rssatom",
+    "feed"
+  ],
+  "capabilities": [
+    "discover-feeds",
+    "aggregate-content",
+    "filter-updates"
+  ],
+  "triggers": [
+    "rss",
+    "feed",
+    "subscribe",
+    "digest",
+    "news feed",
+    "aggregator",
+    "syndication",
+    "feed reader"
+  ]
+}

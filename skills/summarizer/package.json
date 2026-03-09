@@ -1,0 +1,35 @@
+{
+  "name": "@lobster-u/summarizer",
+  "version": "0.1.0",
+  "description": "Content summarization with core argument extraction, key detail retention, and accuracy self-checking for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "content-processing"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/summarizer"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/summarizer",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

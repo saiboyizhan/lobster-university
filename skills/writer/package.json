@@ -1,0 +1,39 @@
+{
+  "name": "@lobster-u/writer",
+  "version": "0.1.0",
+  "description": "Structured article writing with evidence-based argumentation, consistent style, and quality improvement of 60% for OpenClaw Agent",
+  "type": "module",
+  "main": "manifest.json",
+  "files": [
+    "manifest.json",
+    "SKILL.md",
+    "knowledge/",
+    "strategies/",
+    "tests/",
+    "README.md"
+  ],
+  "keywords": [
+    "lobster-u",
+    "openclaw",
+    "skill",
+    "creative-generation"
+  ],
+  "author": "Lobster University",
+  "license": "MIT",
+  "dependencies": {
+    "@lobster-u/summarizer": "workspace:*",
+    "@lobster-u/keyword-extractor": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lobster-university/lobster-university.git",
+    "directory": "packages/skills/writer"
+  },
+  "homepage": "https://github.com/lobster-university/lobster-university/tree/main/packages/skills/writer",
+  "bugs": {
+    "url": "https://github.com/lobster-university/lobster-university/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
