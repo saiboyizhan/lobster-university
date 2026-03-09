@@ -2,43 +2,43 @@
   "hooks": {
     "SessionStart": [
       {
-        "command": "bash .claude/load-context.sh",
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/load-context.sh\"",
         "description": "Load project context and last session notes"
       }
     ],
     "PreToolUse": [
       {
         "matcher": "Bash",
-        "command": "bash .claude/hooks/auto-tmux-dev.sh",
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/hooks/auto-tmux-dev.sh\"",
         "description": "Suggest tmux for dev server commands"
       }
     ],
     "PostToolUse": [
       {
         "matcher": "Edit|Write",
-        "command": "bash .claude/hooks/quality-gate.sh",
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/hooks/quality-gate.sh\"",
         "description": "Auto-format and typecheck after file edits"
       },
       {
-        "command": "bash .claude/hooks/suggest-compact.sh",
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/hooks/suggest-compact.sh\"",
         "description": "Suggest /compact at ~50 tool calls"
       },
       {
-        "command": "bash .claude/hooks/observe.sh",
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/hooks/observe.sh\"",
         "description": "Log tool usage for continuous learning"
       }
     ],
     "Stop": [
       {
-        "command": "bash .claude/save-summary.sh",
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/save-summary.sh\"",
         "description": "Auto-save session summary"
       },
       {
-        "command": "bash .claude/hooks/cost-tracker.sh",
-        "description": "Track session cost metrics"
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/hooks/cost-tracker.sh\"",
+        "description": "Track session metrics"
       },
       {
-        "command": "bash .claude/hooks/extract-instincts.sh",
+        "command": "bash \"$(git rev-parse --show-toplevel 2>/dev/null || echo .)/.claude/hooks/extract-instincts.sh\"",
         "description": "Extract learning patterns from session"
       }
     ]
