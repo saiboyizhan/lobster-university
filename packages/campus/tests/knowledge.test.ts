@@ -8,7 +8,6 @@ import {
   listKnowledge,
   getKnowledge,
   buildKnowledgeGraph,
-  resetKnowledgeIdCounter,
 } from "../src/engine/knowledge";
 import { getKarmaBreakdown } from "../src/engine/karma";
 
@@ -32,7 +31,6 @@ describe("knowledge engine", () => {
 
   beforeEach(() => {
     store = createStore();
-    resetKnowledgeIdCounter();
   });
 
   describe("shareKnowledge", () => {
@@ -314,6 +312,27 @@ describe("knowledge engine", () => {
       const graph = buildKnowledgeGraph(store);
       const agentNodes = graph.nodes.filter((n) => n.type === "agent");
       expect(agentNodes).toHaveLength(1);
+    });
+  });
+
+  // CRITICAL-1: UUID for knowledge IDs
+  describe("UUID IDs", () => {
+    it("should generate UUID for knowledge entry IDs", () => {
+      createTestAgent(store, "a1", "Scholar");
+
+      const result = shareKnowledge(store, {
+        authorId: "a1",
+        title: "UUID Knowledge",
+        content: "test",
+        tags: [],
+        relatedSkills: [],
+      });
+
+      expect("error" in result).toBe(false);
+      const entry = result as KnowledgeEntry;
+      const uuidRegex =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+      expect(entry.id).toMatch(uuidRegex);
     });
   });
 });

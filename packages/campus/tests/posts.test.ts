@@ -3,8 +3,7 @@ import { createApp } from "../src/index";
 import { createStore } from "../src/store";
 import type { Store } from "../src/store";
 import type { Agent, Post, Comment, PaginatedResponse } from "../src/types";
-import { resetAgentIdCounter } from "../src/routes/agents";
-import { resetPostIdCounters } from "../src/routes/posts";
+import { KARMA_VALUES } from "../src/types";
 
 async function createAgent(
   app: ReturnType<typeof createApp>,
@@ -26,8 +25,6 @@ describe("posts API", () => {
   beforeEach(async () => {
     store = createStore();
     app = createApp(store);
-    resetAgentIdCounter();
-    resetPostIdCounters();
     agent = await createAgent(app, "PostAuthor");
   });
 
@@ -348,6 +345,222 @@ describe("posts API", () => {
       const result = await res.json();
       expect(result.upvotes).toBe(0);
       expect(result.downvotes).toBe(1);
+    });
+
+    // CRITICAL-2: Fix karma reversal on vote switch
+    it("should correctly reverse karma when switching vote from up to down", async () => {
+      const postRes = await app.request("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: agent.id,
+          title: "Karma Switch Up->Down",
+          content: "test",
+        }),
+      });
+      const post: Post = await postRes.json();
+
+      const voter = await createAgent(app, "Voter");
+
+      // Upvote first: author karma = 5 (post) + 3 (upvote) = 8
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "up" }),
+      });
+
+      // Switch to downvote: should reverse upvote karma (-3) then add downvote (-1)
+      // Expected: 5 (post) - 1 (downvote) = 4
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "down" }),
+      });
+
+      const agentRes = await app.request(`/api/agents/${agent.id}`);
+      const updated: Agent = await agentRes.json();
+      // 5 (post) + 3 (upvote) - 3 (reverse upvote) - 1 (downvote) = 4
+      expect(updated.karma).toBe(4);
+    });
+
+    it("should correctly reverse karma when switching vote from down to up", async () => {
+      const postRes = await app.request("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: agent.id,
+          title: "Karma Switch Down->Up",
+          content: "test",
+        }),
+      });
+      const post: Post = await postRes.json();
+
+      const voter = await createAgent(app, "Voter");
+
+      // Downvote first: author karma = 5 (post) - 1 (downvote) = 4
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "down" }),
+      });
+
+      // Switch to upvote: should reverse downvote karma (+1) then add upvote (+3)
+      // Expected: 5 (post) + 3 (upvote) = 8
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "up" }),
+      });
+
+      const agentRes = await app.request(`/api/agents/${agent.id}`);
+      const updated: Agent = await agentRes.json();
+      // 5 (post) - 1 (down) + 1 (reverse down) + 3 (upvote) = 8
+      expect(updated.karma).toBe(8);
+    });
+
+    it("repeated vote switching should not inflate karma", async () => {
+      const postRes = await app.request("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: agent.id,
+          title: "Karma Inflate Test",
+          content: "test",
+        }),
+      });
+      const post: Post = await postRes.json();
+
+      const voter = await createAgent(app, "Voter");
+
+      // up, down, up, down, up = should end with 1 upvote
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "up" }),
+      });
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "down" }),
+      });
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "up" }),
+      });
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "down" }),
+      });
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "up" }),
+      });
+
+      const agentRes = await app.request(`/api/agents/${agent.id}`);
+      const updated: Agent = await agentRes.json();
+      // Final state: 1 upvote, so karma = 5 (post) + 3 (upvote) = 8
+      expect(updated.karma).toBe(8);
+    });
+  });
+
+  // CRITICAL-1: UUID for post and comment IDs
+  describe("UUID IDs", () => {
+    it("should generate UUID for post IDs", async () => {
+      const res = await app.request("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: agent.id,
+          title: "UUID Post",
+          content: "test",
+        }),
+      });
+      const post: Post = await res.json();
+
+      const uuidRegex =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+      expect(post.id).toMatch(uuidRegex);
+    });
+
+    it("should generate UUID for comment IDs", async () => {
+      const postRes = await app.request("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: agent.id,
+          title: "UUID Comment Post",
+          content: "test",
+        }),
+      });
+      const post: Post = await postRes.json();
+
+      const commenter = await createAgent(app, "Commenter");
+      const res = await app.request(`/api/posts/${post.id}/comments`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: commenter.id,
+          content: "UUID comment",
+        }),
+      });
+      const comment: Comment = await res.json();
+
+      const uuidRegex =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+      expect(comment.id).toMatch(uuidRegex);
+    });
+  });
+
+  // HIGH-5: Strip voters from response
+  describe("voter privacy", () => {
+    it("should not expose voters record in post response", async () => {
+      const postRes = await app.request("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: agent.id,
+          title: "Voter Privacy",
+          content: "test",
+        }),
+      });
+      const post = await postRes.json();
+
+      const voter = await createAgent(app, "Voter");
+      await app.request(`/api/posts/${post.id}/vote`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ voterId: voter.id, direction: "up" }),
+      });
+
+      // GET single post should not have voters
+      const getRes = await app.request(`/api/posts/${post.id}`);
+      const fetched = await getRes.json();
+      expect(fetched.voters).toBeUndefined();
+
+      // GET post list should not have voters
+      const listRes = await app.request("/api/posts");
+      const list: PaginatedResponse<Record<string, unknown>> =
+        await listRes.json();
+      for (const p of list.data) {
+        expect(p.voters).toBeUndefined();
+      }
+    });
+
+    it("should not expose voters in post creation response", async () => {
+      const postRes = await app.request("/api/posts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          authorId: agent.id,
+          title: "Create Response Privacy",
+          content: "test",
+        }),
+      });
+      const post = await postRes.json();
+      expect(post.voters).toBeUndefined();
     });
   });
 });

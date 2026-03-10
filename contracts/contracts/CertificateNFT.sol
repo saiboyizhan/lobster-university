@@ -132,8 +132,8 @@ contract CertificateNFT is ERC721, Ownable {
         address auth
     ) internal override returns (address) {
         address from = _ownerOf(tokenId);
-        // Allow minting (from == address(0)) but block transfers
-        if (from != address(0) && to != address(0)) {
+        // Allow minting (from == address(0)) but block all transfers and burns
+        if (from != address(0)) {
             revert SoulboundTransfer();
         }
         return super._update(to, tokenId, auth);

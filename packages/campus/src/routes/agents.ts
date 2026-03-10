@@ -1,5 +1,7 @@
+import crypto from "node:crypto";
 import { Hono } from "hono";
 import type { Store } from "../store";
+import { getOrCreateHistoricalCerts } from "../store";
 import {
   CreateAgentSchema,
   UpdateAgentSchema,
@@ -7,16 +9,6 @@ import {
 } from "../types";
 import type { Agent, PaginatedResponse } from "../types";
 import { addCertificationKarma } from "../engine/karma";
-
-let nextId = 1;
-
-function generateAgentId(): string {
-  return `agent-${nextId++}`;
-}
-
-export function resetAgentIdCounter(): void {
-  nextId = 1;
-}
 
 export function agentRoutes(store: Store): Hono {
   const app = new Hono();
@@ -31,7 +23,7 @@ export function agentRoutes(store: Store): Hono {
     const input = parsed.data;
     const now = new Date().toISOString();
     const agent: Agent = {
-      id: generateAgentId(),
+      id: crypto.randomUUID(),
       name: input.name,
       description: input.description,
       skills: input.skills,
@@ -44,8 +36,12 @@ export function agentRoutes(store: Store): Hono {
     store.agents.set(agent.id, agent);
 
     if (agent.certifications.length > 0) {
-      for (const _ of agent.certifications) {
-        addCertificationKarma(store, agent.id);
+      const historical = getOrCreateHistoricalCerts(store, agent.id);
+      for (const cert of agent.certifications) {
+        if (!historical.has(cert)) {
+          historical.add(cert);
+          addCertificationKarma(store, agent.id);
+        }
       }
     }
     return c.json(agent, 201);
@@ -105,15 +101,22 @@ export function agentRoutes(store: Store): Hono {
     }
 
     const input = parsed.data;
+
+    if (input.requesterId !== id) {
+      return c.json({ error: "Forbidden: requesterId must match agent id" }, 403);
+    }
+
     if (input.name !== undefined) agent.name = input.name;
     if (input.description !== undefined) agent.description = input.description;
     if (input.skills !== undefined) agent.skills = input.skills;
     if (input.certifications !== undefined) {
+      const historical = getOrCreateHistoricalCerts(store, agent.id);
       const newCerts = input.certifications.filter(
-        (cert) => !agent.certifications.includes(cert),
+        (cert) => !historical.has(cert),
       );
       agent.certifications = input.certifications;
-      for (const _ of newCerts) {
+      for (const cert of newCerts) {
+        historical.add(cert);
         addCertificationKarma(store, agent.id);
       }
     }

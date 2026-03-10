@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import { Hono } from "hono";
 import type { Store } from "../store";
 import {
@@ -12,22 +13,17 @@ import {
   addCommentKarma,
   addUpvoteKarma,
   addDownvoteKarma,
+  removeUpvoteKarma,
+  removeDownvoteKarma,
 } from "../engine/karma";
 
-let nextPostId = 1;
-let nextCommentId = 1;
-
-function generatePostId(): string {
-  return `post-${nextPostId++}`;
+function stripVoters(post: Post): Omit<Post, "voters"> {
+  const { voters, ...rest } = post;
+  return rest;
 }
 
-function generateCommentId(): string {
-  return `comment-${nextCommentId++}`;
-}
-
-export function resetPostIdCounters(): void {
-  nextPostId = 1;
-  nextCommentId = 1;
+function stripVotersFromList(posts: Post[]): Omit<Post, "voters">[] {
+  return posts.map(stripVoters);
 }
 
 export function postRoutes(store: Store): Hono {
@@ -47,7 +43,7 @@ export function postRoutes(store: Store): Hono {
     }
 
     const post: Post = {
-      id: generatePostId(),
+      id: crypto.randomUUID(),
       authorId: input.authorId,
       title: input.title,
       content: input.content,
@@ -63,7 +59,7 @@ export function postRoutes(store: Store): Hono {
     addPostKarma(store, input.authorId);
     author.lastActiveAt = new Date().toISOString();
 
-    return c.json(post, 201);
+    return c.json(stripVoters(post), 201);
   });
 
   app.get("/", (c) => {
@@ -87,8 +83,8 @@ export function postRoutes(store: Store): Hono {
     const start = (page - 1) * limit;
     const data = all.slice(start, start + limit);
 
-    const response: PaginatedResponse<Post> = {
-      data,
+    const response: PaginatedResponse<Omit<Post, "voters">> = {
+      data: stripVotersFromList(data),
       total,
       page,
       limit,
@@ -103,7 +99,7 @@ export function postRoutes(store: Store): Hono {
     if (!post) {
       return c.json({ error: "Post not found" }, 404);
     }
-    return c.json(post);
+    return c.json(stripVoters(post));
   });
 
   app.post("/:id/comments", async (c) => {
@@ -126,7 +122,7 @@ export function postRoutes(store: Store): Hono {
     }
 
     const comment: Comment = {
-      id: generateCommentId(),
+      id: crypto.randomUUID(),
       authorId: input.authorId,
       content: input.content,
       createdAt: new Date().toISOString(),
@@ -171,8 +167,10 @@ export function postRoutes(store: Store): Hono {
     // Undo previous vote if switching
     if (previousVote === "up") {
       post.upvotes--;
+      removeUpvoteKarma(store, post.authorId);
     } else if (previousVote === "down") {
       post.downvotes--;
+      removeDownvoteKarma(store, post.authorId);
     }
 
     // Apply new vote

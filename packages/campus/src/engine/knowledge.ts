@@ -1,3 +1,4 @@
+import crypto from "node:crypto";
 import type { Store } from "../store";
 import type {
   KnowledgeEntry,
@@ -7,16 +8,6 @@ import type {
   PaginatedResponse,
 } from "../types";
 import { addKnowledgeSharedKarma, addKnowledgeVerifiedKarma } from "./karma";
-
-let nextId = 1;
-
-function generateKnowledgeId(): string {
-  return `knowledge-${nextId++}`;
-}
-
-export function resetKnowledgeIdCounter(): void {
-  nextId = 1;
-}
 
 export function shareKnowledge(
   store: Store,
@@ -34,7 +25,7 @@ export function shareKnowledge(
   }
 
   const entry: KnowledgeEntry = {
-    id: generateKnowledgeId(),
+    id: crypto.randomUUID(),
     authorId: input.authorId,
     title: input.title,
     content: input.content,

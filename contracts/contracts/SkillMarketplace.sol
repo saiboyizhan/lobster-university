@@ -65,7 +65,7 @@ contract SkillMarketplace is Ownable, ReentrancyGuard {
      */
     function listSkill(bytes32 skillId, uint256 price) external {
         if (price == 0) revert ZeroPrice();
-        if (listings[skillId].seller != address(0)) revert SkillAlreadyListed(skillId);
+        if (listings[skillId].seller != address(0) && listings[skillId].active) revert SkillAlreadyListed(skillId);
 
         listings[skillId] = Listing({
             seller: msg.sender,
@@ -91,12 +91,24 @@ contract SkillMarketplace is Ownable, ReentrancyGuard {
     }
 
     /**
+     * @notice Emergency delist a skill (owner only).
+     * @param skillId Unique identifier of the skill.
+     */
+    function ownerDelistSkill(bytes32 skillId) external onlyOwner {
+        Listing storage listing = listings[skillId];
+        if (listing.seller == address(0)) revert SkillNotFound(skillId);
+
+        listing.active = false;
+        emit SkillDelisted(skillId);
+    }
+
+    /**
      * @notice Update skill price (seller only).
      */
     function updatePrice(bytes32 skillId, uint256 newPrice) external {
         if (newPrice == 0) revert ZeroPrice();
         Listing storage listing = listings[skillId];
-        if (listing.seller == address(0)) revert SkillNotFound(skillId);
+        if (listing.seller == address(0) || !listing.active) revert SkillNotFound(skillId);
         if (listing.seller != msg.sender) revert NotSeller(skillId);
 
         listing.price = newPrice;
@@ -105,10 +117,13 @@ contract SkillMarketplace is Ownable, ReentrancyGuard {
 
     /**
      * @notice Buy a skill. Transfers KARMA from buyer to seller minus platform fee.
+     * @param skillId Unique identifier of the skill.
+     * @param maxPrice Maximum price the buyer is willing to pay (front-running protection).
      */
-    function buySkill(bytes32 skillId) external nonReentrant {
+    function buySkill(bytes32 skillId, uint256 maxPrice) external nonReentrant {
         Listing storage listing = listings[skillId];
         if (listing.seller == address(0) || !listing.active) revert SkillNotFound(skillId);
+        require(listing.price <= maxPrice, "Price exceeds maximum");
         if (msg.sender == listing.seller) revert CannotBuyOwnSkill();
         if (hasPurchased[skillId][msg.sender]) revert AlreadyPurchased(skillId);
 

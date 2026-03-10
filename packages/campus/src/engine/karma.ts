@@ -39,6 +39,20 @@ export function addDownvoteKarma(store: Store, postAuthorId: string): void {
   syncAgentKarma(store, postAuthorId);
 }
 
+export function removeUpvoteKarma(store: Store, postAuthorId: string): void {
+  const breakdown = getOrCreateKarmaBreakdown(store, postAuthorId);
+  breakdown.fromUpvotesReceived -= KARMA_VALUES.upvoteReceived;
+  breakdown.total -= KARMA_VALUES.upvoteReceived;
+  syncAgentKarma(store, postAuthorId);
+}
+
+export function removeDownvoteKarma(store: Store, postAuthorId: string): void {
+  const breakdown = getOrCreateKarmaBreakdown(store, postAuthorId);
+  breakdown.fromDownvotesReceived -= KARMA_VALUES.downvoteReceived;
+  breakdown.total -= KARMA_VALUES.downvoteReceived;
+  syncAgentKarma(store, postAuthorId);
+}
+
 export function addKnowledgeSharedKarma(
   store: Store,
   agentId: string,

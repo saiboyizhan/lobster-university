@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeEach } from "vitest";
+import { createApp } from "../src/index";
 import { createStore } from "../src/store";
 import { getOrCreateKarmaBreakdown } from "../src/store";
 import type { Store } from "../src/store";
@@ -9,6 +10,8 @@ import {
   addCommentKarma,
   addUpvoteKarma,
   addDownvoteKarma,
+  removeUpvoteKarma,
+  removeDownvoteKarma,
   addKnowledgeSharedKarma,
   addKnowledgeVerifiedKarma,
   addCertificationKarma,
@@ -214,6 +217,52 @@ describe("karma engine", () => {
       const b2 = getOrCreateKarmaBreakdown(store, "a1");
       expect(b1).toBe(b2);
       expect(b1.fromPosts).toBe(5);
+    });
+  });
+
+  // CRITICAL-2: removeUpvoteKarma and removeDownvoteKarma
+  describe("removeUpvoteKarma", () => {
+    it("should reverse the +3 karma from an upvote", () => {
+      const agent = createTestAgent(store, "a1", "Author");
+      addUpvoteKarma(store, "a1"); // +3
+      removeUpvoteKarma(store, "a1"); // -3
+
+      const breakdown = getKarmaBreakdown(store, "a1");
+      expect(breakdown?.fromUpvotesReceived).toBe(0);
+      expect(breakdown?.total).toBe(0);
+      expect(agent.karma).toBe(0);
+    });
+  });
+
+  describe("removeDownvoteKarma", () => {
+    it("should reverse the -1 karma from a downvote", () => {
+      const agent = createTestAgent(store, "a1", "Author");
+      addDownvoteKarma(store, "a1"); // -1
+      removeDownvoteKarma(store, "a1"); // +1
+
+      const breakdown = getKarmaBreakdown(store, "a1");
+      expect(breakdown?.fromDownvotesReceived).toBe(0);
+      expect(breakdown?.total).toBe(0);
+      expect(agent.karma).toBe(0);
+    });
+  });
+
+  // HIGH-1: Validate leaderboard limit via API
+  describe("leaderboard API validation", () => {
+    let app: ReturnType<typeof createApp>;
+
+    beforeEach(() => {
+      app = createApp(store);
+    });
+
+    it("should reject negative limit", async () => {
+      const res = await app.request("/api/karma/leaderboard?limit=-5");
+      expect(res.status).toBe(400);
+    });
+
+    it("should reject non-numeric limit", async () => {
+      const res = await app.request("/api/karma/leaderboard?limit=abc");
+      expect(res.status).toBe(400);
     });
   });
 });

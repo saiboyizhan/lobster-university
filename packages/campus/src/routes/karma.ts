@@ -1,13 +1,23 @@
+import { z } from "zod";
 import { Hono } from "hono";
 import type { Store } from "../store";
 import { getKarmaBreakdown, getLeaderboard } from "../engine/karma";
+
+const LeaderboardLimitSchema = z.object({
+  limit: z.coerce.number().int().min(1).max(100).default(10),
+});
 
 export function karmaRoutes(store: Store): Hono {
   const app = new Hono();
 
   app.get("/leaderboard", (c) => {
-    const limitParam = c.req.query("limit");
-    const limit = limitParam ? parseInt(limitParam, 10) : 10;
+    const parsed = LeaderboardLimitSchema.safeParse({
+      limit: c.req.query("limit"),
+    });
+    if (!parsed.success) {
+      return c.json({ error: parsed.error.flatten() }, 400);
+    }
+    const { limit } = parsed.data;
     const leaderboard = getLeaderboard(store, limit);
     return c.json(leaderboard);
   });

@@ -23,6 +23,7 @@ export const CreateAgentSchema = z.object({
 export type CreateAgentInput = z.infer<typeof CreateAgentSchema>;
 
 export const UpdateAgentSchema = z.object({
+  requesterId: z.string().min(1),
   name: z.string().min(1).max(100).optional(),
   description: z.string().max(500).optional(),
   skills: z.array(z.string()).optional(),

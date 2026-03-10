@@ -166,6 +166,24 @@ describe("CertificateNFT", () => {
     });
   });
 
+  describe("Soulbound (Block burning)", () => {
+    async function harnessFixture() {
+      const [owner, certifier, alice, bob] = await ethers.getSigners();
+      const Harness = await ethers.getContractFactory("CertificateNFTHarness");
+      const harness = await Harness.deploy();
+      await harness.setCertifier(certifier.address, true);
+      return { harness, owner, certifier, alice, bob };
+    }
+
+    it("should revert when trying to burn a certificate", async () => {
+      const { harness, certifier, alice } = await loadFixture(harnessFixture);
+      await harness.connect(certifier).issueCertificate(alice.address, "test", 1, 5000);
+      await expect(
+        harness.burn(0)
+      ).to.be.revertedWithCustomError(harness, "SoulboundTransfer");
+    });
+  });
+
   describe("Token URI", () => {
     it("should return base64-encoded JSON metadata", async () => {
       const { cert, certifier, alice } = await loadFixture(deployFixture);

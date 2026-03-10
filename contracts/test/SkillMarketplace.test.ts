@@ -37,7 +37,7 @@ describe("SkillMarketplace", () => {
 
   async function purchasedFixture() {
     const fixture = await listedFixture();
-    await fixture.marketplace.connect(fixture.buyer).buySkill(fixture.sid);
+    await fixture.marketplace.connect(fixture.buyer).buySkill(fixture.sid, SKILL_PRICE);
     return fixture;
   }
 
@@ -168,7 +168,7 @@ describe("SkillMarketplace", () => {
       const { karma, marketplace, seller, buyer, sid } = await loadFixture(listedFixture);
       const sellerBefore = await karma.balanceOf(seller.address);
 
-      await marketplace.connect(buyer).buySkill(sid);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
 
       const sellerAfter = await karma.balanceOf(seller.address);
       const fee = (SKILL_PRICE * 500n) / 10000n; // 5%
@@ -177,7 +177,7 @@ describe("SkillMarketplace", () => {
 
     it("should collect platform fee", async () => {
       const { karma, marketplace, buyer, sid } = await loadFixture(listedFixture);
-      await marketplace.connect(buyer).buySkill(sid);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
       const fee = (SKILL_PRICE * 500n) / 10000n;
       expect(await marketplace.accumulatedFees()).to.equal(fee);
       expect(await karma.balanceOf(await marketplace.getAddress())).to.equal(fee);
@@ -185,14 +185,14 @@ describe("SkillMarketplace", () => {
 
     it("should mark buyer as having purchased", async () => {
       const { marketplace, buyer, sid } = await loadFixture(listedFixture);
-      await marketplace.connect(buyer).buySkill(sid);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
       expect(await marketplace.hasPurchased(sid, buyer.address)).to.be.true;
     });
 
     it("should emit SkillPurchased event", async () => {
       const { marketplace, buyer, sid } = await loadFixture(listedFixture);
       const fee = (SKILL_PRICE * 500n) / 10000n;
-      await expect(marketplace.connect(buyer).buySkill(sid))
+      await expect(marketplace.connect(buyer).buySkill(sid, SKILL_PRICE))
         .to.emit(marketplace, "SkillPurchased")
         .withArgs(sid, buyer.address, SKILL_PRICE, fee);
     });
@@ -200,7 +200,7 @@ describe("SkillMarketplace", () => {
     it("should revert buying nonexistent skill", async () => {
       const { marketplace, buyer } = await loadFixture(deployFixture);
       await expect(
-        marketplace.connect(buyer).buySkill(skillId("nonexistent"))
+        marketplace.connect(buyer).buySkill(skillId("nonexistent"), SKILL_PRICE)
       ).to.be.revertedWithCustomError(marketplace, "SkillNotFound");
     });
 
@@ -208,21 +208,21 @@ describe("SkillMarketplace", () => {
       const { marketplace, seller, buyer, sid } = await loadFixture(listedFixture);
       await marketplace.connect(seller).delistSkill(sid);
       await expect(
-        marketplace.connect(buyer).buySkill(sid)
+        marketplace.connect(buyer).buySkill(sid, SKILL_PRICE)
       ).to.be.revertedWithCustomError(marketplace, "SkillNotFound");
     });
 
     it("should revert buying own skill", async () => {
       const { marketplace, seller, sid } = await loadFixture(listedFixture);
       await expect(
-        marketplace.connect(seller).buySkill(sid)
+        marketplace.connect(seller).buySkill(sid, SKILL_PRICE)
       ).to.be.revertedWithCustomError(marketplace, "CannotBuyOwnSkill");
     });
 
     it("should revert buying already purchased skill", async () => {
       const { marketplace, buyer, sid } = await loadFixture(purchasedFixture);
       await expect(
-        marketplace.connect(buyer).buySkill(sid)
+        marketplace.connect(buyer).buySkill(sid, SKILL_PRICE)
       ).to.be.revertedWithCustomError(marketplace, "AlreadyPurchased");
     });
 
@@ -230,7 +230,7 @@ describe("SkillMarketplace", () => {
       const { karma, marketplace, rater, sid } = await loadFixture(listedFixture);
       await karma.connect(rater).approve(await marketplace.getAddress(), ethers.MaxUint256);
       await expect(
-        marketplace.connect(rater).buySkill(sid)
+        marketplace.connect(rater).buySkill(sid, SKILL_PRICE)
       ).to.be.revertedWithCustomError(karma, "ERC20InsufficientBalance");
     });
   });
@@ -263,7 +263,7 @@ describe("SkillMarketplace", () => {
       // Give rater funds and purchase
       await karma.mint(rater.address, ethers.parseEther("10000"), "test");
       await karma.connect(rater).approve(await marketplace.getAddress(), ethers.MaxUint256);
-      await marketplace.connect(rater).buySkill(sid);
+      await marketplace.connect(rater).buySkill(sid, SKILL_PRICE);
 
       await marketplace.connect(buyer).rateSkill(sid, 4);
       await marketplace.connect(rater).rateSkill(sid, 5);
@@ -345,7 +345,7 @@ describe("SkillMarketplace", () => {
   describe("Fee Withdrawal", () => {
     it("should allow owner to withdraw fees", async () => {
       const { karma, marketplace, owner, buyer, sid } = await loadFixture(listedFixture);
-      await marketplace.connect(buyer).buySkill(sid);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
       const fees = await marketplace.accumulatedFees();
 
       const balanceBefore = await karma.balanceOf(owner.address);
@@ -358,7 +358,7 @@ describe("SkillMarketplace", () => {
 
     it("should emit FeesWithdrawn event", async () => {
       const { marketplace, owner, buyer, sid } = await loadFixture(listedFixture);
-      await marketplace.connect(buyer).buySkill(sid);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
       const fees = await marketplace.accumulatedFees();
 
       await expect(marketplace.withdrawFees(owner.address))
@@ -368,7 +368,7 @@ describe("SkillMarketplace", () => {
 
     it("should revert withdrawing to zero address", async () => {
       const { marketplace, buyer, sid } = await loadFixture(listedFixture);
-      await marketplace.connect(buyer).buySkill(sid);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
       await expect(
         marketplace.withdrawFees(ethers.ZeroAddress)
       ).to.be.revertedWith("SkillMarketplace: withdraw to zero address");
@@ -395,11 +395,65 @@ describe("SkillMarketplace", () => {
       await marketplace.setPlatformFee(0);
 
       const sellerBefore = await karma.balanceOf(seller.address);
-      await marketplace.connect(buyer).buySkill(sid);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
       const sellerAfter = await karma.balanceOf(seller.address);
 
       expect(sellerAfter - sellerBefore).to.equal(SKILL_PRICE);
       expect(await marketplace.accumulatedFees()).to.equal(0);
+    });
+  });
+
+  describe("Front-running protection (maxPrice)", () => {
+    it("should revert when price exceeds maxPrice", async () => {
+      const { marketplace, buyer, sid } = await loadFixture(listedFixture);
+      const tooLow = ethers.parseEther("50");
+      await expect(
+        marketplace.connect(buyer).buySkill(sid, tooLow)
+      ).to.be.revertedWith("Price exceeds maximum");
+    });
+
+    it("should succeed when price equals maxPrice", async () => {
+      const { marketplace, buyer, sid } = await loadFixture(listedFixture);
+      await marketplace.connect(buyer).buySkill(sid, SKILL_PRICE);
+      expect(await marketplace.hasPurchased(sid, buyer.address)).to.be.true;
+    });
+  });
+
+  describe("Re-listing after delist (HIGH-1)", () => {
+    it("should allow re-listing a delisted skill", async () => {
+      const { marketplace, seller, sid } = await loadFixture(listedFixture);
+      await marketplace.connect(seller).delistSkill(sid);
+      const newPrice = ethers.parseEther("200");
+      await marketplace.connect(seller).listSkill(sid, newPrice);
+      const listing = await marketplace.listings(sid);
+      expect(listing.active).to.be.true;
+      expect(listing.price).to.equal(newPrice);
+    });
+  });
+
+  describe("Owner emergency delist (HIGH-3)", () => {
+    it("should allow owner to delist any skill", async () => {
+      const { marketplace, owner, sid } = await loadFixture(listedFixture);
+      await marketplace.connect(owner).ownerDelistSkill(sid);
+      const listing = await marketplace.listings(sid);
+      expect(listing.active).to.be.false;
+    });
+
+    it("should revert when non-owner tries emergency delist", async () => {
+      const { marketplace, buyer, sid } = await loadFixture(listedFixture);
+      await expect(
+        marketplace.connect(buyer).ownerDelistSkill(sid)
+      ).to.be.revertedWithCustomError(marketplace, "OwnableUnauthorizedAccount");
+    });
+  });
+
+  describe("Block operations on delisted skills (HIGH-2)", () => {
+    it("should revert updatePrice on delisted skill", async () => {
+      const { marketplace, seller, sid } = await loadFixture(listedFixture);
+      await marketplace.connect(seller).delistSkill(sid);
+      await expect(
+        marketplace.connect(seller).updatePrice(sid, ethers.parseEther("200"))
+      ).to.be.revertedWithCustomError(marketplace, "SkillNotFound");
     });
   });
 

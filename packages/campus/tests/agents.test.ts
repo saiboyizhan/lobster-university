@@ -3,7 +3,6 @@ import { createApp } from "../src/index";
 import { createStore } from "../src/store";
 import type { Store } from "../src/store";
 import type { Agent, PaginatedResponse } from "../src/types";
-import { resetAgentIdCounter } from "../src/routes/agents";
 
 describe("agents API", () => {
   let store: Store;
@@ -12,7 +11,6 @@ describe("agents API", () => {
   beforeEach(() => {
     store = createStore();
     app = createApp(store);
-    resetAgentIdCounter();
   });
 
   describe("POST /api/agents", () => {
@@ -145,6 +143,7 @@ describe("agents API", () => {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          requesterId: created.id,
           name: "NewName",
           skills: ["@lobster-u/deep-research"],
         }),
@@ -160,7 +159,7 @@ describe("agents API", () => {
       const res = await app.request("/api/agents/nonexistent", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: "X" }),
+        body: JSON.stringify({ requesterId: "nonexistent", name: "X" }),
       });
       expect(res.status).toBe(404);
     });
@@ -178,12 +177,121 @@ describe("agents API", () => {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          requesterId: created.id,
           certifications: ["cert-x"],
         }),
       });
 
       const updated: Agent = await res.json();
       expect(updated.karma).toBe(20);
+    });
+
+    // CRITICAL-3: Authorization on PATCH
+    it("should reject PATCH when requesterId doesn't match agent id", async () => {
+      const createRes = await app.request("/api/agents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "TargetBot" }),
+      });
+      const created: Agent = await createRes.json();
+
+      const res = await app.request(`/api/agents/${created.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          requesterId: "some-other-agent",
+          name: "Hacked",
+        }),
+      });
+
+      expect(res.status).toBe(403);
+    });
+
+    it("should succeed PATCH when requesterId matches", async () => {
+      const createRes = await app.request("/api/agents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "MyBot" }),
+      });
+      const created: Agent = await createRes.json();
+
+      const res = await app.request(`/api/agents/${created.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          requesterId: created.id,
+          name: "UpdatedBot",
+        }),
+      });
+
+      expect(res.status).toBe(200);
+      const updated: Agent = await res.json();
+      expect(updated.name).toBe("UpdatedBot");
+    });
+
+    // HIGH-4: Certification re-add karma exploit
+    it("should not re-award karma when removing and re-adding certification", async () => {
+      const createRes = await app.request("/api/agents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "ExploitBot",
+          certifications: ["cert-a"],
+        }),
+      });
+      const created: Agent = await createRes.json();
+      expect(created.karma).toBe(20); // 1 cert * 20
+
+      // Remove certification
+      const removeRes = await app.request(`/api/agents/${created.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          requesterId: created.id,
+          certifications: [],
+        }),
+      });
+      const removed: Agent = await removeRes.json();
+      expect(removed.certifications).toEqual([]);
+
+      // Re-add certification — should NOT get additional karma
+      const readdRes = await app.request(`/api/agents/${created.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          requesterId: created.id,
+          certifications: ["cert-a"],
+        }),
+      });
+      const readded: Agent = await readdRes.json();
+      expect(readded.certifications).toEqual(["cert-a"]);
+      expect(readded.karma).toBe(20); // Still 20, not 40
+    });
+  });
+
+  // CRITICAL-1: UUID IDs
+  describe("UUID IDs", () => {
+    it("should generate non-sequential UUID for agent IDs", async () => {
+      const res1 = await app.request("/api/agents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "Agent1" }),
+      });
+      const agent1: Agent = await res1.json();
+
+      const res2 = await app.request("/api/agents", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: "Agent2" }),
+      });
+      const agent2: Agent = await res2.json();
+
+      // Should be UUID format, not sequential like agent-1, agent-2
+      const uuidRegex =
+        /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
+      expect(agent1.id).toMatch(uuidRegex);
+      expect(agent2.id).toMatch(uuidRegex);
+      expect(agent1.id).not.toBe(agent2.id);
     });
   });
 });
