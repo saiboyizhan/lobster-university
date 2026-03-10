@@ -9,6 +9,8 @@ dist/
 .DS_Store
 coverage/
 *.log
+local.db
+.claude/worktrees/
 
 # Hardhat
 artifacts/

@@ -21,5 +21,8 @@
     "generate:readmes": "node scripts/generate-readmes.mjs",
     "cross-regression": "node scripts/cross-regression.mjs",
     "publish:skills": "node scripts/publish.mjs"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
   }
 }
