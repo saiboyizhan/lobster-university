@@ -1,0 +1,118 @@
+# 加密交易基础：从看盘到执行
+**用链上数据做交易决策，而不是靠猜。**
+
+---
+
+## Quick Start
+你天天刷 Crypto Twitter，但还是亏钱。这个 Playbook 帮你建立系统化的链上分析和 DEX 交易方法。
+
+---
+
+## Who It's For
+想从投机转向数据驱动交易的开发者和交易者。
+
+---
+
+## The Pain (盲目交易)
+- 买币靠热度，不靠数据。
+- 不会在交易前看链上指标。
+- 没有风控体系，全凭感觉。
+
+---
+
+## The Simple Learning Logic
+- **链上数据不会骗人：** K 线可以被操纵，但链上交易是透明的。
+- **风控优先：** 活下来比赚到更重要。下单前先算好仓位。
+
+---
+
+## The Human‑Agent Split
+**Agent 做**
+- 拉取链上指标（流动性深度、持仓分布、交易量）。
+- 扫描 DEX 池子异常（突然撤流动性、筹码高度集中）。
+- 根据你的风险参数计算仓位大小。
+
+**Human 做**
+- 设定风险容忍度和资金分配。
+- 做最终的买卖决策。
+- 监控持仓并调整策略。
+
+---
+
+## The 4‑Step Routine (30 min/day)
+**1) Scan（5 分钟）**
+查看 Agent 的隔夜摘要——关注代币的成交量变化、巨鲸动向、流动性变动。
+
+**2) Analyze（10 分钟）**
+选一个代币。Agent 拉取持仓分布、大户活动、DEX 池子健康度。你来解读信号。
+
+**3) Plan（10 分钟）**
+如果值得交易，定义入场价格、仓位（单笔不超过总资金 5%）、止损和止盈。
+
+**4) Execute & Log（5 分钟）**
+在 DEX 上执行交易。记录你的交易逻辑和参数，方便后续复盘。
+
+---
+
+## Expected Outcomes (Time‑boxed)
+- **7 天：** 对一个代币建立可用的链上分析流程。
+- **14 天：** 有 3 笔以上记录完整的交易及其结果。
+- **30 天：** 形成一套有明确风控规则的可复用交易系统。
+
+---
+
+## Starter Prompt (Example, Unverified)
+用于生成今天的流程：
+
+```
+分析这个 BSC 上的代币：[合约地址]。
+拉取：流动性深度、前 10 大持仓占比、24h 成交量、买卖比。
+标记所有危险信号（貔貅指标、筹码过度集中、流动性下降）。
+按 $1000 总资金、单笔最大风险 2% 计算推荐仓位。
+```
+
+---
+
+## Skill Pack
+
+**Candidate Skills (not yet verified)**
+- On‑Chain Data Aggregator: https://skills.sh/search?q=on-chain%20analysis
+- DEX Pool Scanner: https://skills.sh/search?q=dex%20pool%20scanner
+- Trade Risk Calculator: https://skills.sh/search?q=trade%20risk%20calculator
+- Portfolio Tracker: https://skills.sh/search?q=crypto%20portfolio
+
+**Verified Skills (downloadable)**
+- @lobster-u/chain-analyzer: https://skills.sh/lobster-u/chain-analyzer
+- @lobster-u/dex-trader: https://skills.sh/lobster-u/dex-trader
+- @lobster-u/wallet-monitor: https://skills.sh/lobster-u/wallet-monitor
+
+---
+
+## Evidence & Verification
+- **UNTESTED**：尚未被真人验证
+- **TESTED**：≥2 位用户 × 3 天
+- **VERIFIED**：≥10 位用户 × 7 天
+
+**Current status:** UNTESTED
+
+如果你测试了这个流程，请反馈结果，我们会升级状态。
+
+---
+
+## Call to Action
+选一个你感兴趣的代币，先看链上数据，再看 K 线。
+
+---
+
+## Open‑Source Community
+这份手册由社区维护。如果你做了改进，请分享出来，让更多人受益。
+
+**Contribute**
+- 提升清晰度或补充更好的场景
+- 添加真实可下载技能（链接 + 仓库）
+- 提交测试结果（你做了什么、持续多久、效果如何）
+
+---
+
+## Change Log
+- 2026‑03‑09 (UTC)：初始版本。

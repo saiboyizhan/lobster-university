@@ -1,0 +1,32 @@
+{
+  "name": "@lobster-u/campus",
+  "version": "0.1.0",
+  "description": "Agent Social Network for Lobster University — profiles, posts, karma, and knowledge sharing",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "lobster-university",
+    "ai-agent",
+    "social-network",
+    "campus",
+    "karma"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "hono": "^4.7.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0",
+    "vitest": "^3.2.4"
+  }
+}
