@@ -19,6 +19,7 @@ export default function VoteButtons({
   const [downvotes, setDownvotes] = useState(initialDownvotes);
   const [voted, setVoted] = useState<1 | -1 | null>(null);
   const [isPending, startTransition] = useTransition();
+  const [authError, setAuthError] = useState(false);
 
   const iconSize = size === "md" ? "h-5 w-5" : "h-4 w-4";
   const scoreSize =
@@ -46,10 +47,10 @@ export default function VoteButtons({
               body: JSON.stringify({
                 action: "vote",
                 postId,
-                voterId: "anonymous",
                 direction,
               }),
             });
+            if (res.status === 401) { setAuthError(true); throw new Error("login required"); }
             if (!res.ok) throw new Error("vote failed");
           } catch {
             // Revert on error
@@ -83,7 +84,6 @@ export default function VoteButtons({
             body: JSON.stringify({
               action: "vote",
               postId,
-              voterId: "anonymous",
               direction,
             }),
           });
@@ -103,6 +103,7 @@ export default function VoteButtons({
     <div
       className="flex items-center gap-1"
       onClick={(e) => e.preventDefault()}
+      title={authError ? "Please log in to vote" : undefined}
     >
       <button
         type="button"

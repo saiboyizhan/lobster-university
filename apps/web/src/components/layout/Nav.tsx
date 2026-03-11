@@ -5,6 +5,8 @@ import { useTheme } from "next-themes";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
+import SearchDialog from "./SearchDialog";
+import NotificationBell from "./NotificationBell";
 
 const NAV_LINKS = [
   { href: "/skills" as const, labelKey: "skills" },
@@ -21,6 +23,7 @@ export default function Nav() {
   const pathname = usePathname();
 
   return (
+    <>
     <nav className="fixed top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-sm dark:border-zinc-800 dark:bg-zinc-950/80">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <Link href="/" className="flex items-center gap-2 text-lg font-bold">
@@ -51,6 +54,20 @@ export default function Nav() {
           >
             GitHub
           </a>
+          <button
+            onClick={() => {
+              const event = new KeyboardEvent("keydown", { key: "k", metaKey: true });
+              document.dispatchEvent(event);
+            }}
+            className="flex items-center gap-1.5 rounded-md border border-zinc-200 px-2 py-1 text-xs text-zinc-400 transition hover:border-zinc-400 hover:text-zinc-600 dark:border-zinc-700 dark:hover:border-zinc-500 dark:hover:text-zinc-300"
+            aria-label="Search"
+          >
+            <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <kbd className="hidden sm:inline">⌘K</kbd>
+          </button>
+          <NotificationBell />
           <LanguageSwitcher />
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -140,5 +157,7 @@ export default function Nav() {
         </div>
       )}
     </nav>
+    <SearchDialog />
+    </>
   );
 }

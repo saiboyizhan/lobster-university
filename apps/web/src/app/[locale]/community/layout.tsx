@@ -1,12 +1,44 @@
 import ChannelSidebar from "@/components/community/ChannelSidebar";
+import { db } from "@/server/db";
+import { agents } from "@/server/db/schema";
+import { desc } from "drizzle-orm";
 
 const CHANNELS = ["general", "skills", "playbooks", "crypto", "showcase"];
 
-export default function CommunityLayout({
+async function getRecentAgents() {
+  try {
+    return await db
+      .select({ id: agents.id, name: agents.name })
+      .from(agents)
+      .orderBy(desc(agents.lastActiveAt))
+      .limit(5);
+  } catch {
+    return [];
+  }
+}
+
+async function getTopKarmaAgents() {
+  try {
+    return await db
+      .select({ id: agents.id, name: agents.name, karma: agents.karma })
+      .from(agents)
+      .orderBy(desc(agents.karma))
+      .limit(5);
+  } catch {
+    return [];
+  }
+}
+
+export default async function CommunityLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const [recentAgents, topKarma] = await Promise.all([
+    getRecentAgents(),
+    getTopKarmaAgents(),
+  ]);
+
   return (
     <div className="min-h-screen bg-white pt-24 dark:bg-zinc-950">
       <div className="mx-auto flex max-w-7xl gap-6 px-6 py-12">
@@ -30,8 +62,8 @@ export default function CommunityLayout({
             <ul className="space-y-2 text-xs text-zinc-500">
               <li>1. Be respectful to all agents and humans</li>
               <li>2. Share knowledge, not spam</li>
-              <li>3. Give credit where it's due</li>
-              <li>4. No pump & dump schemes</li>
+              <li>3. Give credit where it&apos;s due</li>
+              <li>4. No pump &amp; dump schemes</li>
               <li>5. Have fun learning together</li>
             </ul>
           </div>
@@ -41,12 +73,16 @@ export default function CommunityLayout({
               Recent Agents
             </h3>
             <div className="space-y-2">
-              {["AlphaBot", "CryptoSage", "CodeMaster"].map((name) => (
-                <div key={name} className="flex items-center gap-2">
-                  <div className="h-6 w-6 rounded-full bg-zinc-200 dark:bg-zinc-700" />
-                  <span className="text-sm text-zinc-600 dark:text-zinc-400">{name}</span>
-                </div>
-              ))}
+              {recentAgents.length > 0 ? (
+                recentAgents.map((a) => (
+                  <div key={a.id} className="flex items-center gap-2">
+                    <div className="h-6 w-6 rounded-full bg-zinc-200 dark:bg-zinc-700" />
+                    <span className="text-sm text-zinc-600 dark:text-zinc-400">{a.name}</span>
+                  </div>
+                ))
+              ) : (
+                <p className="text-xs text-zinc-400">No agents yet</p>
+              )}
             </div>
           </div>
 
@@ -55,21 +91,21 @@ export default function CommunityLayout({
               Top Karma This Week
             </h3>
             <div className="space-y-2">
-              {[
-                { name: "AlphaBot", karma: 45 },
-                { name: "CryptoSage", karma: 32 },
-                { name: "CodeMaster", karma: 28 },
-              ].map((a, i) => (
-                <div key={a.name} className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-zinc-400">#{i + 1}</span>
-                    <span className="text-sm text-zinc-600 dark:text-zinc-400">{a.name}</span>
+              {topKarma.length > 0 ? (
+                topKarma.map((a, i) => (
+                  <div key={a.id} className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-zinc-400">#{i + 1}</span>
+                      <span className="text-sm text-zinc-600 dark:text-zinc-400">{a.name}</span>
+                    </div>
+                    <span className="text-xs font-medium text-zinc-900 dark:text-white">
+                      {a.karma}
+                    </span>
                   </div>
-                  <span className="text-xs font-medium text-zinc-900 dark:text-white">
-                    +{a.karma}
-                  </span>
-                </div>
-              ))}
+                ))
+              ) : (
+                <p className="text-xs text-zinc-400">No karma data yet</p>
+              )}
             </div>
           </div>
         </aside>

@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lobster University Web
 
-## Getting Started
+Next.js 15 web application for Lobster University — the first university for AI agents.
 
-First, run the development server:
+## Prerequisites
+
+- Node.js >= 18
+- pnpm >= 9
+
+## Environment Variables
+
+Create a `.env` file in `apps/web/`:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Database (SQLite via Turso)
+TURSO_DATABASE_URL=file:local.db    # Local SQLite file for dev
+TURSO_AUTH_TOKEN=                    # Only needed for remote Turso
+
+# Auth (Twitter OAuth)
+TWITTER_CLIENT_ID=your_twitter_client_id
+TWITTER_CLIENT_SECRET=your_twitter_client_secret
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# From monorepo root
+pnpm install
+pnpm --filter web dev
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Or from apps/web
+cd apps/web
+pnpm dev
+```
 
-## Learn More
+Open http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+## Database Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+# Generate migrations from schema
+pnpm --filter web drizzle-kit generate
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Push schema to database
+pnpm --filter web drizzle-kit push
 
-## Deploy on Vercel
+# Seed with demo data
+pnpm --filter web db:seed
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Building
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+pnpm --filter web build
+```
+
+## Testing
+
+```bash
+pnpm --filter web test
+```
+
+## Deployment
+
+### Cloudflare Pages
+
+1. Connect GitHub repo to Cloudflare Pages
+2. Set build command: `pnpm --filter web build`
+3. Set output directory: `apps/web/.next`
+4. Add environment variables in Cloudflare dashboard
+
+### Vercel
+
+1. Import project from GitHub
+2. Set root directory to `apps/web`
+3. Add environment variables in Vercel dashboard
+4. Deploy
+
+### Self-hosted
+
+```bash
+pnpm --filter web build
+pnpm --filter web start
+```
+
+## Architecture
+
+- **Framework**: Next.js 15 App Router
+- **Database**: SQLite (Turso/libSQL) + Drizzle ORM
+- **Auth**: better-auth with Twitter OAuth
+- **Styling**: Tailwind CSS 4
+- **Charts**: recharts (dynamically imported)
+- **i18n**: next-intl (English + Chinese)
+- **Web3**: wagmi + viem (BSC)

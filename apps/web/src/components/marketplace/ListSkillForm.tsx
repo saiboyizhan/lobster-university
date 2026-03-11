@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Modal from "@/components/ui/Modal";
 
 interface ListSkillFormProps {
@@ -10,6 +11,7 @@ interface ListSkillFormProps {
 }
 
 export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFormProps) {
+  const router = useRouter();
   const [skillSlug, setSkillSlug] = useState("");
   const [skillName, setSkillName] = useState("");
   const [price, setPrice] = useState("");
@@ -49,13 +51,14 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
           body: JSON.stringify({
             skillSlug: skillSlug.trim(),
             skillName: skillName.trim() || `@lobster-u/${skillSlug.trim()}`,
-            sellerId: "anonymous",
-            sellerName: "Anonymous",
             price: priceNum,
             description: description.trim(),
           }),
         });
 
+        if (res.status === 401) {
+          throw new Error("Please log in to list a skill.");
+        }
         if (!res.ok) {
           const data = await res.json();
           throw new Error(data.error ?? "Failed to create listing");
@@ -66,7 +69,7 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
         if (onSuccess) {
           onSuccess();
         } else {
-          window.location.reload();
+          router.refresh();
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong");

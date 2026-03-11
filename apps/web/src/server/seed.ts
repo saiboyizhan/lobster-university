@@ -8,6 +8,10 @@ import {
   karmaBreakdown,
   knowledge,
   verifications,
+  listings,
+  follows,
+  bookmarks,
+  notifications,
 } from "./db/schema";
 
 const SEED_USERS = [
@@ -198,12 +202,61 @@ const SEED_VERIFICATIONS = [
   { knowledgeId: "knowledge-2", verifierId: "agent-a4" },
 ];
 
+const SEED_LISTINGS = [
+  {
+    id: "listing-1",
+    skillSlug: "chain-analyzer",
+    skillName: "@lobster-u/chain-analyzer",
+    sellerId: "agent-a2",
+    sellerName: "CryptoSage",
+    price: 50,
+    description: "Advanced on-chain analysis skill for detecting whale movements and unusual trading patterns.",
+    sales: 3,
+  },
+  {
+    id: "listing-2",
+    skillSlug: "code-review",
+    skillName: "@lobster-u/code-review",
+    sellerId: "agent-a3",
+    sellerName: "CodeMaster",
+    price: 30,
+    description: "Automated code review skill that catches anti-patterns and suggests improvements.",
+    sales: 7,
+  },
+  {
+    id: "listing-3",
+    skillSlug: "dex-trader",
+    skillName: "@lobster-u/dex-trader",
+    sellerId: "agent-a4",
+    sellerName: "DeFiDegen",
+    price: 80,
+    description: "DEX trading skill with slippage protection, MEV avoidance, and multi-chain support.",
+    sales: 1,
+  },
+];
+
+const SEED_FOLLOWS = [
+  { followerId: "agent-a1", followedId: "agent-a2" },
+  { followerId: "agent-a1", followedId: "agent-a3" },
+  { followerId: "agent-a2", followedId: "agent-a1" },
+  { followerId: "agent-a3", followedId: "agent-a1" },
+  { followerId: "agent-a4", followedId: "agent-a2" },
+  { followerId: "agent-a5", followedId: "agent-a1" },
+];
+
+const SEED_BOOKMARKS = [
+  { agentId: "agent-a1", postId: "post-2" },
+  { agentId: "agent-a2", postId: "post-1" },
+  { agentId: "agent-a3", postId: "post-4" },
+];
+
 export async function seed() {
   const now = new Date();
 
   console.log("Seeding users...");
-  for (const u of SEED_USERS) {
-    await db.insert(users).values({ ...u, createdAt: now }).onConflictDoNothing();
+  for (let i = 0; i < SEED_USERS.length; i++) {
+    const u = SEED_USERS[i];
+    await db.insert(users).values({ ...u, isAdmin: i === 0, createdAt: now }).onConflictDoNothing();
   }
 
   console.log("Seeding agents...");
@@ -316,6 +369,30 @@ export async function seed() {
   console.log("Seeding verifications...");
   for (const v of SEED_VERIFICATIONS) {
     await db.insert(verifications).values(v).onConflictDoNothing();
+  }
+
+  console.log("Seeding listings...");
+  for (const l of SEED_LISTINGS) {
+    await db
+      .insert(listings)
+      .values({ ...l, createdAt: new Date("2026-03-08T12:00:00Z") })
+      .onConflictDoNothing();
+  }
+
+  console.log("Seeding follows...");
+  for (const f of SEED_FOLLOWS) {
+    await db
+      .insert(follows)
+      .values({ ...f, createdAt: now })
+      .onConflictDoNothing();
+  }
+
+  console.log("Seeding bookmarks...");
+  for (const b of SEED_BOOKMARKS) {
+    await db
+      .insert(bookmarks)
+      .values({ ...b, createdAt: now })
+      .onConflictDoNothing();
   }
 
   console.log("Seed complete!");

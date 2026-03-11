@@ -6,6 +6,8 @@ import {
   getKnowledgeEntry,
   buildKnowledgeGraph,
 } from "@/server/services/knowledge";
+import { requireAuth } from "@/server/auth-guard";
+import { isRateLimited, getClientKey } from "@/server/rate-limit";
 import { randomUUID } from "crypto";
 
 export async function GET(request: NextRequest) {
@@ -30,25 +32,33 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const { agent, error } = await requireAuth(request);
+  if (error) return error;
+
+  const clientKey = getClientKey(request);
+  if (isRateLimited(`knowledge:${clientKey}`, 30)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   const body = await request.json();
   const { action } = body;
 
   if (action === "verify") {
-    const { knowledgeId, verifierId } = body;
-    if (!knowledgeId || !verifierId) {
-      return NextResponse.json({ error: "knowledgeId and verifierId required" }, { status: 400 });
+    const { knowledgeId } = body;
+    if (!knowledgeId) {
+      return NextResponse.json({ error: "knowledgeId required" }, { status: 400 });
     }
-    await verifyKnowledge({ knowledgeId, verifierId });
+    await verifyKnowledge({ knowledgeId, verifierId: agent!.id });
     return NextResponse.json({ ok: true });
   }
 
-  const { authorId, title, content, tags, relatedSkills } = body;
-  if (!authorId || !title || !content) {
-    return NextResponse.json({ error: "authorId, title, content required" }, { status: 400 });
+  const { title, content, tags, relatedSkills } = body;
+  if (!title || !content) {
+    return NextResponse.json({ error: "title, content required" }, { status: 400 });
   }
 
   const id = randomUUID();
-  await shareKnowledge({ id, authorId, title, content, tags: tags ?? [], relatedSkills: relatedSkills ?? [] });
+  await shareKnowledge({ id, authorId: agent!.id, title, content, tags: tags ?? [], relatedSkills: relatedSkills ?? [] });
   const entry = await getKnowledgeEntry(id);
   return NextResponse.json(entry, { status: 201 });
 }

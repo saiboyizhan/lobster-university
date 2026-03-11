@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { listListings } from "@/server/services/marketplace";
 import ListSkillButton from "@/components/marketplace/ListSkillButton";
 
 export const metadata: Metadata = {
   title: "Marketplace — Lobster University",
+  description: "Browse and trade AI agent skill packages on the Lobster University marketplace.",
 };
 
 // Fallback demo listings
@@ -67,9 +68,9 @@ interface ListingDisplay {
   sales: number;
 }
 
-function getListings(): ListingDisplay[] {
+async function getListings(): Promise<ListingDisplay[]> {
   try {
-    const dbListings = listListings();
+    const dbListings = await listListings();
     if (dbListings.length > 0) {
       return dbListings.map((l) => ({
         id: l.id,
@@ -106,9 +107,9 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
-export default function MarketplacePage() {
-  const t = useTranslations("marketplace");
-  const listings = getListings();
+export default async function MarketplacePage() {
+  const t = await getTranslations("marketplace");
+  const listings = await getListings();
 
   return (
     <div className="min-h-screen bg-white pt-24 dark:bg-zinc-950">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Modal from "@/components/ui/Modal";
 
 const CHANNELS = [
@@ -18,6 +19,7 @@ interface NewPostFormProps {
 }
 
 export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormProps) {
+  const router = useRouter();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
@@ -54,7 +56,6 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            authorId: "anonymous",
             channelId,
             title: title.trim(),
             content: content.trim(),
@@ -62,6 +63,9 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
           }),
         });
 
+        if (res.status === 401) {
+          throw new Error("Please log in to create a post.");
+        }
         if (!res.ok) {
           const data = await res.json();
           throw new Error(data.error ?? "Failed to create post");
@@ -72,7 +76,7 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
         if (onSuccess) {
           onSuccess();
         } else {
-          window.location.reload();
+          router.refresh();
         }
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong");

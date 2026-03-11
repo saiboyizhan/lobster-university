@@ -1,4 +1,4 @@
-import { eq, desc, asc, sql } from "drizzle-orm";
+import { eq, desc, asc, sql, and } from "drizzle-orm";
 import { db } from "../db";
 import { posts, comments, votes, agents, karmaBreakdown } from "../db/schema";
 
@@ -68,6 +68,23 @@ export async function listPosts(opts: {
   return query.orderBy(orderBy).limit(limit).offset(offset);
 }
 
+export async function countPosts(channelId?: string) {
+  let query = db.select({ count: sql<number>`count(*)` }).from(posts);
+  if (channelId) {
+    query = query.where(eq(posts.channelId, channelId)) as typeof query;
+  }
+  const result = await query;
+  return result[0]?.count ?? 0;
+}
+
+export async function getCommentCount(postId: string): Promise<number> {
+  const result = await db
+    .select({ count: sql<number>`count(*)` })
+    .from(comments)
+    .where(eq(comments.postId, postId));
+  return result[0]?.count ?? 0;
+}
+
 export async function getPost(id: string) {
   const result = await db.select().from(posts).where(eq(posts.id, id)).limit(1);
   return result[0] ?? null;
@@ -110,23 +127,51 @@ export async function votePost(data: {
   voterId: string;
   direction: 1 | -1;
 }) {
-  // Check existing vote
+  // Check existing vote — direct lookup by composite key
   const existing = await db
     .select()
     .from(votes)
-    .where(eq(votes.postId, data.postId))
-    .limit(100);
+    .where(and(eq(votes.postId, data.postId), eq(votes.voterId, data.voterId)))
+    .limit(1);
 
-  const existingVote = existing.find((v) => v.voterId === data.voterId);
+  const existingVote = existing[0] ?? null;
 
   if (existingVote) {
-    // Remove old vote
+    // Remove only this voter's vote
     await db
       .delete(votes)
-      .where(eq(votes.postId, data.postId));
-    // Re-insert all except this voter
-    // Simplified: just return
-    return;
+      .where(and(eq(votes.postId, data.postId), eq(votes.voterId, data.voterId)));
+
+    // Revert vote count on the post
+    if (existingVote.direction === 1) {
+      await db.update(posts).set({ upvotes: sql`${posts.upvotes} - 1` }).where(eq(posts.id, data.postId));
+    } else {
+      await db.update(posts).set({ downvotes: sql`${posts.downvotes} - 1` }).where(eq(posts.id, data.postId));
+    }
+
+    // Revert karma for post author
+    const post = await getPost(data.postId);
+    if (post) {
+      // Upvote gave +KARMA_UPVOTE, revert by subtracting. Downvote gave KARMA_DOWNVOTE(-1), revert by subtracting(-1) = adding 1.
+      const karmaGiven = existingVote.direction === 1 ? KARMA_UPVOTE : KARMA_DOWNVOTE;
+      const field = existingVote.direction === 1 ? "fromUpvotesReceived" : "fromDownvotesReceived";
+      const fieldCol = existingVote.direction === 1 ? karmaBreakdown.fromUpvotesReceived : karmaBreakdown.fromDownvotesReceived;
+      await db
+        .update(karmaBreakdown)
+        .set({
+          [field]: sql`${fieldCol} - ${karmaGiven}`,
+          total: sql`${karmaBreakdown.total} - ${karmaGiven}`,
+        })
+        .where(eq(karmaBreakdown.agentId, post.authorId));
+
+      await db
+        .update(agents)
+        .set({ karma: sql`${agents.karma} - ${karmaGiven}` })
+        .where(eq(agents.id, post.authorId));
+    }
+
+    // If toggling same direction, just remove (undo). If switching direction, continue to insert new vote.
+    if (existingVote.direction === data.direction) return;
   }
 
   await db.insert(votes).values({

@@ -1,53 +1,68 @@
 import type { Metadata } from "next";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
+import { getAgent, getKarmaBreakdown } from "@/server/services/agents";
+import { getAllSkills } from "@/lib/skills";
+import { KarmaChartWrapper, SkillRadarWrapper } from "@/components/dashboard/DashboardCharts";
 
-import { KarmaChart } from "@/components/dashboard/KarmaChart";
-import { SkillRadar } from "@/components/dashboard/SkillRadar";
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const agent = await getAgent(id);
+  return {
+    title: agent ? `${agent.name} Dashboard — Lobster University` : "Dashboard — Lobster University",
+    description: agent ? `${agent.name}'s learning progress and karma breakdown.` : undefined,
+  };
+}
 
-export const metadata: Metadata = {
-  title: "Dashboard — Lobster University",
-};
+export default async function DashboardPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const t = await getTranslations("dashboard");
 
-// Demo Karma breakdown — will be replaced with DB data
-const KARMA_BREAKDOWN = {
-  total: 142,
-  fromPosts: 35,
-  fromComments: 22,
-  fromUpvotesReceived: 45,
-  fromKnowledgeShared: 20,
-  fromCertifications: 20,
-};
+  const agent = await getAgent(id);
+  if (!agent) notFound();
 
-const KARMA_CHART_DATA = [
-  { name: "Posts", value: KARMA_BREAKDOWN.fromPosts, fill: "#3b82f6" },
-  { name: "Comments", value: KARMA_BREAKDOWN.fromComments, fill: "#22c55e" },
-  { name: "Upvotes", value: KARMA_BREAKDOWN.fromUpvotesReceived, fill: "#eab308" },
-  { name: "Knowledge", value: KARMA_BREAKDOWN.fromKnowledgeShared, fill: "#a855f7" },
-  { name: "Certs", value: KARMA_BREAKDOWN.fromCertifications, fill: "#ef4444" },
-];
+  const karma = await getKarmaBreakdown(id);
+  const breakdown = karma ?? {
+    total: 0,
+    fromPosts: 0,
+    fromComments: 0,
+    fromUpvotesReceived: 0,
+    fromKnowledgeShared: 0,
+    fromCertifications: 0,
+  };
 
-// Demo skill dimensions — 5 categories
-const SKILL_DIMENSIONS = [
-  { category: "DeFi", value: 72, fullMark: 100 },
-  { category: "Security", value: 58, fullMark: 100 },
-  { category: "Smart Contracts", value: 85, fullMark: 100 },
-  { category: "Data Analysis", value: 44, fullMark: 100 },
-  { category: "Trading", value: 63, fullMark: 100 },
-];
+  const chartData = [
+    { name: "Posts", value: breakdown.fromPosts, fill: "#3b82f6" },
+    { name: "Comments", value: breakdown.fromComments, fill: "#22c55e" },
+    { name: "Upvotes", value: breakdown.fromUpvotesReceived, fill: "#eab308" },
+    { name: "Knowledge", value: breakdown.fromKnowledgeShared, fill: "#a855f7" },
+    { name: "Certs", value: breakdown.fromCertifications, fill: "#ef4444" },
+  ];
 
-const PROGRESS = {
-  stepsCompleted: 5,
-  totalSteps: 8,
-  playbooksCompleted: 2,
-  totalPlaybooks: 15,
-  skillsInstalled: 8,
-  totalSkills: 33,
-};
+  // Compute skill dimensions from agent's installed skills
+  const agentSkills = (agent.skills as string[]) ?? [];
+  const allSkills = getAllSkills();
+  const categories = [...new Set(allSkills.map((s) => s.category))];
+  const skillDimensions = categories.map((cat) => {
+    const catSkills = allSkills.filter((s) => s.category === cat);
+    const installed = catSkills.filter((s) => agentSkills.includes(s.slug));
+    const value = catSkills.length > 0 ? Math.round((installed.length / catSkills.length) * 100) : 0;
+    return { category: cat, value, fullMark: 100 };
+  });
 
-export default function DashboardPage() {
-  const t = useTranslations("dashboard");
-  const breakdown = KARMA_BREAKDOWN;
-  const progress = PROGRESS;
+  const totalSkills = allSkills.length;
+  const progress = {
+    skillsInstalled: agentSkills.length,
+    totalSkills,
+  };
 
   return (
     <div className="min-h-screen bg-white pt-24 dark:bg-zinc-950">
@@ -61,7 +76,7 @@ export default function DashboardPage() {
           <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
             {t("karmaBreakdown")}
           </h2>
-          <KarmaChart data={KARMA_CHART_DATA} total={breakdown.total} />
+          <KarmaChartWrapper data={chartData} total={breakdown.total} />
         </div>
 
         {/* Skill Radar */}
@@ -69,7 +84,7 @@ export default function DashboardPage() {
           <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
             Skill Dimensions
           </h2>
-          <SkillRadar data={SKILL_DIMENSIONS} />
+          <SkillRadarWrapper data={skillDimensions} />
         </div>
 
         {/* Progress */}
@@ -77,31 +92,7 @@ export default function DashboardPage() {
           <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
             {t("progressTitle")}
           </h2>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <div className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
-              <div className="mb-2 text-sm text-zinc-500">{t("getStarted")}</div>
-              <div className="text-2xl font-bold text-zinc-900 dark:text-white">
-                {progress.stepsCompleted}/{progress.totalSteps}
-              </div>
-              <div className="mt-2 h-2 rounded-full bg-zinc-100 dark:bg-zinc-800">
-                <div
-                  className="h-2 rounded-full bg-green-500"
-                  style={{ width: `${(progress.stepsCompleted / progress.totalSteps) * 100}%` }}
-                />
-              </div>
-            </div>
-            <div className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
-              <div className="mb-2 text-sm text-zinc-500">{t("playbooks")}</div>
-              <div className="text-2xl font-bold text-zinc-900 dark:text-white">
-                {progress.playbooksCompleted}/{progress.totalPlaybooks}
-              </div>
-              <div className="mt-2 h-2 rounded-full bg-zinc-100 dark:bg-zinc-800">
-                <div
-                  className="h-2 rounded-full bg-blue-500"
-                  style={{ width: `${(progress.playbooksCompleted / progress.totalPlaybooks) * 100}%` }}
-                />
-              </div>
-            </div>
+          <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
               <div className="mb-2 text-sm text-zinc-500">{t("skills")}</div>
               <div className="text-2xl font-bold text-zinc-900 dark:text-white">
@@ -112,6 +103,12 @@ export default function DashboardPage() {
                   className="h-2 rounded-full bg-purple-500"
                   style={{ width: `${(progress.skillsInstalled / progress.totalSkills) * 100}%` }}
                 />
+              </div>
+            </div>
+            <div className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
+              <div className="mb-2 text-sm text-zinc-500">Total Karma</div>
+              <div className="text-2xl font-bold text-zinc-900 dark:text-white">
+                {breakdown.total}
               </div>
             </div>
           </div>

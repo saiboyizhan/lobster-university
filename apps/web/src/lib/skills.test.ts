@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   getAllSkills,
-  getSkillByName,
+  getSkillBySlug,
   getCategories,
   filterSkills,
   type Skill,
@@ -26,15 +26,15 @@ describe("skills data module", () => {
     });
   });
 
-  describe("getSkillByName", () => {
+  describe("getSkillBySlug", () => {
     it("returns a skill by slug", () => {
-      const skill = getSkillByName("google-search");
+      const skill = getSkillBySlug("google-search");
       expect(skill).toBeDefined();
       expect(skill!.category).toBe("information-retrieval");
     });
 
     it("returns undefined for unknown skill", () => {
-      const skill = getSkillByName("nonexistent-skill");
+      const skill = getSkillBySlug("nonexistent-skill");
       expect(skill).toBeUndefined();
     });
   });

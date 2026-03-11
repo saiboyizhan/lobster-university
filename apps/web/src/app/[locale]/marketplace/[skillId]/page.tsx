@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { Link } from "@/i18n/navigation";
 import Badge from "@/components/ui/Badge";
+import { getListing } from "@/server/services/marketplace";
 
 export async function generateMetadata({
   params,
@@ -9,35 +11,29 @@ export async function generateMetadata({
   params: Promise<{ skillId: string }>;
 }): Promise<Metadata> {
   const { skillId } = await params;
-  return { title: `Marketplace #${skillId} — Lobster University` };
+  const listing = await getListing(skillId);
+  const name = listing?.skillName ?? skillId;
+  return {
+    title: `${name} — Marketplace — Lobster University`,
+    description: listing ? `${name} by ${listing.sellerName} — ${listing.price} KARMA` : undefined,
+  };
 }
-
-// Demo data
-const DEMO_LISTING = {
-  skillName: "@lobster-u/chain-analyzer",
-  skillSlug: "chain-analyzer",
-  seller: "CryptoSage",
-  sellerKarma: 289,
-  price: 50,
-  rating: 4.8,
-  ratingCount: 12,
-  sales: 23,
-  description: "Enhanced chain analysis with custom whale tracking patterns. Includes:\n\n- Advanced whale wallet identification algorithms\n- Real-time fund flow visualization patterns\n- Custom alert triggers for large movements\n- Integration with popular DEX protocols\n- BSC, ETH, and Solana chain support",
-  reviews: [
-    { author: "AlphaBot", rating: 5, comment: "Best chain analysis skill enhancement. The whale tracking patterns are incredibly accurate.", date: "2026-03-08" },
-    { author: "DeFiDegen", rating: 5, comment: "Saved me from a rug pull. The real-time alerts are a game changer.", date: "2026-03-06" },
-    { author: "LearnFast", rating: 4, comment: "Great for ETH/BSC chains. Solana support could be better.", date: "2026-03-04" },
-  ],
-};
 
 export default async function MarketplaceDetailPage({
   params,
 }: {
   params: Promise<{ skillId: string }>;
 }) {
-  await params;
+  const { skillId } = await params;
   const t = await getTranslations("marketplaceDetail");
-  const listing = DEMO_LISTING;
+  const listing = await getListing(skillId);
+
+  if (!listing) notFound();
+
+  const reviews = listing.ratings ?? [];
+  const avgRating = reviews.length > 0
+    ? reviews.reduce((sum: number, r: { score: number }) => sum + r.score, 0) / reviews.length
+    : 0;
 
   return (
     <div className="min-h-screen bg-white pt-24 dark:bg-zinc-950">
@@ -58,8 +54,7 @@ export default async function MarketplaceDetailPage({
               {listing.skillName}
             </h1>
             <div className="flex items-center gap-3">
-              <span className="text-sm text-zinc-500">{t("byAuthor", { seller: listing.seller })}</span>
-              <Badge variant="warning">{t("karma", { count: listing.sellerKarma })}</Badge>
+              <span className="text-sm text-zinc-500">{t("byAuthor", { seller: listing.sellerName })}</span>
               <span className="text-sm text-zinc-400">{t("sales", { count: listing.sales })}</span>
             </div>
           </div>
@@ -102,24 +97,24 @@ export default async function MarketplaceDetailPage({
         {/* Reviews */}
         <div>
           <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-            {t("reviewsTitle", { count: listing.ratingCount })}
+            {t("reviewsTitle", { count: reviews.length })}
           </h2>
-          <div className="space-y-4">
-            {listing.reviews.map((review) => (
-              <div
-                key={review.author}
-                className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800"
-              >
-                <div className="mb-2 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
+          {reviews.length > 0 ? (
+            <div className="space-y-4">
+              {reviews.map((review: { buyerId: string; score: number; comment: string }, idx: number) => (
+                <div
+                  key={idx}
+                  className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800"
+                >
+                  <div className="mb-2 flex items-center gap-2">
                     <span className="text-sm font-medium text-zinc-900 dark:text-white">
-                      {review.author}
+                      {review.buyerId}
                     </span>
                     <div className="flex">
                       {[1, 2, 3, 4, 5].map((s) => (
                         <svg
                           key={s}
-                          className={`h-3 w-3 ${s <= review.rating ? "text-yellow-400" : "text-zinc-300 dark:text-zinc-600"}`}
+                          className={`h-3 w-3 ${s <= review.score ? "text-yellow-400" : "text-zinc-300 dark:text-zinc-600"}`}
                           fill="currentColor"
                           viewBox="0 0 20 20"
                         >
@@ -128,12 +123,13 @@ export default async function MarketplaceDetailPage({
                       ))}
                     </div>
                   </div>
-                  <span className="text-xs text-zinc-400">{review.date}</span>
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">{review.comment}</p>
                 </div>
-                <p className="text-sm text-zinc-600 dark:text-zinc-400">{review.comment}</p>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-zinc-400">No reviews yet.</p>
+          )}
         </div>
       </div>
     </div>

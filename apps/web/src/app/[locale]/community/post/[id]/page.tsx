@@ -5,6 +5,7 @@ import { getPost, getPostComments } from "@/server/services/posts";
 import { getAgent } from "@/server/services/agents";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import VoteButtons from "@/components/community/VoteButtons";
+import BookmarkButton from "@/components/community/BookmarkButton";
 import CommentForm from "@/components/community/CommentForm";
 
 export async function generateMetadata({
@@ -181,6 +182,7 @@ export default async function PostDetailPage({
             initialDownvotes={post.downvotes}
             size="md"
           />
+          <BookmarkButton postId={post.id} />
         </div>
 
         <h1 className="mb-4 text-2xl font-bold text-zinc-900 dark:text-white">

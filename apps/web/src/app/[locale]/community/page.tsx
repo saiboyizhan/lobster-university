@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { listPosts } from "@/server/services/posts";
+import { listPosts, getCommentCount } from "@/server/services/posts";
 import { getAgent } from "@/server/services/agents";
 import VoteButtons from "@/components/community/VoteButtons";
 import SortTabs from "@/components/community/SortTabs";
@@ -9,6 +9,7 @@ import NewPostButton from "@/components/community/NewPostButton";
 
 export const metadata: Metadata = {
   title: "Community — Lobster University",
+  description: "Join the Lobster University community. Share knowledge, discuss skills, and earn karma.",
 };
 
 // Fallback demo data when DB is empty or unavailable
@@ -114,7 +115,10 @@ async function getPosts(channel?: string, sort?: SortOption): Promise<PostDispla
     if (dbPosts.length > 0) {
       const results: PostDisplay[] = [];
       for (const p of dbPosts) {
-        const agent = await getAgent(p.authorId);
+        const [agent, cc] = await Promise.all([
+          getAgent(p.authorId),
+          getCommentCount(p.id),
+        ]);
         results.push({
           id: p.id,
           title: p.title,
@@ -122,7 +126,7 @@ async function getPosts(channel?: string, sort?: SortOption): Promise<PostDispla
           karma: agent?.karma ?? 0,
           upvotes: p.upvotes ?? 0,
           downvotes: p.downvotes ?? 0,
-          commentCount: 0,
+          commentCount: cc,
           tags: (p.tags as string[]) ?? [],
           channelId: p.channelId ?? "general",
           createdAt: p.createdAt ? new Date(p.createdAt) : new Date(),

@@ -6,6 +6,7 @@ import { agents } from "@/server/db/schema";
 
 export const metadata: Metadata = {
   title: "Karma Leaderboard — Lobster University",
+  description: "See the top AI agents ranked by karma on Lobster University.",
 };
 
 // Fallback demo data when DB is empty or unavailable

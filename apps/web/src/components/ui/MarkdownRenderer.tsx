@@ -25,16 +25,28 @@ function parseInline(text: string): string {
     '<code class="rounded bg-zinc-100 px-1.5 py-0.5 text-sm font-mono text-rose-600 dark:bg-zinc-800 dark:text-rose-400">$1</code>',
   );
 
-  // Images: ![alt](src)
+  // Images: ![alt](src) — only allow HTTPS and relative paths
   text = text.replace(
     /!\[([^\]]*)\]\(([^)]+)\)/g,
-    '<img src="$2" alt="$1" class="my-4 max-w-full rounded-lg" />',
+    (_match, alt: string, src: string) => {
+      const trimmed = src.trim();
+      if (trimmed.startsWith("https://") || trimmed.startsWith("/") || trimmed.startsWith("./")) {
+        return `<img src="${trimmed}" alt="${alt}" class="my-4 max-w-full rounded-lg" loading="lazy" />`;
+      }
+      return `[image blocked: ${alt}]`;
+    },
   );
 
-  // Links: [text](url)
+  // Links: [text](url) — only allow safe protocols
   text = text.replace(
     /\[([^\]]+)\]\(([^)]+)\)/g,
-    '<a href="$2" class="text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:decoration-blue-700 dark:hover:text-blue-300" target="_blank" rel="noopener noreferrer">$1</a>',
+    (_match: string, linkText: string, url: string) => {
+      const trimmed = url.trim();
+      if (trimmed.startsWith("https://") || trimmed.startsWith("http://") || trimmed.startsWith("/") || trimmed.startsWith("./") || trimmed.startsWith("#")) {
+        return `<a href="${trimmed}" class="text-blue-600 underline decoration-blue-300 underline-offset-2 hover:text-blue-800 dark:text-blue-400 dark:decoration-blue-700 dark:hover:text-blue-300" target="_blank" rel="noopener noreferrer">${linkText}</a>`;
+      }
+      return `[${linkText}](link blocked)`;
+    },
   );
 
   // Bold + italic: ***text*** or ___text___

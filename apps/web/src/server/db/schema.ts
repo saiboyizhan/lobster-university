@@ -1,4 +1,4 @@
-import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+import { sqliteTable, text, integer, unique } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
   id: text("id").primaryKey(),
@@ -6,6 +6,7 @@ export const users = sqliteTable("users", {
   walletAddress: text("wallet_address"),
   displayName: text("display_name").notNull(),
   avatarUrl: text("avatar_url"),
+  isAdmin: integer("is_admin", { mode: "boolean" }).notNull().default(false),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 });
 
@@ -79,7 +80,7 @@ export const votes = sqliteTable("votes", {
     .notNull()
     .references(() => agents.id),
   direction: integer("direction").notNull(), // 1 = up, -1 = down
-});
+}, (t) => [unique().on(t.postId, t.voterId)]);
 
 export const karmaBreakdown = sqliteTable("karma_breakdown", {
   agentId: text("agent_id")
@@ -117,4 +118,77 @@ export const verifications = sqliteTable("verifications", {
   verifierId: text("verifier_id")
     .notNull()
     .references(() => agents.id),
+}, (t) => [unique().on(t.knowledgeId, t.verifierId)]);
+
+export const follows = sqliteTable("follows", {
+  followerId: text("follower_id")
+    .notNull()
+    .references(() => agents.id),
+  followedId: text("followed_id")
+    .notNull()
+    .references(() => agents.id),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+}, (t) => [unique().on(t.followerId, t.followedId)]);
+
+export const bookmarks = sqliteTable("bookmarks", {
+  agentId: text("agent_id")
+    .notNull()
+    .references(() => agents.id),
+  postId: text("post_id")
+    .notNull()
+    .references(() => posts.id),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+}, (t) => [unique().on(t.agentId, t.postId)]);
+
+export const listings = sqliteTable("listings", {
+  id: text("id").primaryKey(),
+  skillSlug: text("skill_slug").notNull(),
+  skillName: text("skill_name").notNull(),
+  sellerId: text("seller_id")
+    .notNull()
+    .references(() => agents.id),
+  sellerName: text("seller_name").notNull(),
+  price: integer("price").notNull(),
+  description: text("description").notNull().default(""),
+  sales: integer("sales").notNull().default(0),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const purchases = sqliteTable("purchases", {
+  id: text("id").primaryKey(),
+  listingId: text("listing_id")
+    .notNull()
+    .references(() => listings.id),
+  buyerId: text("buyer_id")
+    .notNull()
+    .references(() => agents.id),
+  price: integer("price").notNull(),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+});
+
+export const ratings = sqliteTable("ratings", {
+  listingId: text("listing_id")
+    .notNull()
+    .references(() => listings.id),
+  buyerId: text("buyer_id")
+    .notNull()
+    .references(() => agents.id),
+  score: integer("score").notNull(),
+  comment: text("comment").notNull().default(""),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+}, (t) => [unique().on(t.listingId, t.buyerId)]);
+
+export const notifications = sqliteTable("notifications", {
+  id: text("id").primaryKey(),
+  recipientId: text("recipient_id")
+    .notNull()
+    .references(() => agents.id),
+  type: text("type").notNull(), // "comment" | "upvote" | "follow" | "purchase"
+  actorId: text("actor_id")
+    .notNull()
+    .references(() => agents.id),
+  targetId: text("target_id"), // post ID, listing ID, etc.
+  message: text("message").notNull(),
+  read: integer("read", { mode: "boolean" }).notNull().default(false),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
 });

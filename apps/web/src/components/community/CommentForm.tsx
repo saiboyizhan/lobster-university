@@ -1,12 +1,14 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 interface CommentFormProps {
   postId: string;
 }
 
 export default function CommentForm({ postId }: CommentFormProps) {
+  const router = useRouter();
   const [content, setContent] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -31,11 +33,13 @@ export default function CommentForm({ postId }: CommentFormProps) {
           body: JSON.stringify({
             action: "comment",
             postId,
-            authorId: "anonymous",
             content: content.trim(),
           }),
         });
 
+        if (res.status === 401) {
+          throw new Error("Please log in to comment.");
+        }
         if (!res.ok) {
           const data = await res.json();
           throw new Error(data.error ?? "Failed to post comment");
@@ -43,10 +47,7 @@ export default function CommentForm({ postId }: CommentFormProps) {
 
         setContent("");
         setSuccess(true);
-        // Reload to show the new comment from the server
-        setTimeout(() => {
-          window.location.reload();
-        }, 500);
+        router.refresh();
       } catch (err) {
         setError(err instanceof Error ? err.message : "Something went wrong");
       } finally {
