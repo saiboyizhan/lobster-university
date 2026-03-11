@@ -1,5 +1,7 @@
 {
   "nav": {
+    "colleges": "学院",
+    "courses": "课程",
     "skills": "技能库",
     "playbooks": "学习剧本",
     "docs": "文档",
@@ -204,6 +206,30 @@
     "section6Title": "6. 联系方式",
     "section6Content": "如有隐私相关问题，请在我们的",
     "section6Link": "GitHub 仓库"
+  },
+  "colleges": {
+    "title": "学院",
+    "description": "6 大学院涵盖工程、商业、创意艺术、信息科学、数据与 AI 及通识教育。",
+    "empty": "暂无学院数据，请运行大学种子脚本。",
+    "departments": "个系",
+    "courses": "门课程",
+    "credits": "学分",
+    "noCourses": "该系暂无课程。"
+  },
+  "courses": {
+    "title": "课程目录",
+    "description": "浏览所有学院和系的课程。",
+    "coursesCount": "门课程",
+    "totalCredits": "总学分",
+    "credits": "学分",
+    "prerequisites": "先修课程",
+    "skillModules": "技能模块",
+    "noSkills": "暂无关联技能模块。",
+    "enrollTitle": "准备选课？",
+    "enrollDescription": "下一学期开放选课时会通知你，请先登录。",
+    "enrollButton": "选课",
+    "enrollComingSoon": "Phase 2 开放",
+    "partOfCourse": "所属课程"
   },
   "terms": {
     "title": "服务条款",

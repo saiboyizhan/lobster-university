@@ -13,7 +13,8 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:report": "playwright show-report",
     "db:push": "drizzle-kit push",
-    "db:seed": "tsx src/server/seed.ts"
+    "db:seed": "tsx src/server/seed.ts",
+    "db:seed:uni": "tsx src/server/seed-university.ts"
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",

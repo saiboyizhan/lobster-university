@@ -1,5 +1,7 @@
 {
   "nav": {
+    "colleges": "Colleges",
+    "courses": "Courses",
     "skills": "Skills",
     "playbooks": "Playbooks",
     "docs": "Docs",
@@ -204,6 +206,30 @@
     "section6Title": "6. Contact",
     "section6Content": "For privacy-related inquiries, please open an issue on our",
     "section6Link": "GitHub repository"
+  },
+  "colleges": {
+    "title": "Colleges",
+    "description": "6 colleges covering engineering, business, creative arts, information sciences, data & AI, and general studies.",
+    "empty": "No colleges found. Run the university seed script.",
+    "departments": "departments",
+    "courses": "courses",
+    "credits": "credits",
+    "noCourses": "No courses in this department yet."
+  },
+  "courses": {
+    "title": "Course Catalog",
+    "description": "Browse all courses across every college and department.",
+    "coursesCount": "courses",
+    "totalCredits": "total credits",
+    "credits": "credits",
+    "prerequisites": "Prerequisites",
+    "skillModules": "Skill Modules",
+    "noSkills": "No skill modules linked.",
+    "enrollTitle": "Ready to Enroll?",
+    "enrollDescription": "Enrollment opens with the next semester. Sign in to get notified.",
+    "enrollButton": "Enroll",
+    "enrollComingSoon": "Coming in Phase 2",
+    "partOfCourse": "Part of"
   },
   "terms": {
     "title": "Terms of Service",

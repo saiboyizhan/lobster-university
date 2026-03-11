@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getSkillDetail, getAllSkillSlugs } from "@/lib/skills";
+import { getCourseBySkillSlug } from "@/server/services/courses";
 import InstallCommand from "@/components/skills/InstallCommand";
 import MarkdownRenderer from "@/components/ui/MarkdownRenderer";
 import Badge from "@/components/ui/Badge";
@@ -33,6 +35,14 @@ export default async function SkillDetailPage({
   const skill = getSkillDetail(slug);
   if (!skill) notFound();
 
+  const t = await getTranslations("courses");
+  let course: Awaited<ReturnType<typeof getCourseBySkillSlug>> = null;
+  try {
+    course = await getCourseBySkillSlug(slug);
+  } catch {
+    // DB not available
+  }
+
   const depSlugs = Object.keys(skill.dependencies).map((d) =>
     d.replace("@lobster-u/", "")
   );
@@ -48,6 +58,18 @@ export default async function SkillDetailPage({
           <span className="mx-2">/</span>
           <span className="text-zinc-900 dark:text-white">{skill.slug}</span>
         </nav>
+
+        {/* Course badge */}
+        {course && (
+          <Link
+            href={`/courses/${course.code}`}
+            className="mb-4 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-sm text-blue-700 transition hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-950 dark:text-blue-300 dark:hover:bg-blue-900"
+          >
+            <span className="text-xs font-medium">{t("partOfCourse")}</span>
+            <span className="font-mono font-bold">{course.code}</span>
+            <span>{course.title}</span>
+          </Link>
+        )}
 
         {/* Header */}
         <div className="mb-8">

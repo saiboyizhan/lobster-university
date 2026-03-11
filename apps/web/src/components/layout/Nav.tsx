@@ -9,9 +9,9 @@ import SearchDialog from "./SearchDialog";
 import NotificationBell from "./NotificationBell";
 
 const NAV_LINKS = [
+  { href: "/colleges" as const, labelKey: "colleges" },
+  { href: "/courses" as const, labelKey: "courses" },
   { href: "/skills" as const, labelKey: "skills" },
-  { href: "/playbooks" as const, labelKey: "playbooks" },
-  { href: "/docs" as const, labelKey: "docs" },
   { href: "/community" as const, labelKey: "community" },
   { href: "/get-started" as const, labelKey: "getStarted" },
 ] as const;
