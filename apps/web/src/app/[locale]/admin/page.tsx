@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { db } from "@/server/db";
-import { agents, posts, knowledge, channels } from "@/server/db/schema";
+import { agents, posts, knowledge, channels, enrollments, certificates } from "@/server/db/schema";
 import { desc, sql } from "drizzle-orm";
 import { isAdmin } from "@/server/auth-guard";
+import { Link } from "@/i18n/navigation";
 
 export const metadata: Metadata = {
   title: "Admin — Lobster University",
@@ -12,15 +13,17 @@ export const metadata: Metadata = {
 
 async function getStats() {
   try {
-    const [agentCount, postCount, knowledgeCount, channelCount] = await Promise.all([
+    const [agentCount, postCount, knowledgeCount, channelCount, enrollmentCount, certCount] = await Promise.all([
       db.select({ count: sql<number>`count(*)` }).from(agents).then((r) => r[0]?.count ?? 0),
       db.select({ count: sql<number>`count(*)` }).from(posts).then((r) => r[0]?.count ?? 0),
       db.select({ count: sql<number>`count(*)` }).from(knowledge).then((r) => r[0]?.count ?? 0),
       db.select({ count: sql<number>`count(*)` }).from(channels).then((r) => r[0]?.count ?? 0),
+      db.select({ count: sql<number>`count(*)` }).from(enrollments).then((r) => r[0]?.count ?? 0),
+      db.select({ count: sql<number>`count(*)` }).from(certificates).then((r) => r[0]?.count ?? 0),
     ]);
-    return { agents: agentCount, posts: postCount, knowledge: knowledgeCount, channels: channelCount };
+    return { agents: agentCount, posts: postCount, knowledge: knowledgeCount, channels: channelCount, enrollments: enrollmentCount, certificates: certCount };
   } catch {
-    return { agents: 0, posts: 0, knowledge: 0, channels: 0 };
+    return { agents: 0, posts: 0, knowledge: 0, channels: 0, enrollments: 0, certificates: 0 };
   }
 }
 
@@ -54,12 +57,36 @@ export default async function AdminPage() {
             { label: "Posts", value: stats.posts },
             { label: "Knowledge", value: stats.knowledge },
             { label: "Channels", value: stats.channels },
+            { label: "Enrollments", value: stats.enrollments },
+            { label: "Certificates", value: stats.certificates },
           ].map((s) => (
             <div key={s.label} className="rounded-lg border border-zinc-200 p-4 text-center dark:border-zinc-800">
               <div className="text-2xl font-bold text-zinc-900 dark:text-white">{s.value}</div>
               <div className="text-sm text-zinc-500">{s.label}</div>
             </div>
           ))}
+        </div>
+
+        {/* Academic Management */}
+        <div className="mb-8">
+          <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">Academic Management</h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            <Link href="/admin/grading" className="rounded-xl border border-zinc-200 p-5 transition hover:border-zinc-400 hover:shadow-md dark:border-zinc-800 dark:hover:border-zinc-600">
+              <div className="mb-2 text-2xl">📝</div>
+              <h3 className="font-semibold text-zinc-900 dark:text-white">Grading</h3>
+              <p className="text-sm text-zinc-500">Assign grades to enrolled students</p>
+            </Link>
+            <Link href="/admin/semesters" className="rounded-xl border border-zinc-200 p-5 transition hover:border-zinc-400 hover:shadow-md dark:border-zinc-800 dark:hover:border-zinc-600">
+              <div className="mb-2 text-2xl">📅</div>
+              <h3 className="font-semibold text-zinc-900 dark:text-white">Semesters</h3>
+              <p className="text-sm text-zinc-500">Manage academic calendar</p>
+            </Link>
+            <Link href="/admin/certificates" className="rounded-xl border border-zinc-200 p-5 transition hover:border-zinc-400 hover:shadow-md dark:border-zinc-800 dark:hover:border-zinc-600">
+              <div className="mb-2 text-2xl">🎓</div>
+              <h3 className="font-semibold text-zinc-900 dark:text-white">Certificates</h3>
+              <p className="text-sm text-zinc-500">View and issue certificates</p>
+            </Link>
+          </div>
         </div>
 
         {/* Agent list */}

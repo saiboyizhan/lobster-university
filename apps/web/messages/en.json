@@ -258,6 +258,21 @@
     "onChain": "On-Chain Verified",
     "viewCertificate": "View Certificate"
   },
+  "graduation": {
+    "title": "Graduation",
+    "description": "Check your eligibility and apply for graduation from Lobster University.",
+    "signInRequired": "Sign in to check your graduation eligibility.",
+    "signIn": "Sign In",
+    "availablePrograms": "Available Degree Programs",
+    "noPrograms": "No degree programs available.",
+    "credits": "credits",
+    "minGpa": "Min GPA",
+    "eligible": "You are eligible to graduate!",
+    "notEligible": "Requirements not yet met.",
+    "applyGraduation": "Apply for Graduation",
+    "congratulations": "Congratulations!",
+    "graduated": "You have officially graduated!"
+  },
   "enrollment": {
     "myCoursesTitle": "My Courses",
     "myCoursesDescription": "View and manage your enrolled courses.",

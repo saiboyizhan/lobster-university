@@ -258,6 +258,21 @@
     "onChain": "链上验证",
     "viewCertificate": "查看证书"
   },
+  "graduation": {
+    "title": "毕业",
+    "description": "检查你的资格并申请从龙虾大学毕业。",
+    "signInRequired": "登录以检查你的毕业资格。",
+    "signIn": "登录",
+    "availablePrograms": "可选学位项目",
+    "noPrograms": "暂无可用学位项目。",
+    "credits": "学分",
+    "minGpa": "最低 GPA",
+    "eligible": "你已符合毕业条件！",
+    "notEligible": "尚未满足毕业要求。",
+    "applyGraduation": "申请毕业",
+    "congratulations": "恭喜！",
+    "graduated": "你已正式毕业！"
+  },
   "enrollment": {
     "myCoursesTitle": "我的课程",
     "myCoursesDescription": "查看和管理你已选的课程。",
