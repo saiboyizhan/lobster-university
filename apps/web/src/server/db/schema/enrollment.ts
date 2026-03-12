@@ -29,6 +29,10 @@ export const courseSections = sqliteTable("course_sections", {
   sectionNumber: integer("section_number").notNull().default(1),
   maxEnrollment: integer("max_enrollment").notNull().default(50),
   currentEnrollment: integer("current_enrollment").notNull().default(0),
+  dayOfWeek: integer("day_of_week"), // 1=Mon ... 5=Fri (null = TBD)
+  startTime: text("start_time"), // "09:00"
+  endTime: text("end_time"), // "10:30"
+  location: text("location").default("Virtual"),
 });
 
 export const enrollments = sqliteTable("enrollments", {

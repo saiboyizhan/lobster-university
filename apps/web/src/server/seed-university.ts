@@ -1,5 +1,5 @@
 import { db } from "./db";
-import { colleges, departments, courses, semesters, faculty, courseSections, degreePrograms, degreeRequirements, campusEvents, officeHours } from "./db/schema";
+import { colleges, departments, courses, semesters, faculty, courseSections, degreePrograms, degreeRequirements, campusEvents, officeHours, achievements } from "./db/schema";
 
 const now = new Date();
 
@@ -231,11 +231,47 @@ async function seedUniversity() {
   }
   console.log(`  ${FACULTY.length} faculty members`);
 
-  // Course sections (1 section per course for Spring 2026)
+  // Course sections (1 section per course for Spring 2026, with schedule)
+  const SECTION_SCHEDULES: Record<string, { dayOfWeek: number; startTime: string; endTime: string; location: string }> = {
+    "crs-eng101": { dayOfWeek: 1, startTime: "09:00", endTime: "10:30", location: "Virtual" },
+    "crs-eng201": { dayOfWeek: 1, startTime: "11:00", endTime: "12:30", location: "Virtual" },
+    "crs-eng301": { dayOfWeek: 2, startTime: "09:00", endTime: "10:30", location: "Virtual" },
+    "crs-eng302": { dayOfWeek: 2, startTime: "11:00", endTime: "12:30", location: "Room 201" },
+    "crs-eng401": { dayOfWeek: 3, startTime: "09:00", endTime: "10:30", location: "Room 201" },
+    "crs-biz101": { dayOfWeek: 1, startTime: "14:00", endTime: "15:30", location: "Virtual" },
+    "crs-biz201": { dayOfWeek: 2, startTime: "14:00", endTime: "15:30", location: "Virtual" },
+    "crs-biz301": { dayOfWeek: 3, startTime: "14:00", endTime: "15:30", location: "Virtual" },
+    "crs-biz302": { dayOfWeek: 4, startTime: "09:00", endTime: "10:30", location: "Virtual" },
+    "crs-biz401": { dayOfWeek: 4, startTime: "11:00", endTime: "12:30", location: "Virtual" },
+    "crs-art101": { dayOfWeek: 1, startTime: "10:00", endTime: "11:30", location: "Virtual" },
+    "crs-art201": { dayOfWeek: 2, startTime: "10:00", endTime: "11:30", location: "Virtual" },
+    "crs-art202": { dayOfWeek: 3, startTime: "10:00", endTime: "11:30", location: "Virtual" },
+    "crs-art301": { dayOfWeek: 4, startTime: "14:00", endTime: "15:30", location: "Virtual" },
+    "crs-art302": { dayOfWeek: 5, startTime: "09:00", endTime: "10:30", location: "Room 305" },
+    "crs-art401": { dayOfWeek: 5, startTime: "11:00", endTime: "12:30", location: "Room 305" },
+    "crs-inf101": { dayOfWeek: 1, startTime: "13:00", endTime: "14:30", location: "Virtual" },
+    "crs-inf102": { dayOfWeek: 2, startTime: "13:00", endTime: "14:30", location: "Virtual" },
+    "crs-inf201": { dayOfWeek: 3, startTime: "13:00", endTime: "14:00", location: "Virtual" },
+    "crs-inf301": { dayOfWeek: 3, startTime: "15:00", endTime: "16:30", location: "Virtual" },
+    "crs-inf302": { dayOfWeek: 4, startTime: "15:00", endTime: "16:30", location: "Virtual" },
+    "crs-dai101": { dayOfWeek: 1, startTime: "15:00", endTime: "16:30", location: "Virtual" },
+    "crs-dai102": { dayOfWeek: 2, startTime: "15:00", endTime: "16:00", location: "Virtual" },
+    "crs-dai201": { dayOfWeek: 3, startTime: "11:00", endTime: "12:00", location: "Virtual" },
+    "crs-dai301": { dayOfWeek: 4, startTime: "13:00", endTime: "14:30", location: "Room 102" },
+    "crs-dai302": { dayOfWeek: 5, startTime: "13:00", endTime: "14:30", location: "Room 102" },
+    "crs-gen101": { dayOfWeek: 1, startTime: "16:00", endTime: "17:30", location: "Virtual" },
+    "crs-gen102": { dayOfWeek: 2, startTime: "16:00", endTime: "17:30", location: "Virtual" },
+    "crs-gen201": { dayOfWeek: 3, startTime: "16:00", endTime: "17:00", location: "Virtual" },
+    "crs-gen202": { dayOfWeek: 4, startTime: "16:00", endTime: "17:30", location: "Virtual" },
+    "crs-gen301": { dayOfWeek: 5, startTime: "14:00", endTime: "15:30", location: "Virtual" },
+    "crs-gen302": { dayOfWeek: 5, startTime: "16:00", endTime: "17:00", location: "Virtual" },
+    "crs-gen401": { dayOfWeek: 5, startTime: "15:30", endTime: "17:00", location: "Virtual" },
+  };
   let sectionCount = 0;
   for (const c of COURSES) {
     const instructorId = DEPT_FACULTY[c.departmentId];
     if (!instructorId) continue;
+    const sched = SECTION_SCHEDULES[c.id];
     await db.insert(courseSections).values({
       id: `sec-${c.id}-spring26`,
       courseId: c.id,
@@ -244,6 +280,10 @@ async function seedUniversity() {
       sectionNumber: 1,
       maxEnrollment: 50,
       currentEnrollment: 0,
+      dayOfWeek: sched?.dayOfWeek ?? null,
+      startTime: sched?.startTime ?? null,
+      endTime: sched?.endTime ?? null,
+      location: sched?.location ?? "Virtual",
     }).onConflictDoNothing();
     sectionCount++;
   }
@@ -328,6 +368,35 @@ async function seedUniversity() {
     ohCount++;
   }
   console.log(`  ${ohCount} office hours`);
+
+  // --- Achievements ---
+  console.log("Seeding achievements...");
+  const ACHIEVEMENTS = [
+    // Academic
+    { id: "ach-first-enroll", slug: "first-enrollment", title: "First Steps", description: "Enroll in your first course.", emoji: "🎒", category: "academic", sortOrder: 1 },
+    { id: "ach-3-courses", slug: "three-courses", title: "Triple Threat", description: "Enroll in 3 courses.", emoji: "📚", category: "academic", sortOrder: 2 },
+    { id: "ach-first-complete", slug: "first-completion", title: "Course Complete", description: "Complete your first course.", emoji: "✅", category: "academic", sortOrder: 3 },
+    { id: "ach-5-complete", slug: "five-completions", title: "Scholar", description: "Complete 5 courses.", emoji: "🎓", category: "academic", sortOrder: 4 },
+    { id: "ach-honor-roll", slug: "honor-roll", title: "Honor Roll", description: "Achieve a GPA of 3.50 or higher.", emoji: "⭐", category: "academic", sortOrder: 5 },
+    { id: "ach-first-cert", slug: "first-certificate", title: "Certified", description: "Earn your first certificate.", emoji: "📜", category: "academic", sortOrder: 6 },
+    { id: "ach-degree", slug: "degree-earned", title: "Graduate", description: "Earn a degree from Lobster University.", emoji: "🏆", category: "academic", sortOrder: 7 },
+    // Social
+    { id: "ach-first-post", slug: "first-post", title: "Voice Heard", description: "Create your first community post.", emoji: "💬", category: "social", sortOrder: 10 },
+    { id: "ach-first-review", slug: "first-review", title: "Critic", description: "Write your first course review.", emoji: "📝", category: "social", sortOrder: 11 },
+    { id: "ach-join-group", slug: "join-group", title: "Team Player", description: "Join a study group.", emoji: "🤝", category: "social", sortOrder: 12 },
+    { id: "ach-mentor", slug: "become-mentor", title: "Mentor", description: "Complete a mentorship as a mentor.", emoji: "🧑‍🏫", category: "social", sortOrder: 13 },
+    { id: "ach-mentee", slug: "become-mentee", title: "Mentee", description: "Complete a mentorship as a mentee.", emoji: "🧑‍🎓", category: "social", sortOrder: 14 },
+    // Milestone
+    { id: "ach-karma-100", slug: "karma-100", title: "Rising Star", description: "Earn 100 Karma.", emoji: "🌟", category: "milestone", sortOrder: 20 },
+    { id: "ach-karma-500", slug: "karma-500", title: "Community Pillar", description: "Earn 500 Karma.", emoji: "🏛️", category: "milestone", sortOrder: 21 },
+    { id: "ach-karma-1000", slug: "karma-1000", title: "Legend", description: "Earn 1000 Karma.", emoji: "👑", category: "milestone", sortOrder: 22 },
+  ];
+  let achievementCount = 0;
+  for (const a of ACHIEVEMENTS) {
+    await db.insert(achievements).values(a).onConflictDoNothing();
+    achievementCount++;
+  }
+  console.log(`  ${achievementCount} achievements`);
 
   console.log("University seed complete.");
 }

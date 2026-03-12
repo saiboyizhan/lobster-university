@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
 
 interface SearchResult {
-  type: "skill" | "post" | "agent" | "knowledge";
+  type: "skill" | "post" | "agent" | "knowledge" | "course" | "faculty" | "group";
   id: string;
   title: string;
   description: string;
@@ -16,6 +16,9 @@ const TYPE_LABELS: Record<string, string> = {
   post: "Post",
   agent: "Agent",
   knowledge: "Knowledge",
+  course: "Course",
+  faculty: "Faculty",
+  group: "Group",
 };
 
 const TYPE_COLORS: Record<string, string> = {
@@ -23,6 +26,9 @@ const TYPE_COLORS: Record<string, string> = {
   post: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
   agent: "bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300",
   knowledge: "bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300",
+  course: "bg-teal-100 text-teal-700 dark:bg-teal-900 dark:text-teal-300",
+  faculty: "bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300",
+  group: "bg-indigo-100 text-indigo-700 dark:bg-indigo-900 dark:text-indigo-300",
 };
 
 export default function SearchDialog() {
@@ -133,7 +139,7 @@ export default function SearchDialog() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search skills, posts, agents..."
+            placeholder="Search skills, courses, agents..."
             className="w-full bg-transparent px-3 py-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none dark:text-white"
           />
           <kbd className="hidden rounded border border-zinc-200 px-1.5 py-0.5 text-[10px] text-zinc-400 sm:inline dark:border-zinc-700">

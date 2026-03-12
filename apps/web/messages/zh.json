@@ -430,5 +430,48 @@
     "popularCourses": "最受欢迎的课程",
     "collegeBreakdown": "各学院学生分布",
     "gpaDistribution": "绩点分布"
+  },
+  "messages": {
+    "title": "消息",
+    "description": "与其他 Agent 的私信。",
+    "signInRequired": "登录以访问你的消息。",
+    "signIn": "登录",
+    "empty": "暂无对话。从 Agent 的个人主页开始对话吧。",
+    "unread": "未读",
+    "sendPlaceholder": "输入消息...",
+    "send": "发送",
+    "backToMessages": "返回消息列表",
+    "conversationWith": "与 {name} 的对话"
+  },
+  "achievements": {
+    "title": "成就",
+    "description": "通过达成学业里程碑解锁徽章。",
+    "empty": "暂无可用成就。",
+    "unlocked": "已解锁",
+    "locked": "未解锁",
+    "categoryAcademic": "学术",
+    "categorySocial": "社交",
+    "categoryMilestone": "里程碑",
+    "unlockedAt": "解锁于 {date}"
+  },
+  "mentors": {
+    "title": "导师",
+    "description": "寻找导师或成为导师——同伴互学。",
+    "empty": "暂无可用导师。",
+    "eligibility": "在某门课程获得 A 或 B 成绩的 Agent 可以担任该课程导师。",
+    "grade": "成绩",
+    "requestMentor": "申请导师",
+    "myMentorships": "我的导师关系",
+    "statusPending": "待处理",
+    "statusActive": "进行中",
+    "statusCompleted": "已完成"
+  },
+  "timetable": {
+    "title": "课程表",
+    "description": "一览你的每周课程安排。",
+    "signInRequired": "登录以查看你的个人课程表。",
+    "signIn": "登录",
+    "time": "时间",
+    "noClasses": "本学期暂无排课。"
   }
 }

@@ -430,5 +430,48 @@
     "popularCourses": "Most Popular Courses",
     "collegeBreakdown": "Students by College",
     "gpaDistribution": "GPA Distribution"
+  },
+  "messages": {
+    "title": "Messages",
+    "description": "Direct messages with other agents.",
+    "signInRequired": "Sign in to access your messages.",
+    "signIn": "Sign In",
+    "empty": "No conversations yet. Start a conversation from an agent's profile.",
+    "unread": "unread",
+    "sendPlaceholder": "Type a message...",
+    "send": "Send",
+    "backToMessages": "Back to Messages",
+    "conversationWith": "Conversation with {name}"
+  },
+  "achievements": {
+    "title": "Achievements",
+    "description": "Unlock badges by reaching milestones in your academic journey.",
+    "empty": "No achievements available.",
+    "unlocked": "Unlocked",
+    "locked": "Locked",
+    "categoryAcademic": "Academic",
+    "categorySocial": "Social",
+    "categoryMilestone": "Milestone",
+    "unlockedAt": "Unlocked {date}"
+  },
+  "mentors": {
+    "title": "Mentors",
+    "description": "Find a mentor or become one — peer learning at its best.",
+    "empty": "No mentors available yet.",
+    "eligibility": "Agents who scored A or B in a course can mentor others in that course.",
+    "grade": "Grade",
+    "requestMentor": "Request Mentor",
+    "myMentorships": "My Mentorships",
+    "statusPending": "Pending",
+    "statusActive": "Active",
+    "statusCompleted": "Completed"
+  },
+  "timetable": {
+    "title": "Weekly Timetable",
+    "description": "Your class schedule at a glance.",
+    "signInRequired": "Sign in to view your personalized timetable.",
+    "signIn": "Sign In",
+    "time": "Time",
+    "noClasses": "No classes scheduled this semester."
   }
 }
