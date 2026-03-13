@@ -125,7 +125,7 @@ export default async function DashboardPage({
         {studentProfile && (
           <div className="mb-8 rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
             <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-              Academic Summary
+              {t("academicSummary")}
             </h2>
             {standing && (
               <div className="mb-4">
@@ -138,13 +138,13 @@ export default async function DashboardPage({
                 <GpaDisplay gpa={studentProfile.cumulativeGpa} />
               </div>
               <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-900">
-                <div className="mb-1 text-sm text-zinc-500">Credits Earned</div>
+                <div className="mb-1 text-sm text-zinc-500">{t("creditsEarned")}</div>
                 <div className="text-2xl font-bold text-zinc-900 dark:text-white">
                   {studentProfile.totalCreditsEarned}
                 </div>
               </div>
               <div className="rounded-lg bg-zinc-50 p-4 dark:bg-zinc-900">
-                <div className="mb-1 text-sm text-zinc-500">Status</div>
+                <div className="mb-1 text-sm text-zinc-500">{t("statusLabel")}</div>
                 <div className="text-lg font-semibold capitalize text-zinc-900 dark:text-white">
                   {studentProfile.enrollmentStatus}
                 </div>
@@ -155,19 +155,19 @@ export default async function DashboardPage({
                 href="/my-courses"
                 className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
               >
-                My Courses
+                {t("myCourses")}
               </Link>
               <Link
                 href="/transcript"
                 className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
               >
-                Transcript
+                {t("transcript")}
               </Link>
               <Link
                 href="/advisor"
                 className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
               >
-                Advisor
+                {t("advisorLink")}
               </Link>
             </div>
           </div>
@@ -178,7 +178,7 @@ export default async function DashboardPage({
           <div className="mb-8 grid gap-6 lg:grid-cols-3">
             <div className="rounded-xl border border-zinc-200 p-6 lg:col-span-2 dark:border-zinc-800">
               <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-                GPA by Semester
+                {t("gpaBySemester")}
               </h2>
               <GpaTrendWrapper data={gpaBySemester} cumulativeGpa={studentProfile.cumulativeGpa} />
             </div>
@@ -186,7 +186,7 @@ export default async function DashboardPage({
               <CreditsProgressWrapper
                 earned={totalCreditsEarned}
                 required={degreeProgress.length > 0 ? degreeProgress[0].requiredCredits : 30}
-                label="Credits Progress"
+                label={t("creditsProgress")}
               />
             </div>
           </div>
@@ -196,7 +196,7 @@ export default async function DashboardPage({
         {degreeProgress.length > 0 && (
           <div className="mb-8 rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
             <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-              Degree Progress
+              {t("degreeProgress")}
             </h2>
             <DegreeProgressWrapper data={degreeProgress} />
           </div>
@@ -213,7 +213,7 @@ export default async function DashboardPage({
         {/* Skill Radar */}
         <div className="mb-8 rounded-xl border border-zinc-200 p-6 dark:border-zinc-800">
           <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-            Skill Dimensions
+            {t("skillDimensions")}
           </h2>
           <SkillRadarWrapper data={skillDimensions} />
         </div>
@@ -237,7 +237,7 @@ export default async function DashboardPage({
               </div>
             </div>
             <div className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
-              <div className="mb-2 text-sm text-zinc-500">Total Karma</div>
+              <div className="mb-2 text-sm text-zinc-500">{t("totalKarma")}</div>
               <div className="text-2xl font-bold text-zinc-900 dark:text-white">
                 {breakdown.total}
               </div>

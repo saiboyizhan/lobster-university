@@ -22,7 +22,7 @@ export const achievements = sqliteTable("achievements", {
   slug: text("slug").notNull().unique(),
   title: text("title").notNull(),
   description: text("description").notNull(),
-  emoji: text("emoji").notNull().default("🏅"),
+  emoji: text("emoji").notNull().default("ACH"),
   category: text("category").notNull().default("academic"), // academic | social | milestone
   sortOrder: integer("sort_order").notNull().default(0),
 });

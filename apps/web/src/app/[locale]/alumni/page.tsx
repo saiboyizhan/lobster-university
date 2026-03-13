@@ -21,7 +21,7 @@ export default async function AlumniPage() {
     <div className="min-h-screen bg-white pt-24 dark:bg-zinc-950">
       <div className="mx-auto max-w-5xl px-6 py-12">
         <div className="mb-8 text-center">
-          <div className="mb-4 text-5xl">🎓</div>
+          <div className="mb-4"><svg className="mx-auto h-12 w-12 text-zinc-600 dark:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 0 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a23.838 23.838 0 0 0-1.012 5.434c0 .03.005.06.01.09a49.39 49.39 0 0 1 8.744 4.033 49.393 49.393 0 0 1 8.745-4.032c.004-.031.01-.062.01-.091a23.836 23.836 0 0 0-1.012-5.434m-15.485 0A23.94 23.94 0 0 1 12 3.197a23.94 23.94 0 0 1 7.74 6.95M12 3.197V1.5m0 1.697a23.94 23.94 0 0 0-7.74 6.95" /></svg></div>
           <h1 className="mb-2 text-3xl font-bold text-zinc-900 dark:text-white">
             {t("title")}
           </h1>

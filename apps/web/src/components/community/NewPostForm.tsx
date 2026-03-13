@@ -2,15 +2,10 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import Modal from "@/components/ui/Modal";
 
-const CHANNELS = [
-  { id: "general", label: "General" },
-  { id: "skills", label: "Skills" },
-  { id: "crypto", label: "Crypto" },
-  { id: "showcase", label: "Showcase" },
-  { id: "help", label: "Help" },
-];
+const CHANNEL_IDS = ["general", "skills", "crypto", "showcase", "help"];
 
 interface NewPostFormProps {
   open: boolean;
@@ -20,6 +15,7 @@ interface NewPostFormProps {
 
 export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormProps) {
   const router = useRouter();
+  const t = useTranslations("community");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tags, setTags] = useState("");
@@ -39,7 +35,7 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
     async (e: React.FormEvent) => {
       e.preventDefault();
       if (!title.trim() || !content.trim()) {
-        setError("Title and content are required.");
+        setError(t("formRequired"));
         return;
       }
 
@@ -49,7 +45,7 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
       try {
         const tagList = tags
           .split(",")
-          .map((t) => t.trim())
+          .map((tg) => tg.trim())
           .filter(Boolean);
 
         const res = await fetch("/api/posts", {
@@ -64,11 +60,11 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
         });
 
         if (res.status === 401) {
-          throw new Error("Please log in to create a post.");
+          throw new Error(t("formLoginRequired"));
         }
         if (!res.ok) {
           const data = await res.json();
-          throw new Error(data.error ?? "Failed to create post");
+          throw new Error(data.error ?? t("formError"));
         }
 
         reset();
@@ -79,12 +75,12 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
           router.refresh();
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        setError(err instanceof Error ? err.message : t("formError"));
       } finally {
         setSubmitting(false);
       }
     },
-    [title, content, tags, channelId, onClose, onSuccess, reset],
+    [title, content, tags, channelId, onClose, onSuccess, reset, t],
   );
 
   const handleClose = useCallback(() => {
@@ -93,7 +89,7 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
   }, [reset, onClose]);
 
   return (
-    <Modal open={open} onClose={handleClose} title="New Post">
+    <Modal open={open} onClose={handleClose} title={t("newPost")}>
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
           <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950 dark:text-red-400">
@@ -106,14 +102,14 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
             htmlFor="post-title"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Title
+            {t("formTitle")}
           </label>
           <input
             id="post-title"
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            placeholder="What's on your mind?"
+            placeholder={t("formTitlePlaceholder")}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           />
         </div>
@@ -123,13 +119,13 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
             htmlFor="post-content"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Content (Markdown supported)
+            {t("formContent")}
           </label>
           <textarea
             id="post-content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
-            placeholder="Share your experience, ask a question, or showcase your work..."
+            placeholder={t("formContentPlaceholder")}
             rows={6}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           />
@@ -140,7 +136,7 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
             htmlFor="post-channel"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Channel
+            {t("formChannel")}
           </label>
           <select
             id="post-channel"
@@ -148,9 +144,9 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
             onChange={(e) => setChannelId(e.target.value)}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           >
-            {CHANNELS.map((ch) => (
-              <option key={ch.id} value={ch.id}>
-                # {ch.label}
+            {CHANNEL_IDS.map((ch) => (
+              <option key={ch} value={ch}>
+                # {ch}
               </option>
             ))}
           </select>
@@ -161,14 +157,14 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
             htmlFor="post-tags"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Tags (comma-separated)
+            {t("formTags")}
           </label>
           <input
             id="post-tags"
             type="text"
             value={tags}
             onChange={(e) => setTags(e.target.value)}
-            placeholder="e.g. skills, workflow, crypto"
+            placeholder={t("formTagsPlaceholder")}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           />
         </div>
@@ -179,14 +175,14 @@ export default function NewPostForm({ open, onClose, onSuccess }: NewPostFormPro
             onClick={handleClose}
             className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
-            Cancel
+            {t("formCancel")}
           </button>
           <button
             type="submit"
             disabled={submitting}
             className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
-            {submitting ? "Posting..." : "Post"}
+            {submitting ? t("formPosting") : t("formPost")}
           </button>
         </div>
       </form>

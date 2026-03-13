@@ -30,7 +30,10 @@ export default async function CourseDetailPage({
   params: Promise<{ code: string }>;
 }) {
   const { code } = await params;
-  const t = await getTranslations("courses");
+  const [t, tr] = await Promise.all([
+    getTranslations("courses"),
+    getTranslations("courseReviews"),
+  ]);
   const course = await getCourse(code);
   if (!course) notFound();
 
@@ -162,29 +165,29 @@ export default async function CourseDetailPage({
         {/* Reviews Section */}
         <section className="mb-8">
           <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-            {t("partOfCourse") === "Part of" ? "Course Reviews" : "课程评价"} ({ratingStats.reviewCount})
+            {tr("title")} ({ratingStats.reviewCount})
           </h2>
           {ratingStats.reviewCount > 0 && (
             <div className="mb-4 flex gap-6 rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
               <div className="text-center">
                 <div className="text-2xl font-bold text-zinc-900 dark:text-white">{ratingStats.avgRating.toFixed(1)}</div>
-                <div className="text-xs text-zinc-500">{"★".repeat(Math.round(ratingStats.avgRating))} Rating</div>
+                <div className="flex items-center gap-0.5 text-xs text-zinc-500">{Array.from({ length: Math.round(ratingStats.avgRating) }).map((_, i) => <svg key={i} className="h-3 w-3 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>)} {tr("rating")}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-zinc-900 dark:text-white">{ratingStats.avgDifficulty.toFixed(1)}</div>
-                <div className="text-xs text-zinc-500">Difficulty</div>
+                <div className="text-xs text-zinc-500">{tr("difficulty")}</div>
               </div>
             </div>
           )}
           {reviews.length === 0 ? (
-            <p className="text-sm text-zinc-400">{t("partOfCourse") === "Part of" ? "No reviews yet." : "暂无评价。"}</p>
+            <p className="text-sm text-zinc-400">{tr("noReviews")}</p>
           ) : (
             <div className="space-y-3">
               {reviews.slice(0, 5).map((review) => (
                 <div key={review.id} className="rounded-lg border border-zinc-100 p-4 dark:border-zinc-800">
                   <div className="mb-1 flex items-center gap-2">
                     <span className="text-sm font-medium text-zinc-900 dark:text-white">{review.agentName}</span>
-                    <span className="text-xs text-amber-500">{"★".repeat(review.rating)}</span>
+                    <span className="flex items-center gap-0.5">{Array.from({ length: review.rating }).map((_, i) => <svg key={i} className="h-3 w-3 text-amber-500" viewBox="0 0 24 24" fill="currentColor"><path d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>)}</span>
                     <span className="text-xs text-zinc-400">
                       {review.createdAt ? new Date(review.createdAt).toLocaleDateString() : ""}
                     </span>
@@ -204,7 +207,7 @@ export default async function CourseDetailPage({
           {activeSection ? (
             <>
               <p className="mb-2 text-sm text-zinc-500">
-                Instructor: {activeSection.instructorName} · {activeSection.currentEnrollment}/{activeSection.maxEnrollment} enrolled
+                {activeSection.instructorName} · {activeSection.currentEnrollment}/{activeSection.maxEnrollment}
               </p>
               <EnrollButton sectionId={activeSection.id} />
             </>

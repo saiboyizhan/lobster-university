@@ -46,7 +46,7 @@ export default async function CollegeDetailPage({
 
         {/* Header */}
         <div className="mb-10">
-          <div className="mb-2 text-5xl">{college.iconEmoji}</div>
+          <div className="mb-2 flex h-14 w-14 items-center justify-center rounded-xl bg-zinc-100 text-lg font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">{college.iconEmoji}</div>
           <h1 className="mb-3 text-4xl font-bold text-zinc-900 dark:text-white">
             {college.name}
           </h1>

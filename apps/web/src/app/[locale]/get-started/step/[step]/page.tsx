@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { getStep, STEPS } from "@/lib/get-started";
 import CodeBlock from "@/components/ui/CodeBlock";
 import Badge from "@/components/ui/Badge";
@@ -17,7 +18,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { step: stepStr } = await params;
   const step = getStep(Number(stepStr));
-  if (!step) return { title: "Step Not Found" };
+  const t = await getTranslations("stepDetail");
+  if (!step) return { title: t("notFound") };
   return {
     title: `Step ${step.number}: ${step.title} — Lobster University`,
   };
@@ -32,6 +34,11 @@ export default async function StepPage({
   const stepNumber = Number(stepStr);
   const step = getStep(stepNumber);
   if (!step) notFound();
+
+  const [t, tgs] = await Promise.all([
+    getTranslations("stepDetail"),
+    getTranslations("getStarted"),
+  ]);
 
   const phaseVariant =
     step.phase === "Setup"
@@ -49,7 +56,7 @@ export default async function StepPage({
       {/* Progress bar */}
       <div className="mb-8">
         <div className="mb-2 flex items-center justify-between text-xs text-zinc-400">
-          <span>Step {step.number + 1} of {STEPS.length}</span>
+          <span>{tgs("step", { num: step.number + 1 })} / {STEPS.length}</span>
           <span>{Math.round(((step.number + 1) / STEPS.length) * 100)}%</span>
         </div>
         <div className="h-2 rounded-full bg-zinc-100 dark:bg-zinc-800">
@@ -66,7 +73,7 @@ export default async function StepPage({
           <Badge variant={phaseVariant as "default" | "success" | "info" | "warning" | "purple"}>
             {step.phase}
           </Badge>
-          <span className="text-sm text-zinc-400">Step {step.number}</span>
+          <span className="text-sm text-zinc-400">{tgs("step", { num: step.number })}</span>
         </div>
         <h1 className="mb-2 text-3xl font-bold text-zinc-900 dark:text-white">
           {step.title}
@@ -77,7 +84,7 @@ export default async function StepPage({
       {/* Goal */}
       <div className="mb-8 rounded-lg border border-zinc-200 bg-zinc-50 p-6 dark:border-zinc-800 dark:bg-zinc-900">
         <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-400">
-          Goal
+          {t("goal")}
         </h2>
         <p className="text-zinc-700 dark:text-zinc-300">{step.goal}</p>
       </div>
@@ -85,7 +92,7 @@ export default async function StepPage({
       {/* Benefit */}
       <div className="mb-8">
         <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-400">
-          Why This Matters
+          {t("whyMatters")}
         </h2>
         <p className="text-zinc-600 dark:text-zinc-400">{step.benefit}</p>
       </div>
@@ -93,7 +100,7 @@ export default async function StepPage({
       {/* Tasks */}
       <div className="mb-8">
         <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-          Tasks
+          {t("tasks")}
         </h2>
         <ul className="space-y-3">
           {step.tasks.map((task, i) => (
@@ -111,7 +118,7 @@ export default async function StepPage({
       {step.codeExample && (
         <div className="mb-8">
           <h2 className="mb-4 text-xl font-semibold text-zinc-900 dark:text-white">
-            Code
+            {t("code")}
           </h2>
           <CodeBlock code={step.codeExample} title="terminal" />
         </div>
@@ -120,7 +127,7 @@ export default async function StepPage({
       {/* Expected Output */}
       <div className="mb-8 rounded-lg border border-green-200 bg-green-50 p-6 dark:border-green-800 dark:bg-green-950">
         <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-green-700 dark:text-green-300">
-          Expected Output
+          {t("expectedOutput")}
         </h2>
         <p className="text-green-800 dark:text-green-200">{step.expectedOutput}</p>
       </div>

@@ -9,7 +9,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function SemestersPage() {
-  const t = await getTranslations("enrollment");
+  const [t, ts] = await Promise.all([
+    getTranslations("enrollment"),
+    getTranslations("semesters"),
+  ]);
 
   let semesterList: Awaited<ReturnType<typeof listSemesters>> = [];
   try {
@@ -27,7 +30,7 @@ export default async function SemestersPage() {
         <p className="mb-8 text-lg text-zinc-500">{t("semestersDescription")}</p>
 
         {semesterList.length === 0 ? (
-          <p className="text-zinc-400">No semesters configured yet.</p>
+          <p className="text-zinc-400">{ts("noSemesters")}</p>
         ) : (
           <div className="space-y-4">
             {semesterList.map((sem) => (
@@ -39,15 +42,15 @@ export default async function SemestersPage() {
                   <h2 className="text-xl font-semibold text-zinc-900 dark:text-white">
                     {sem.name}
                   </h2>
-                  <SemesterBadge name={sem.isActive ? "Active" : "Upcoming"} isActive={sem.isActive} />
+                  <SemesterBadge name={sem.isActive ? ts("active") : ts("upcoming")} isActive={sem.isActive} />
                 </div>
                 <div className="grid gap-4 text-sm text-zinc-500 sm:grid-cols-2">
                   <div>
-                    <span className="font-medium text-zinc-700 dark:text-zinc-300">Semester: </span>
+                    <span className="font-medium text-zinc-700 dark:text-zinc-300">{ts("semester")}: </span>
                     {sem.startDate.toLocaleDateString()} — {sem.endDate.toLocaleDateString()}
                   </div>
                   <div>
-                    <span className="font-medium text-zinc-700 dark:text-zinc-300">Enrollment: </span>
+                    <span className="font-medium text-zinc-700 dark:text-zinc-300">{ts("enrollment")}: </span>
                     {sem.enrollmentOpenDate.toLocaleDateString()} — {sem.enrollmentCloseDate.toLocaleDateString()}
                   </div>
                 </div>

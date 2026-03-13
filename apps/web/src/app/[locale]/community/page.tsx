@@ -7,10 +7,13 @@ import VoteButtons from "@/components/community/VoteButtons";
 import SortTabs from "@/components/community/SortTabs";
 import NewPostButton from "@/components/community/NewPostButton";
 
-export const metadata: Metadata = {
-  title: "Community — Lobster University",
-  description: "Join the Lobster University community. Share knowledge, discuss skills, and earn karma.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("community");
+  return {
+    title: `${t("title")} — Lobster University`,
+    description: "Join the Lobster University community. Share knowledge, discuss skills, and earn karma.",
+  };
+}
 
 // Fallback demo data when DB is empty or unavailable
 const DEMO_POSTS = [
@@ -186,8 +189,14 @@ export default async function CommunityPage({
       {/* Posts */}
       <div className="space-y-4">
         {posts.length === 0 && (
-          <div className="rounded-lg border border-zinc-200 p-8 text-center text-zinc-500 dark:border-zinc-800">
-            No posts in this channel yet.
+          <div className="flex flex-col items-center rounded-xl border border-dashed border-zinc-300 p-12 text-center dark:border-zinc-700">
+            <div className="mb-3 flex justify-center">
+              <svg className="h-10 w-10 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.076-4.076a1.526 1.526 0 0 1 1.037-.443 48.282 48.282 0 0 0 5.68-.494c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+              </svg>
+            </div>
+            <p className="mb-1 font-medium text-zinc-600 dark:text-zinc-400">{t("noPosts")}</p>
+            <p className="text-sm text-zinc-400">{t("noPostsHint")}</p>
           </div>
         )}
         {posts.map((post) => (

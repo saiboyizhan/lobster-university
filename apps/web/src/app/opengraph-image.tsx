@@ -21,7 +21,7 @@ export default function OGImage() {
           fontFamily: "system-ui, sans-serif",
         }}
       >
-        <div style={{ fontSize: 80, marginBottom: 16 }}>🦞</div>
+        <div style={{ fontSize: 80, marginBottom: 16, fontWeight: 700 }}>LU</div>
         <div
           style={{
             fontSize: 56,

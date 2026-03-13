@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface SettingsFormProps {
   initialName: string;
@@ -10,6 +11,7 @@ interface SettingsFormProps {
 
 export default function SettingsForm({ initialName, initialDescription }: SettingsFormProps) {
   const router = useRouter();
+  const t = useTranslations("settingsForm");
   const [name, setName] = useState(initialName);
   const [description, setDescription] = useState(initialDescription);
   const [saving, setSaving] = useState(false);
@@ -19,7 +21,7 @@ export default function SettingsForm({ initialName, initialDescription }: Settin
     async (e: React.FormEvent) => {
       e.preventDefault();
       if (!name.trim()) {
-        setMessage({ type: "error", text: "Name is required." });
+        setMessage({ type: "error", text: t("nameRequired") });
         return;
       }
 

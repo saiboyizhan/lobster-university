@@ -18,24 +18,16 @@ export default async function MyCoursesPage() {
         </h1>
         <p className="mb-8 text-zinc-500">{t("myCoursesDescription")}</p>
 
-        {/* Client component will fetch /api/enrollments */}
-        <MyCoursesClient />
+        <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
+          <p className="mb-4 text-zinc-500">{t("signInRequired")}</p>
+          <Link
+            href="/auth/login"
+            className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700"
+          >
+            {t("signIn")}
+          </Link>
+        </div>
       </div>
-    </div>
-  );
-}
-
-function MyCoursesClient() {
-  // For now server-rendered placeholder. Full client fetching in production.
-  return (
-    <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
-      <p className="mb-4 text-zinc-500">Sign in to see your enrolled courses.</p>
-      <Link
-        href="/auth/login"
-        className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700"
-      >
-        Sign In
-      </Link>
     </div>
   );
 }

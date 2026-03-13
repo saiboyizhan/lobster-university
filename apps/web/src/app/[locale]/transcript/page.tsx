@@ -19,12 +19,12 @@ export default async function TranscriptPage() {
         <p className="mb-8 text-zinc-500">{t("transcriptDescription")}</p>
 
         <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
-          <p className="mb-4 text-zinc-500">Sign in to view your academic transcript.</p>
+          <p className="mb-4 text-zinc-500">{t("signInRequired")}</p>
           <Link
             href="/auth/login"
             className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white hover:bg-blue-700"
           >
-            Sign In
+            {t("signIn")}
           </Link>
         </div>
       </div>

@@ -34,9 +34,14 @@ export default async function CourseCatalogPage() {
           {t("title")}
         </h1>
         <p className="mb-2 text-lg text-zinc-500">{t("description")}</p>
-        <p className="mb-8 text-sm text-zinc-400">
-          {courseList.length} {t("coursesCount")} · {totalCredits} {t("totalCredits")}
-        </p>
+        <div className="mb-8 flex items-center gap-3">
+          <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+            {courseList.length} {t("coursesCount")}
+          </span>
+          <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+            {totalCredits} {t("totalCredits")}
+          </span>
+        </div>
 
         <CourseExplorer
           courses={courseList}

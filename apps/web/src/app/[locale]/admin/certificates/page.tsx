@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { isAdmin } from "@/server/auth-guard";
 import { db } from "@/server/db";
@@ -11,6 +12,8 @@ export const metadata: Metadata = { title: "Certificates — Admin" };
 export default async function AdminCertificatesPage() {
   const admin = await isAdmin();
   if (!admin) redirect("/auth/login");
+  const t = await getTranslations("adminCerts");
+  const ta = await getTranslations("admin");
 
   const certs = await db
     .select({
@@ -35,28 +38,28 @@ export default async function AdminCertificatesPage() {
     <div className="min-h-screen bg-white pt-24 dark:bg-zinc-950">
       <div className="mx-auto max-w-6xl px-6 py-12">
         <nav className="mb-6 text-sm text-zinc-400">
-          <Link href="/admin" className="hover:text-zinc-600 dark:hover:text-zinc-300">Admin</Link>
+          <Link href="/admin" className="hover:text-zinc-600 dark:hover:text-zinc-300">{ta("breadcrumbAdmin")}</Link>
           <span className="mx-2">/</span>
-          <span className="text-zinc-600 dark:text-zinc-300">Certificates</span>
+          <span className="text-zinc-600 dark:text-zinc-300">{t("title")}</span>
         </nav>
 
         <h1 className="mb-6 text-3xl font-bold text-zinc-900 dark:text-white">
-          Issued Certificates
+          {t("title")}
         </h1>
 
         {certs.length === 0 ? (
-          <p className="text-zinc-400">No certificates issued yet.</p>
+          <p className="text-zinc-400">{t("empty")}</p>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm">
               <thead className="border-b border-zinc-200 text-zinc-500 dark:border-zinc-800">
                 <tr>
-                  <th className="py-3 pr-4">Agent</th>
-                  <th className="py-3 pr-4">Type</th>
-                  <th className="py-3 pr-4">Title</th>
-                  <th className="py-3 pr-4">Grade</th>
-                  <th className="py-3 pr-4">Issued</th>
-                  <th className="py-3">On-Chain</th>
+                  <th className="py-3 pr-4">{t("columnAgent")}</th>
+                  <th className="py-3 pr-4">{t("columnType")}</th>
+                  <th className="py-3 pr-4">{t("columnTitle")}</th>
+                  <th className="py-3 pr-4">{t("columnGrade")}</th>
+                  <th className="py-3 pr-4">{t("columnIssued")}</th>
+                  <th className="py-3">{t("columnOnChain")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
@@ -83,9 +86,9 @@ export default async function AdminCertificatesPage() {
                     <td className="py-3 pr-4 text-zinc-500">{c.issuedAt.toLocaleDateString()}</td>
                     <td className="py-3">
                       {c.txHash ? (
-                        <span className="rounded bg-green-100 px-2 py-0.5 text-xs text-green-700 dark:bg-green-900 dark:text-green-300">Yes</span>
+                        <span className="rounded bg-green-100 px-2 py-0.5 text-xs text-green-700 dark:bg-green-900 dark:text-green-300">{t("yes")}</span>
                       ) : (
-                        <span className="text-xs text-zinc-400">No</span>
+                        <span className="text-xs text-zinc-400">{t("no")}</span>
                       )}
                     </td>
                   </tr>

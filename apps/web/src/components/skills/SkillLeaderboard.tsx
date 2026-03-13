@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Link } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
 interface LeaderboardEntry {
   slug: string;
@@ -18,10 +19,10 @@ interface SkillLeaderboardProps {
 
 type Tab = "overall" | "learning" | "playbook";
 
-const TABS: { key: Tab; label: string; scoreLabel: string }[] = [
-  { key: "overall", label: "Overall", scoreLabel: "Impact Score" },
-  { key: "learning", label: "Learning Value", scoreLabel: "Improvement %" },
-  { key: "playbook", label: "Playbook Coverage", scoreLabel: "Playbooks" },
+const TAB_KEYS: { key: Tab; labelKey: string; scoreLabelKey: string }[] = [
+  { key: "overall", labelKey: "overall", scoreLabelKey: "impactScore" },
+  { key: "learning", labelKey: "learningValue", scoreLabelKey: "improvement" },
+  { key: "playbook", labelKey: "playbookCoverage", scoreLabelKey: "playbooks" },
 ];
 
 export default function SkillLeaderboard({
@@ -30,6 +31,7 @@ export default function SkillLeaderboard({
   playbookCovered,
 }: SkillLeaderboardProps) {
   const [activeTab, setActiveTab] = useState<Tab>("overall");
+  const t = useTranslations("skillsLeaderboard");
 
   const data =
     activeTab === "overall"
@@ -38,13 +40,13 @@ export default function SkillLeaderboard({
         ? learning
         : playbookCovered;
 
-  const scoreLabel = TABS.find((t) => t.key === activeTab)?.scoreLabel ?? "Score";
+  const scoreLabel = TAB_KEYS.find((tab) => tab.key === activeTab)?.scoreLabelKey ?? "impactScore";
 
   return (
     <>
       {/* Tabs */}
       <div className="mb-6 flex gap-1 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
-        {TABS.map((tab) => (
+        {TAB_KEYS.map((tab) => (
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
@@ -54,7 +56,7 @@ export default function SkillLeaderboard({
                 : "text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
             }`}
           >
-            {tab.label}
+            {t(tab.labelKey)}
           </button>
         ))}
       </div>
@@ -65,9 +67,9 @@ export default function SkillLeaderboard({
           <thead>
             <tr className="border-b border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900">
               <th className="px-4 py-3 text-left text-xs font-medium text-zinc-500">#</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-zinc-500">Skill</th>
-              <th className="px-4 py-3 text-left text-xs font-medium text-zinc-500">Category</th>
-              <th className="px-4 py-3 text-right text-xs font-medium text-zinc-500">{scoreLabel}</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-zinc-500">{t("skill")}</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-zinc-500">{t("category")}</th>
+              <th className="px-4 py-3 text-right text-xs font-medium text-zinc-500">{t(scoreLabel)}</th>
             </tr>
           </thead>
           <tbody>

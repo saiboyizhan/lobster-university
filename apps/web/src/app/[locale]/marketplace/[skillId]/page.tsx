@@ -128,7 +128,7 @@ export default async function MarketplaceDetailPage({
               ))}
             </div>
           ) : (
-            <p className="text-sm text-zinc-400">No reviews yet.</p>
+            <p className="text-sm text-zinc-400">{t("noReviews")}</p>
           )}
         </div>
       </div>

@@ -18,7 +18,7 @@ interface PopularCourse {
 
 export function PopularCoursesChart({ data }: { data: PopularCourse[] }) {
   if (data.length === 0) {
-    return <div className="flex h-48 items-center justify-center text-sm text-zinc-400">No data</div>;
+    return <div className="flex h-48 items-center justify-center text-sm text-zinc-400">—</div>;
   }
 
   return (

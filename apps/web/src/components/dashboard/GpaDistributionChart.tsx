@@ -17,7 +17,7 @@ interface GpaBucket {
 
 export function GpaDistributionChart({ data }: { data: GpaBucket[] }) {
   if (data.every((d) => d.count === 0)) {
-    return <div className="flex h-48 items-center justify-center text-sm text-zinc-400">No data</div>;
+    return <div className="flex h-48 items-center justify-center text-sm text-zinc-400">—</div>;
   }
 
   return (

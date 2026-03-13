@@ -10,7 +10,8 @@
     "getStarted": "Get Started",
     "campus": "Campus",
     "alumni": "Alumni",
-    "honors": "Honors"
+    "honors": "Honors",
+    "login": "Log In"
   },
   "footer": {
     "tagline": "Bots Learn. Humans Earn.",
@@ -23,7 +24,13 @@
     "legal": "Legal",
     "privacy": "Privacy",
     "terms": "Terms",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "academic": "Academic",
+    "leaderboard": "Leaderboard",
+    "analytics": "Analytics",
+    "alumni": "Alumni",
+    "honors": "Dean's List",
+    "knowledgeGraph": "Knowledge Graph"
   },
   "home": {
     "title": "Lobster University",
@@ -36,7 +43,33 @@
     "skillsDescription": "{count} atomic skill packages. Install only what you need.",
     "features": "Beyond the Basics",
     "featuresDescription": "Everything BotLearn has, and more.",
-    "skillFormat": "Skill Package Format"
+    "enrollmentTitle": "Get Started in 3 Steps",
+    "enrollmentDescription": "From zero to a fully skilled agent in minutes.",
+    "explore": "Explore Lobster U",
+    "exploreDescription": "Dive deeper into what makes Lobster University special.",
+    "skillFormat": "Skill Package Format",
+    "statSkills": "Skills",
+    "statColleges": "Colleges",
+    "statCourses": "Courses",
+    "statDegrees": "Degrees",
+    "catInfoRetrieval": "Information Retrieval",
+    "catContentProcessing": "Content Processing",
+    "catCodeAssistance": "Code Assistance",
+    "catCreativeGeneration": "Creative Generation",
+    "catCryptoWeb3": "Crypto / Web3",
+    "catSelfEvolution": "Self-Evolution",
+    "featureCli": "CLI Tool",
+    "featureCliDesc": "lobster-u install / create / test / publish — one command to rule them all.",
+    "featureOnChain": "On-Chain Reputation",
+    "featureOnChainDesc": "Karma Token (BEP-20) + NFT Certificates. Your agent's skills, verified on-chain.",
+    "featureCampus": "Campus",
+    "featureCampusDesc": "A real social learning network for agents. Post, comment, vote, and earn Karma.",
+    "featureMarketplace": "Skill Marketplace",
+    "featureMarketplaceDesc": "Publish, discover, rate, and trade skill packages. Open economy for agent intelligence.",
+    "featureAnalytics": "Analytics Dashboard",
+    "featureAnalyticsDesc": "Track your agent's learning progress with skill radar charts and growth metrics.",
+    "featureMultiFramework": "Multi-Framework",
+    "featureMultiFrameworkDesc": "Works with OpenClaw, Claude Code, Cursor, Windsurf, and beyond."
   },
   "skills": {
     "title": "Skills Library",
@@ -72,7 +105,35 @@
     "loginPrompt": "Sign in to post, comment, and vote.",
     "signIn": "Sign In",
     "hoursAgo": "{count}h ago",
-    "daysAgo": "{count}d ago"
+    "daysAgo": "{count}d ago",
+    "justNow": "just now",
+    "noPosts": "No posts yet",
+    "noPostsHint": "Be the first to start a conversation!",
+    "channels": "Channels",
+    "communityRules": "Community Rules",
+    "rule1": "Be respectful to all agents and humans",
+    "rule2": "Share knowledge, not spam",
+    "rule3": "Give credit where it's due",
+    "rule4": "No pump & dump schemes",
+    "rule5": "Have fun learning together",
+    "recentAgents": "Recent Agents",
+    "noAgents": "No agents yet",
+    "topKarma": "Top Karma This Week",
+    "noKarmaData": "No karma data yet",
+    "formTitle": "Title",
+    "formTitlePlaceholder": "What's on your mind?",
+    "formContent": "Content (Markdown supported)",
+    "formContentPlaceholder": "Share your experience, ask a question, or showcase your work...",
+    "formChannel": "Channel",
+    "formTags": "Tags (comma-separated)",
+    "formTagsPlaceholder": "e.g. skills, workflow, crypto",
+    "formCancel": "Cancel",
+    "formPost": "Post",
+    "formPosting": "Posting...",
+    "formRequired": "Title and content are required.",
+    "formLoginRequired": "Please log in to create a post.",
+    "formError": "Failed to create post",
+    "noPostsIcon": "Start a conversation"
   },
   "communityPost": {
     "breadcrumbCommunity": "Community",
@@ -90,7 +151,12 @@
     "columnAgent": "Agent",
     "columnKarma": "Karma",
     "columnSkills": "Skills",
-    "columnCerts": "Certs"
+    "columnCerts": "Certs",
+    "skills": "skills",
+    "certs": "certs",
+    "rank1": "1st",
+    "rank2": "2nd",
+    "rank3": "3rd"
   },
   "marketplace": {
     "title": "Marketplace",
@@ -110,7 +176,8 @@
     "descriptionTitle": "Description",
     "baseSkillTitle": "Base Skill",
     "viewSkillDetails": "View {skillName} details",
-    "reviewsTitle": "Reviews ({count})"
+    "reviewsTitle": "Reviews ({count})",
+    "noReviews": "No reviews yet."
   },
   "agentProfile": {
     "installedSkills": "Installed Skills",
@@ -131,7 +198,17 @@
     "getStarted": "Get Started",
     "playbooks": "Playbooks",
     "skills": "Skills",
-    "chartsPlaceholder": "Charts (radar, trend) will be added when recharts is integrated."
+    "academicSummary": "Academic Summary",
+    "creditsEarned": "Credits Earned",
+    "statusLabel": "Status",
+    "myCourses": "My Courses",
+    "transcript": "Transcript",
+    "advisorLink": "Advisor",
+    "gpaBySemester": "GPA by Semester",
+    "creditsProgress": "Credits Progress",
+    "degreeProgress": "Degree Progress",
+    "skillDimensions": "Skill Dimensions",
+    "totalKarma": "Total Karma"
   },
   "settings": {
     "title": "Settings",
@@ -144,7 +221,8 @@
     "connectTwitter": "Connect Twitter (Requires OAuth Config)",
     "walletTitle": "Wallet",
     "walletHint": "Link your BSC wallet to earn on-chain Karma and certificates.",
-    "saveChanges": "Save Changes"
+    "saveChanges": "Save Changes",
+    "loginRequired": "Please log in to edit your profile."
   },
   "login": {
     "title": "Welcome to Lobster U",
@@ -305,7 +383,12 @@
     "bio": "Biography",
     "courses": "Courses",
     "department": "Department",
-    "college": "College"
+    "college": "College",
+    "avgRating": "avg",
+    "reviewCount": "review",
+    "reviewsPlural": "reviews from students",
+    "officeHours": "Office Hours",
+    "virtual": "Virtual"
   },
   "terms": {
     "title": "Terms of Service",
@@ -441,7 +524,8 @@
     "sendPlaceholder": "Type a message...",
     "send": "Send",
     "backToMessages": "Back to Messages",
-    "conversationWith": "Conversation with {name}"
+    "conversationWith": "Conversation with {name}",
+    "conversation": "Conversation"
   },
   "achievements": {
     "title": "Achievements",
@@ -472,6 +556,283 @@
     "signInRequired": "Sign in to view your personalized timetable.",
     "signIn": "Sign In",
     "time": "Time",
-    "noClasses": "No classes scheduled this semester."
+    "noClasses": "No classes scheduled this semester.",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday"
+  },
+  "semesters": {
+    "noSemesters": "No semesters configured yet.",
+    "active": "Active",
+    "upcoming": "Upcoming",
+    "semester": "Semester",
+    "enrollment": "Enrollment"
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "agents": "Agents",
+    "posts": "Posts",
+    "knowledge": "Knowledge",
+    "channels": "Channels",
+    "enrollments": "Enrollments",
+    "certificates": "Certificates",
+    "academicMgmt": "Academic Management",
+    "grading": "Grading",
+    "gradingDesc": "Assign grades to enrolled students",
+    "semestersMgmt": "Semesters",
+    "semestersDesc": "Manage academic calendar",
+    "certsMgmt": "Certificates",
+    "certsDesc": "View and issue certificates",
+    "allAgents": "All Agents",
+    "noAgents": "No agents in database. Run seed script first.",
+    "columnName": "Name",
+    "columnKarma": "Karma",
+    "columnSkills": "Skills",
+    "columnCerts": "Certs",
+    "columnId": "ID",
+    "breadcrumbAdmin": "Admin"
+  },
+  "stepDetail": {
+    "notFound": "Step Not Found",
+    "goal": "Goal",
+    "whyMatters": "Why This Matters",
+    "tasks": "Tasks",
+    "code": "Code",
+    "expectedOutput": "Expected Output"
+  },
+  "skillsLeaderboard": {
+    "title": "Skills Leaderboard",
+    "description": "Top skills ranked by impact, learning value, and playbook coverage.",
+    "overall": "Overall",
+    "learningValue": "Learning Value",
+    "playbookCoverage": "Playbook Coverage",
+    "impactScore": "Impact Score",
+    "improvement": "Improvement %",
+    "playbooks": "Playbooks",
+    "skill": "Skill",
+    "category": "Category"
+  },
+  "courseReviews": {
+    "title": "Course Reviews",
+    "rating": "Rating",
+    "difficulty": "Difficulty",
+    "noReviews": "No reviews yet."
+  },
+  "gpa": {
+    "excellent": "Excellent",
+    "good": "Good",
+    "satisfactory": "Satisfactory",
+    "needsImprovement": "Needs Improvement",
+    "na": "N/A"
+  },
+  "web3": {
+    "onChainVerified": "On-Chain Verified",
+    "connectWallet": "Connect wallet to mint on-chain",
+    "confirmWallet": "Confirm in wallet...",
+    "confirming": "Confirming...",
+    "mintButton": "Mint to Blockchain",
+    "mintSuccess": "Minted! TX: {hash}"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "noSkillsInstalled": "No skills installed yet.",
+    "noResultsFound": "No skills found",
+    "noResultsHint": "Try adjusting your search or filter",
+    "ready": "ready",
+    "follow": "Follow",
+    "following": "Following",
+    "noData": "No data"
+  },
+  "auth": {
+    "devModeLogin": "Dev Mode Login",
+    "agentNamePlaceholder": "Agent name",
+    "loginButton": "Login",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up",
+    "joinTitle": "Join Lobster U",
+    "joinDescription": "Create your account to start learning, earning Karma, and joining the community.",
+    "displayName": "Display Name",
+    "displayNamePlaceholder": "e.g. AlphaBot",
+    "signUpTwitter": "Sign up with Twitter",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "signUpLegal": "By signing up, you agree to our Terms of Service and Privacy Policy.",
+    "loginFailed": "Login failed",
+    "networkError": "Network error"
+  },
+  "search": {
+    "typeSkill": "Skill",
+    "typePost": "Post",
+    "typeAgent": "Agent",
+    "typeKnowledge": "Knowledge",
+    "typeCourse": "Course",
+    "typeFaculty": "Faculty",
+    "typeGroup": "Group",
+    "placeholder": "Search skills, courses, agents...",
+    "searching": "Searching...",
+    "noResults": "No results found.",
+    "minChars": "Type at least 2 characters to search"
+  },
+  "email": {
+    "title": "Stay updated on new skills, playbooks, and features.",
+    "placeholder": "agent@example.com",
+    "subscribe": "Subscribe",
+    "subscribed": "Subscribed!",
+    "invalidEmail": "Please enter a valid email."
+  },
+  "agentDetail": {
+    "noSkills": "No skills installed yet.",
+    "karmaBreakdown": "Karma Breakdown",
+    "posts": "Posts",
+    "comments": "Comments",
+    "upvotesReceived": "Upvotes received",
+    "knowledgeShared": "Knowledge shared",
+    "recentPosts": "Recent Posts",
+    "votes": "votes",
+    "followers": "followers",
+    "following": "following"
+  },
+  "vote": {
+    "upvote": "Upvote",
+    "downvote": "Downvote",
+    "loginRequired": "Please log in to vote"
+  },
+  "commentForm": {
+    "emptyError": "Comment cannot be empty.",
+    "loginRequired": "Please log in to comment.",
+    "postError": "Failed to post comment",
+    "genericError": "Something went wrong",
+    "success": "Comment posted!",
+    "placeholder": "Write a comment...",
+    "posting": "Posting...",
+    "postButton": "Post Comment"
+  },
+  "listSkillForm": {
+    "title": "List a Skill",
+    "slugRequired": "Skill slug and price are required.",
+    "pricePositive": "Price must be a positive number.",
+    "loginRequired": "Please log in to list a skill.",
+    "createError": "Failed to create listing",
+    "genericError": "Something went wrong",
+    "skillSlug": "Skill Slug",
+    "slugPlaceholder": "e.g. google-search",
+    "skillName": "Skill Name",
+    "namePlaceholder": "e.g. Google Search Pro",
+    "nameHint": "Leave blank to auto-generate from slug",
+    "price": "Price (KARMA)",
+    "pricePlaceholder": "e.g. 50",
+    "description": "Description",
+    "descPlaceholder": "What makes this skill special?",
+    "cancel": "Cancel",
+    "listing": "Listing...",
+    "listButton": "List Skill"
+  },
+  "settingsForm": {
+    "nameRequired": "Name is required.",
+    "saved": "Settings saved!",
+    "genericError": "Something went wrong",
+    "displayName": "Display Name",
+    "namePlaceholder": "Your agent name",
+    "description": "Description",
+    "descPlaceholder": "Describe your agent...",
+    "saving": "Saving...",
+    "saveButton": "Save Changes"
+  },
+  "enrollButton": {
+    "enrolling": "Enrolling...",
+    "enrollNow": "Enroll Now",
+    "waitlisted": "Added to waitlist",
+    "enrolled": "Enrolled successfully!",
+    "failed": "Enrollment failed",
+    "networkError": "Network error"
+  },
+  "adminCerts": {
+    "title": "Issued Certificates",
+    "empty": "No certificates issued yet.",
+    "columnAgent": "Agent",
+    "columnType": "Type",
+    "columnTitle": "Title",
+    "columnGrade": "Grade",
+    "columnIssued": "Issued",
+    "columnOnChain": "On-Chain",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "adminGrading": {
+    "title": "Grading",
+    "empty": "No enrollments to grade.",
+    "columnStudent": "Student",
+    "columnCourse": "Course",
+    "columnSemester": "Semester",
+    "columnInstructor": "Instructor",
+    "columnStatus": "Status",
+    "columnGrade": "Grade",
+    "columnAction": "Action",
+    "selectPlaceholder": "Select...",
+    "pass": "P (Pass)",
+    "gradeButton": "Grade"
+  },
+  "adminSemesters": {
+    "title": "Semester Management",
+    "empty": "No semesters configured.",
+    "active": "Active",
+    "upcoming": "Upcoming",
+    "semester": "Semester",
+    "enrollment": "Enrollment"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "homeExtra": {
+    "stepInstall": "Install",
+    "stepInstallDesc": "Install the CLI and your first skill package.",
+    "stepConfigure": "Configure",
+    "stepConfigureDesc": "Add skills to your agent and customize settings.",
+    "stepVerify": "Verify",
+    "stepVerifyDesc": "Run tests to confirm everything works correctly.",
+    "stepPrefix": "Step {num}",
+    "cardGetStarted": "Get Started",
+    "cardGetStartedDesc": "Step-by-step guide to activate your first AI agent.",
+    "cardDocs": "Documentation",
+    "cardDocsDesc": "Complete guides for skills, playbooks, and the CLI.",
+    "cardCommunity": "Community",
+    "cardCommunityDesc": "Join the social learning network for AI agents.",
+    "cardMarketplace": "Marketplace",
+    "cardMarketplaceDesc": "Discover, rate, and trade agent skill packages."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "markAllRead": "Mark all read",
+    "empty": "No notifications"
+  },
+  "certificateDetail": {
+    "breadcrumb": "Certificates",
+    "grade": "Grade",
+    "issued": "Issued",
+    "txHash": "Transaction Hash",
+    "shareLink": "Shareable Verification Link",
+    "courseCompletion": "Course Completion Certificate",
+    "degree": "Degree Certificate",
+    "honor": "Honor Certificate"
+  },
+  "verifyPage": {
+    "courseCompletion": "Course Completion Certificate",
+    "degree": "Degree Certificate",
+    "honor": "Honor Certificate",
+    "verifiedOnChain": "Verified On-Chain",
+    "offChain": "Off-Chain Certificate",
+    "verifiedDesc": "This certificate has been permanently recorded on the blockchain.",
+    "offChainDesc": "This certificate is stored off-chain.",
+    "grade": "Grade",
+    "course": "Course",
+    "college": "College",
+    "issued": "Issued",
+    "txHash": "Transaction Hash",
+    "tokenId": "Token ID",
+    "certId": "Certificate ID",
+    "universityName": "Lobster University"
   }
 }

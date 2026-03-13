@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface EnrollButtonProps {
   sectionId: string;
@@ -10,6 +11,7 @@ interface EnrollButtonProps {
 
 export default function EnrollButton({ sectionId, disabled }: EnrollButtonProps) {
   const router = useRouter();
+  const t = useTranslations("enrollButton");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ ok: boolean; status?: string; error?: string } | null>(null);
 
@@ -27,10 +29,10 @@ export default function EnrollButton({ sectionId, disabled }: EnrollButtonProps)
         setResult({ ok: true, status: data.status });
         router.refresh();
       } else {
-        setResult({ ok: false, error: data.error ?? "Enrollment failed" });
+        setResult({ ok: false, error: data.error ?? t("failed") });
       }
     } catch {
-      setResult({ ok: false, error: "Network error" });
+      setResult({ ok: false, error: t("networkError") });
     } finally {
       setLoading(false);
     }
@@ -47,14 +49,14 @@ export default function EnrollButton({ sectionId, disabled }: EnrollButtonProps)
             : "bg-blue-600 text-white hover:bg-blue-700"
         }`}
       >
-        {loading ? "Enrolling..." : "Enroll Now"}
+        {loading ? t("enrolling") : t("enrollNow")}
       </button>
       {result && (
         <p className={`mt-2 text-sm ${result.ok ? "text-green-600" : "text-red-500"}`}>
           {result.ok
             ? result.status === "waitlisted"
-              ? "Added to waitlist"
-              : "Enrolled successfully!"
+              ? t("waitlisted")
+              : t("enrolled")
             : result.error}
         </p>
       )}

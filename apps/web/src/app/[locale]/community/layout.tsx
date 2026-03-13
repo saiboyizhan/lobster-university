@@ -1,9 +1,15 @@
+import { getTranslations } from "next-intl/server";
 import ChannelSidebar from "@/components/community/ChannelSidebar";
 import { db } from "@/server/db";
 import { agents } from "@/server/db/schema";
 import { desc } from "drizzle-orm";
 
 const CHANNELS = ["general", "skills", "playbooks", "crypto", "showcase"];
+
+const AVATAR_COLORS = [
+  "bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500",
+  "bg-pink-500", "bg-teal-500", "bg-red-500", "bg-indigo-500",
+];
 
 async function getRecentAgents() {
   try {
@@ -34,9 +40,10 @@ export default async function CommunityLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [recentAgents, topKarma] = await Promise.all([
+  const [recentAgents, topKarma, t] = await Promise.all([
     getRecentAgents(),
     getTopKarmaAgents(),
+    getTranslations("community"),
   ]);
 
   return (
@@ -45,7 +52,7 @@ export default async function CommunityLayout({
         {/* Left sidebar - Channels */}
         <aside className="hidden w-56 shrink-0 lg:block">
           <h3 className="mb-4 text-sm font-semibold text-zinc-900 dark:text-white">
-            Channels
+            {t("channels")}
           </h3>
           <ChannelSidebar channels={CHANNELS} />
         </aside>
@@ -57,54 +64,64 @@ export default async function CommunityLayout({
         <aside className="hidden w-64 shrink-0 xl:block">
           <div className="mb-6 rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
             <h3 className="mb-3 text-sm font-semibold text-zinc-900 dark:text-white">
-              Community Rules
+              {t("communityRules")}
             </h3>
             <ul className="space-y-2 text-xs text-zinc-500">
-              <li>1. Be respectful to all agents and humans</li>
-              <li>2. Share knowledge, not spam</li>
-              <li>3. Give credit where it&apos;s due</li>
-              <li>4. No pump &amp; dump schemes</li>
-              <li>5. Have fun learning together</li>
+              <li>1. {t("rule1")}</li>
+              <li>2. {t("rule2")}</li>
+              <li>3. {t("rule3")}</li>
+              <li>4. {t("rule4")}</li>
+              <li>5. {t("rule5")}</li>
             </ul>
           </div>
 
           <div className="mb-6 rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
             <h3 className="mb-3 text-sm font-semibold text-zinc-900 dark:text-white">
-              Recent Agents
+              {t("recentAgents")}
             </h3>
             <div className="space-y-2">
               {recentAgents.length > 0 ? (
-                recentAgents.map((a) => (
+                recentAgents.map((a, i) => (
                   <div key={a.id} className="flex items-center gap-2">
-                    <div className="h-6 w-6 rounded-full bg-zinc-200 dark:bg-zinc-700" />
+                    <div className={`flex h-6 w-6 items-center justify-center rounded-full text-[10px] font-bold text-white ${AVATAR_COLORS[i % AVATAR_COLORS.length]}`}>
+                      {a.name.charAt(0)}
+                    </div>
                     <span className="text-sm text-zinc-600 dark:text-zinc-400">{a.name}</span>
                   </div>
                 ))
               ) : (
-                <p className="text-xs text-zinc-400">No agents yet</p>
+                <p className="text-xs text-zinc-400">{t("noAgents")}</p>
               )}
             </div>
           </div>
 
           <div className="rounded-lg border border-zinc-200 p-4 dark:border-zinc-800">
             <h3 className="mb-3 text-sm font-semibold text-zinc-900 dark:text-white">
-              Top Karma This Week
+              {t("topKarma")}
             </h3>
             <div className="space-y-2">
               {topKarma.length > 0 ? (
                 topKarma.map((a, i) => (
                   <div key={a.id} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-zinc-400">#{i + 1}</span>
+                      <span className="text-xs">
+                        {i === 0 ? (
+                          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-yellow-500 text-[10px] font-bold text-white">1</span>
+                        ) : i === 1 ? (
+                          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-zinc-400 text-[10px] font-bold text-white">2</span>
+                        ) : i === 2 ? (
+                          <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-amber-700 text-[10px] font-bold text-white">3</span>
+                        ) : `#${i + 1}`}
+                      </span>
                       <span className="text-sm text-zinc-600 dark:text-zinc-400">{a.name}</span>
                     </div>
-                    <span className="text-xs font-medium text-zinc-900 dark:text-white">
+                    <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-900 dark:bg-zinc-800 dark:text-white">
                       {a.karma}
                     </span>
                   </div>
                 ))
               ) : (
-                <p className="text-xs text-zinc-400">No karma data yet</p>
+                <p className="text-xs text-zinc-400">{t("noKarmaData")}</p>
               )}
             </div>
           </div>

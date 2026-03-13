@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import type { Skill } from "@/lib/skills";
 import SkillSearch from "./SkillSearch";
@@ -19,6 +20,7 @@ export default function SkillsExplorer({
   searchPlaceholder,
   allLabel,
 }: SkillsExplorerProps) {
+  const tc = useTranslations("common");
   const [filteredBySearch, setFilteredBySearch] = useState<Skill[]>(skills);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -69,7 +71,7 @@ export default function SkillsExplorer({
                     {skill.name}
                   </code>
                   <span className="rounded-full bg-green-100 px-2 py-0.5 text-xs text-green-700 dark:bg-green-900 dark:text-green-300">
-                    ready
+                    {tc("ready")}
                   </span>
                 </div>
                 <p className="text-sm text-zinc-500">{skill.description}</p>
@@ -92,7 +94,11 @@ export default function SkillsExplorer({
       ))}
 
       {displayed.length === 0 && (
-        <p className="py-12 text-center text-zinc-500">No skills found.</p>
+        <div className="flex flex-col items-center py-16 text-center">
+          <div className="mb-3"><svg className="mx-auto h-10 w-10 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg></div>
+          <p className="mb-1 font-medium text-zinc-600 dark:text-zinc-400">{tc("noResultsFound")}</p>
+          <p className="text-sm text-zinc-400">{tc("noResultsHint")}</p>
+        </div>
       )}
     </>
   );

@@ -2,8 +2,10 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 export default function NotificationBell() {
+  const t = useTranslations("notifications");
   const [unread, setUnread] = useState(0);
   const [open, setOpen] = useState(false);
   const [notifications, setNotifications] = useState<
@@ -99,19 +101,19 @@ export default function NotificationBell() {
           <div className="fixed inset-0 z-40" onClick={() => setOpen(false)} />
           <div className="absolute right-0 z-50 mt-2 w-80 overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
             <div className="flex items-center justify-between border-b border-zinc-200 px-4 py-3 dark:border-zinc-700">
-              <h3 className="text-sm font-semibold text-zinc-900 dark:text-white">Notifications</h3>
+              <h3 className="text-sm font-semibold text-zinc-900 dark:text-white">{t("title")}</h3>
               {unread > 0 && (
                 <button
                   onClick={handleMarkAllRead}
                   className="text-xs text-blue-600 hover:text-blue-800 dark:text-blue-400"
                 >
-                  Mark all read
+                  {t("markAllRead")}
                 </button>
               )}
             </div>
             <div className="max-h-80 overflow-y-auto">
               {notifications.length === 0 ? (
-                <div className="px-4 py-8 text-center text-sm text-zinc-400">No notifications</div>
+                <div className="px-4 py-8 text-center text-sm text-zinc-400">{t("empty")}</div>
               ) : (
                 notifications.map((n) => (
                   <div

@@ -18,7 +18,7 @@ function renderLabel(props: PieLabelRenderProps) {
 
 export function CollegePieChart({ data }: { data: CollegeData[] }) {
   if (data.length === 0) {
-    return <div className="flex h-48 items-center justify-center text-sm text-zinc-400">No data</div>;
+    return <div className="flex h-48 items-center justify-center text-sm text-zinc-400">—</div>;
   }
 
   return (

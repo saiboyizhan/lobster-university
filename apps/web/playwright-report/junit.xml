@@ -1,0 +1,162 @@
+<testsuites id="" name="" tests="74" failures="0" skipped="0" errors="0" time="35.540076">
+<testsuite name="tests/community.spec.ts" timestamp="2026-03-11T20:23:25.303Z" hostname="chromium" tests="11" failures="0" skipped="0" time="27.916" errors="0">
+<testcase name="Community Page › page loads with heading" classname="tests/community.spec.ts" time="1.88">
+</testcase>
+<testcase name="Community Page › posts are displayed (demo data fallback)" classname="tests/community.spec.ts" time="1.961">
+</testcase>
+<testcase name="Community Page › sort tabs are visible" classname="tests/community.spec.ts" time="1.869">
+</testcase>
+<testcase name="Community Page › post cards show text content" classname="tests/community.spec.ts" time="1.919">
+</testcase>
+<testcase name="Community Page › clicking a post (via title) navigates to post detail page" classname="tests/community.spec.ts" time="4.011">
+</testcase>
+<testcase name="Community Page › login prompt is visible for unauthenticated users" classname="tests/community.spec.ts" time="3.537">
+</testcase>
+<testcase name="Community Page › channel filter query param does not break the page" classname="tests/community.spec.ts" time="4.735">
+</testcase>
+<testcase name="Post Detail Page › demo post &apos;post-1&apos; loads with title and article content" classname="tests/community.spec.ts" time="3.093">
+</testcase>
+<testcase name="Post Detail Page › demo fallback post ID &apos;1&apos; also resolves" classname="tests/community.spec.ts" time="1.775">
+</testcase>
+<testcase name="Post Detail Page › breadcrumb links back to community list" classname="tests/community.spec.ts" time="1.582">
+</testcase>
+<testcase name="Post Detail Page › comments section is present" classname="tests/community.spec.ts" time="1.554">
+</testcase>
+</testsuite>
+<testsuite name="tests/get-started.spec.ts" timestamp="2026-03-11T20:23:25.303Z" hostname="chromium" tests="22" failures="0" skipped="0" time="38.405" errors="0">
+<testcase name="Get Started Overview Page › page loads with heading and step links" classname="tests/get-started.spec.ts" time="1.309">
+</testcase>
+<testcase name="Get Started Overview Page › displays all 8 step links (each link appears in sidebar AND main content)" classname="tests/get-started.spec.ts" time="1.144">
+</testcase>
+<testcase name="Get Started Overview Page › before/after comparison cards are visible" classname="tests/get-started.spec.ts" time="1.126">
+</testcase>
+<testcase name="Get Started Overview Page › phase labels (Setup, Activate, etc.) are visible" classname="tests/get-started.spec.ts" time="1.142">
+</testcase>
+<testcase name="Get Started Overview Page › clicking Step 0 card (in main content) navigates to step detail page" classname="tests/get-started.spec.ts" time="1.48">
+</testcase>
+<testcase name="Get Started Overview Page › clicking Step 3 card navigates correctly" classname="tests/get-started.spec.ts" time="1.468">
+</testcase>
+<testcase name="Step Detail Pages › Step 0 loads with all required sections" classname="tests/get-started.spec.ts" time="1.102">
+</testcase>
+<testcase name="Step Detail Pages › Step 0 progress shows &apos;Step 1 of 8&apos; and &apos;13%&apos;" classname="tests/get-started.spec.ts" time="1.078">
+</testcase>
+<testcase name="Step Detail Pages › Step 7 progress shows &apos;Step 8 of 8&apos; and &apos;100%&apos;" classname="tests/get-started.spec.ts" time="1.212">
+</testcase>
+<testcase name="Step Detail Pages › step detail has a tasks list with numbered items" classname="tests/get-started.spec.ts" time="1.074">
+</testcase>
+<testcase name="Step Detail Pages › navigation to next step works (Step 0 -&gt; Step 1)" classname="tests/get-started.spec.ts" time="1.485">
+</testcase>
+<testcase name="Step Detail Pages › last step (Step 7) has no Next link — shows Explore Skills instead" classname="tests/get-started.spec.ts" time="1.074">
+</testcase>
+<testcase name="Step Detail Pages › first step (Step 0) has no Previous link — shows Overview instead" classname="tests/get-started.spec.ts" time="1.202">
+</testcase>
+<testcase name="Step Detail Pages › invalid step number shows 404" classname="tests/get-started.spec.ts" time="16.152">
+</testcase>
+<testcase name="Step Detail Pages › Step 0 page is accessible" classname="tests/get-started.spec.ts" time="1.064">
+</testcase>
+<testcase name="Step Detail Pages › Step 1 page is accessible" classname="tests/get-started.spec.ts" time="0.932">
+</testcase>
+<testcase name="Step Detail Pages › Step 2 page is accessible" classname="tests/get-started.spec.ts" time="0.814">
+</testcase>
+<testcase name="Step Detail Pages › Step 3 page is accessible" classname="tests/get-started.spec.ts" time="0.771">
+</testcase>
+<testcase name="Step Detail Pages › Step 4 page is accessible" classname="tests/get-started.spec.ts" time="0.729">
+</testcase>
+<testcase name="Step Detail Pages › Step 5 page is accessible" classname="tests/get-started.spec.ts" time="0.708">
+</testcase>
+<testcase name="Step Detail Pages › Step 6 page is accessible" classname="tests/get-started.spec.ts" time="0.684">
+</testcase>
+<testcase name="Step Detail Pages › Step 7 page is accessible" classname="tests/get-started.spec.ts" time="0.655">
+</testcase>
+</testsuite>
+<testsuite name="tests/homepage.spec.ts" timestamp="2026-03-11T20:23:25.303Z" hostname="chromium" tests="11" failures="0" skipped="0" time="17.12" errors="0">
+<testcase name="Homepage › hero section loads with title and CTA buttons" classname="tests/homepage.spec.ts" time="1.114">
+</testcase>
+<testcase name="Homepage › navigation bar renders all main links" classname="tests/homepage.spec.ts" time="1.137">
+</testcase>
+<testcase name="Homepage › clicking nav logo returns to homepage" classname="tests/homepage.spec.ts" time="2.346">
+</testcase>
+<testcase name="Homepage › nav Skills link navigates to /en/skills" classname="tests/homepage.spec.ts" time="1.805">
+</testcase>
+<testcase name="Homepage › nav Community link navigates to /en/community" classname="tests/homepage.spec.ts" time="2.323">
+</testcase>
+<testcase name="Homepage › nav Get Started link navigates to /en/get-started" classname="tests/homepage.spec.ts" time="1.596">
+</testcase>
+<testcase name="Homepage › dark mode toggle is clickable without errors" classname="tests/homepage.spec.ts" time="1.417">
+</testcase>
+<testcase name="Homepage › language switcher is visible in nav" classname="tests/homepage.spec.ts" time="0.545">
+</testcase>
+<testcase name="Homepage › quick start section is present with code block" classname="tests/homepage.spec.ts" time="1.03">
+</testcase>
+<testcase name="Homepage › skills library section shows category cards" classname="tests/homepage.spec.ts" time="1.08">
+</testcase>
+<testcase name="Homepage › no console errors on page load" classname="tests/homepage.spec.ts" time="2.727">
+</testcase>
+</testsuite>
+<testsuite name="tests/marketplace.spec.ts" timestamp="2026-03-11T20:23:25.303Z" hostname="chromium" tests="9" failures="0" skipped="0" time="11.276" errors="0">
+<testcase name="Marketplace Page › page loads with heading" classname="tests/marketplace.spec.ts" time="1.347">
+</testcase>
+<testcase name="Marketplace Page › listings are displayed (DB or demo fallback)" classname="tests/marketplace.spec.ts" time="1.32">
+</testcase>
+<testcase name="Marketplace Page › listing cards show skill name, price, and description" classname="tests/marketplace.spec.ts" time="0.729">
+</testcase>
+<testcase name="Marketplace Page › clicking first listing navigates to detail page" classname="tests/marketplace.spec.ts" time="1.365">
+</testcase>
+<testcase name="Marketplace Page › list skill button is present" classname="tests/marketplace.spec.ts" time="1.133">
+</testcase>
+<testcase name="Marketplace Detail Page › detail page loads for the first listing in the list" classname="tests/marketplace.spec.ts" time="1.436">
+</testcase>
+<testcase name="Marketplace Detail Page › detail page shows description section" classname="tests/marketplace.spec.ts" time="1.345">
+</testcase>
+<testcase name="Marketplace Detail Page › buy button is present and disabled (no wallet connected)" classname="tests/marketplace.spec.ts" time="1.087">
+</testcase>
+<testcase name="Marketplace Detail Page › breadcrumb returns to marketplace list" classname="tests/marketplace.spec.ts" time="1.514">
+</testcase>
+</testsuite>
+<testsuite name="tests/search.spec.ts" timestamp="2026-03-11T20:23:25.303Z" hostname="chromium" tests="11" failures="0" skipped="0" time="25.327" errors="0">
+<testcase name="Search Dialog › Cmd+K opens the search dialog" classname="tests/search.spec.ts" time="1.592">
+</testcase>
+<testcase name="Search Dialog › search dialog has a text input with placeholder" classname="tests/search.spec.ts" time="1.561">
+</testcase>
+<testcase name="Search Dialog › hint text shown when fewer than 2 characters typed" classname="tests/search.spec.ts" time="1.222">
+</testcase>
+<testcase name="Search Dialog › hint text hides when 2+ characters typed" classname="tests/search.spec.ts" time="2.271">
+</testcase>
+<testcase name="Search Dialog › Escape key closes the dialog" classname="tests/search.spec.ts" time="1.819">
+</testcase>
+<testcase name="Search Dialog › clicking the backdrop closes the dialog" classname="tests/search.spec.ts" time="1.682">
+</testcase>
+<testcase name="Search Dialog › search button in nav opens dialog" classname="tests/search.spec.ts" time="1.273">
+</testcase>
+<testcase name="Search Dialog › typing a query sends request to /api/search" classname="tests/search.spec.ts" time="3.778">
+</testcase>
+<testcase name="Search Dialog › dialog shows &apos;No results found&apos; when API returns empty" classname="tests/search.spec.ts" time="3.79">
+</testcase>
+<testcase name="Search Dialog › dialog shows results when API returns data" classname="tests/search.spec.ts" time="3.786">
+</testcase>
+<testcase name="Search Dialog › reopening dialog clears previous query" classname="tests/search.spec.ts" time="2.553">
+</testcase>
+</testsuite>
+<testsuite name="tests/skills.spec.ts" timestamp="2026-03-11T20:23:25.303Z" hostname="chromium" tests="10" failures="0" skipped="0" time="11.283" errors="0">
+<testcase name="Skills Page › page loads with heading and skill cards" classname="tests/skills.spec.ts" time="0.649">
+</testcase>
+<testcase name="Skills Page › search input filters visible skill cards" classname="tests/skills.spec.ts" time="1.376">
+</testcase>
+<testcase name="Skills Page › search with no match shows empty state" classname="tests/skills.spec.ts" time="1.289">
+</testcase>
+<testcase name="Skills Page › clearing search restores all skills" classname="tests/skills.spec.ts" time="1.68">
+</testcase>
+<testcase name="Skills Page › skill cards display name and description" classname="tests/skills.spec.ts" time="0.882">
+</testcase>
+<testcase name="Skills Page › clicking a skill card navigates to detail page" classname="tests/skills.spec.ts" time="1.561">
+</testcase>
+<testcase name="Skills Page › skills page URL is correct" classname="tests/skills.spec.ts" time="0.792">
+</testcase>
+<testcase name="Skill Detail Page › renders skill title and metadata for academic-search" classname="tests/skills.spec.ts" time="1.192">
+</testcase>
+<testcase name="Skill Detail Page › skill detail page has Install section" classname="tests/skills.spec.ts" time="1.023">
+</testcase>
+<testcase name="Skill Detail Page › unknown skill slug shows 404 page" classname="tests/skills.spec.ts" time="0.839">
+</testcase>
+</testsuite>
+</testsuites>

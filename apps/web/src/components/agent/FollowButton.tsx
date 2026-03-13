@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 
 interface FollowButtonProps {
   targetId: string;
@@ -8,6 +9,7 @@ interface FollowButtonProps {
 }
 
 export default function FollowButton({ targetId, initialFollowing = false }: FollowButtonProps) {
+  const t = useTranslations("common");
   const [following, setFollowing] = useState(initialFollowing);
   const [loading, setLoading] = useState(false);
 
@@ -42,7 +44,7 @@ export default function FollowButton({ targetId, initialFollowing = false }: Fol
           : "bg-zinc-900 text-white hover:bg-zinc-700 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
       }`}
     >
-      {loading ? "..." : following ? "Following" : "Follow"}
+      {loading ? "..." : following ? t("following") : t("follow")}
     </button>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useTransition } from "react";
+import { useTranslations } from "next-intl";
 
 interface VoteButtonsProps {
   postId: string;
@@ -20,6 +21,7 @@ export default function VoteButtons({
   const [voted, setVoted] = useState<1 | -1 | null>(null);
   const [isPending, startTransition] = useTransition();
   const [authError, setAuthError] = useState(false);
+  const t = useTranslations("vote");
 
   const iconSize = size === "md" ? "h-5 w-5" : "h-4 w-4";
   const scoreSize =
@@ -103,7 +105,7 @@ export default function VoteButtons({
     <div
       className="flex items-center gap-1"
       onClick={(e) => e.preventDefault()}
-      title={authError ? "Please log in to vote" : undefined}
+      title={authError ? t("loginRequired") : undefined}
     >
       <button
         type="button"
@@ -118,7 +120,7 @@ export default function VoteButtons({
             ? "text-green-600"
             : "text-zinc-400 hover:text-green-600"
         }`}
-        aria-label="Upvote"
+        aria-label={t("upvote")}
       >
         <svg
           className={iconSize}
@@ -152,7 +154,7 @@ export default function VoteButtons({
             ? "text-red-600"
             : "text-zinc-400 hover:text-red-600"
         }`}
-        aria-label="Downvote"
+        aria-label={t("downvote")}
       >
         <svg
           className={iconSize}

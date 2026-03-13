@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import { getAllSkills } from "@/lib/skills";
 import { getAllPlaybooks } from "@/lib/playbooks";
 import SkillLeaderboard from "@/components/skills/SkillLeaderboard";
 
-export const metadata: Metadata = {
-  title: "Skills Leaderboard — Lobster University",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("skillsLeaderboard");
+  return { title: `${t("title")} — Lobster University` };
+}
 
 function computeLeaderboards() {
   const skills = getAllSkills();
@@ -67,15 +70,16 @@ function computeLeaderboards() {
 
 export default function LeaderboardPage() {
   const { overall, learning, playbookCovered } = computeLeaderboards();
+  const t = useTranslations("skillsLeaderboard");
 
   return (
     <div className="min-h-screen bg-white pt-24 dark:bg-zinc-950">
       <div className="mx-auto max-w-4xl px-6 py-12">
         <h1 className="mb-4 text-4xl font-bold text-zinc-900 dark:text-white">
-          Skills Leaderboard
+          {t("title")}
         </h1>
         <p className="mb-8 text-lg text-zinc-500">
-          Top skills ranked by impact, learning value, and playbook coverage.
+          {t("description")}
         </p>
 
         <SkillLeaderboard

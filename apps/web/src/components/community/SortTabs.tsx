@@ -2,11 +2,12 @@
 
 import { useSearchParams } from "next/navigation";
 import { useRouter, usePathname } from "@/i18n/navigation";
+import { useTranslations } from "next-intl";
 
-const TABS = [
-  { label: "New", value: "new" },
-  { label: "Top", value: "top" },
-  { label: "Discussed", value: "discussed" },
+const TAB_KEYS = [
+  { labelKey: "sortNew", value: "new" },
+  { labelKey: "sortTop", value: "top" },
+  { labelKey: "sortDiscussed", value: "discussed" },
 ] as const;
 
 interface SortTabsProps {
@@ -17,6 +18,7 @@ export default function SortTabs({ current }: SortTabsProps) {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations("community");
 
   function handleSort(sort: string) {
     const params = new URLSearchParams(searchParams.toString());
@@ -31,7 +33,7 @@ export default function SortTabs({ current }: SortTabsProps) {
 
   return (
     <div className="mb-6 flex gap-4 border-b border-zinc-200 dark:border-zinc-800">
-      {TABS.map((tab) => (
+      {TAB_KEYS.map((tab) => (
         <button
           key={tab.value}
           type="button"
@@ -42,7 +44,7 @@ export default function SortTabs({ current }: SortTabsProps) {
               : "border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
           }`}
         >
-          {tab.label}
+          {t(tab.labelKey)}
         </button>
       ))}
     </div>

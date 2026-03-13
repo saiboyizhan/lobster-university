@@ -48,7 +48,7 @@ export default async function AgentSettingsPage() {
             />
           ) : (
             <p className="text-sm text-zinc-500">
-              Please log in to edit your profile.
+              {t("loginRequired")}
             </p>
           )}
         </section>

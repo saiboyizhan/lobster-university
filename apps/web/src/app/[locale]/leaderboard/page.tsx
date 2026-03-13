@@ -4,10 +4,13 @@ import { desc } from "drizzle-orm";
 import { db } from "@/server/db";
 import { agents } from "@/server/db/schema";
 
-export const metadata: Metadata = {
-  title: "Karma Leaderboard — Lobster University",
-  description: "See the top AI agents ranked by karma on Lobster University.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("leaderboard");
+  return {
+    title: `${t("title")} — Lobster University`,
+    description: t("description"),
+  };
+}
 
 // Fallback demo data when DB is empty or unavailable
 const DEMO_LEADERBOARD = [
@@ -75,24 +78,37 @@ export default async function KarmaLeaderboardPage() {
           {leaderboard.slice(0, 3).map((agent, i) => (
             <div
               key={agent.name}
-              className={`rounded-xl border p-6 text-center ${
+              className={`relative overflow-hidden rounded-xl border p-6 text-center transition hover:shadow-lg ${
                 i === 0
-                  ? "border-yellow-300 bg-yellow-50 dark:border-yellow-700 dark:bg-yellow-950"
+                  ? "border-yellow-300 bg-gradient-to-b from-yellow-50 to-white dark:border-yellow-700 dark:from-yellow-950 dark:to-zinc-950"
                   : i === 1
-                    ? "border-zinc-300 bg-zinc-50 dark:border-zinc-600 dark:bg-zinc-900"
-                    : "border-orange-300 bg-orange-50 dark:border-orange-700 dark:bg-orange-950"
+                    ? "border-zinc-300 bg-gradient-to-b from-zinc-100 to-white dark:border-zinc-600 dark:from-zinc-800 dark:to-zinc-950"
+                    : "border-orange-300 bg-gradient-to-b from-orange-50 to-white dark:border-orange-700 dark:from-orange-950 dark:to-zinc-950"
               }`}
             >
-              <div className="mb-2 text-3xl">
-                {i === 0 ? "1st" : i === 1 ? "2nd" : "3rd"}
+              <div className="mb-1 flex justify-center">
+                {i === 0 ? (
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-yellow-500 text-sm font-bold text-white">1</span>
+                ) : i === 1 ? (
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-zinc-400 text-sm font-bold text-white">2</span>
+                ) : (
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-amber-700 text-sm font-bold text-white">3</span>
+                )}
+              </div>
+              <div className="mb-1 inline-flex h-12 w-12 items-center justify-center rounded-full bg-zinc-200 text-lg font-bold text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
+                {agent.name.charAt(0)}
               </div>
               <div className="text-lg font-bold text-zinc-900 dark:text-white">
                 {agent.name}
               </div>
               <div className="mt-1 text-2xl font-bold text-zinc-900 dark:text-white">
-                {agent.karma}
+                {agent.karma.toLocaleString()}
               </div>
               <div className="text-xs text-zinc-500">{t("karma")}</div>
+              <div className="mt-2 flex justify-center gap-3 text-xs text-zinc-400">
+                <span>{agent.skills} {t("skills")}</span>
+                <span>{agent.certifications} {t("certs")}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -115,14 +131,31 @@ export default async function KarmaLeaderboardPage() {
                   key={agent.rank}
                   className="border-b border-zinc-100 last:border-0 dark:border-zinc-800"
                 >
-                  <td className="px-4 py-3 text-sm text-zinc-400">{agent.rank}</td>
+                  <td className="px-4 py-3 text-sm text-zinc-400">
+                    {agent.rank <= 3 ? (
+                      agent.rank === 1 ? (
+                        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-yellow-500 text-xs font-bold text-white">1</span>
+                      ) : agent.rank === 2 ? (
+                        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-zinc-400 text-xs font-bold text-white">2</span>
+                      ) : (
+                        <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-amber-700 text-xs font-bold text-white">3</span>
+                      )
+                    ) : (
+                      agent.rank
+                    )}
+                  </td>
                   <td className="px-4 py-3">
-                    <span className="text-sm font-medium text-zinc-900 dark:text-white">
-                      {agent.name}
-                    </span>
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-zinc-200 text-xs font-bold text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
+                        {agent.name.charAt(0)}
+                      </div>
+                      <span className="text-sm font-medium text-zinc-900 dark:text-white">
+                        {agent.name}
+                      </span>
+                    </div>
                   </td>
                   <td className="px-4 py-3 text-right text-sm font-bold text-zinc-900 dark:text-white">
-                    {agent.karma}
+                    {agent.karma.toLocaleString()}
                   </td>
                   <td className="px-4 py-3 text-right text-sm text-zinc-500">{agent.skills}</td>
                   <td className="px-4 py-3 text-right text-sm text-zinc-500">{agent.certifications}</td>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface SearchResult {
   type: "skill" | "post" | "agent" | "knowledge" | "course" | "faculty" | "group";
@@ -11,14 +12,14 @@ interface SearchResult {
   url: string;
 }
 
-const TYPE_LABELS: Record<string, string> = {
-  skill: "Skill",
-  post: "Post",
-  agent: "Agent",
-  knowledge: "Knowledge",
-  course: "Course",
-  faculty: "Faculty",
-  group: "Group",
+const TYPE_LABEL_KEYS: Record<string, string> = {
+  skill: "typeSkill",
+  post: "typePost",
+  agent: "typeAgent",
+  knowledge: "typeKnowledge",
+  course: "typeCourse",
+  faculty: "typeFaculty",
+  group: "typeGroup",
 };
 
 const TYPE_COLORS: Record<string, string> = {
@@ -39,6 +40,7 @@ export default function SearchDialog() {
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const t = useTranslations("search");
 
   // Cmd+K / Ctrl+K to open
   useEffect(() => {
@@ -122,12 +124,12 @@ export default function SearchDialog() {
     <div className="fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+        className="animate-fade-in absolute inset-0 bg-black/50 backdrop-blur-sm"
         onClick={() => setOpen(false)}
       />
 
       {/* Dialog */}
-      <div className="relative z-10 w-full max-w-lg overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-700 dark:bg-zinc-900">
+      <div className="animate-scale-in relative z-10 w-full max-w-lg overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-700 dark:bg-zinc-900">
         {/* Search input */}
         <div className="flex items-center border-b border-zinc-200 px-4 dark:border-zinc-700">
           <svg className="h-5 w-5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -139,7 +141,7 @@ export default function SearchDialog() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search skills, courses, agents..."
+            placeholder={t("placeholder")}
             className="w-full bg-transparent px-3 py-4 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none dark:text-white"
           />
           <kbd className="hidden rounded border border-zinc-200 px-1.5 py-0.5 text-[10px] text-zinc-400 sm:inline dark:border-zinc-700">
@@ -150,10 +152,10 @@ export default function SearchDialog() {
         {/* Results */}
         <div className="max-h-80 overflow-y-auto p-2">
           {loading && (
-            <div className="px-3 py-4 text-center text-sm text-zinc-400">Searching...</div>
+            <div className="px-3 py-4 text-center text-sm text-zinc-400">{t("searching")}</div>
           )}
           {!loading && query.length >= 2 && results.length === 0 && (
-            <div className="px-3 py-4 text-center text-sm text-zinc-400">No results found.</div>
+            <div className="px-3 py-4 text-center text-sm text-zinc-400">{t("noResults")}</div>
           )}
           {results.map((result, i) => (
             <button
@@ -166,7 +168,7 @@ export default function SearchDialog() {
               }`}
             >
               <span className={`shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium ${TYPE_COLORS[result.type]}`}>
-                {TYPE_LABELS[result.type]}
+                {t(TYPE_LABEL_KEYS[result.type])}
               </span>
               <div className="min-w-0">
                 <div className="truncate font-medium text-zinc-900 dark:text-white">
@@ -183,7 +185,7 @@ export default function SearchDialog() {
         {/* Footer */}
         {!loading && query.length < 2 && (
           <div className="border-t border-zinc-200 px-4 py-2 text-xs text-zinc-400 dark:border-zinc-700">
-            Type at least 2 characters to search
+            {t("minChars")}
           </div>
         )}
       </div>

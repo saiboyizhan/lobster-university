@@ -1,9 +1,10 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { db } from "./db";
+import * as authSchema from "./db/schema/auth";
 
 export const auth = betterAuth({
-  database: drizzleAdapter(db, { provider: "sqlite" }),
+  database: drizzleAdapter(db, { provider: "sqlite", schema: authSchema }),
   socialProviders: {
     twitter: {
       clientId: process.env.TWITTER_CLIENT_ID ?? "",

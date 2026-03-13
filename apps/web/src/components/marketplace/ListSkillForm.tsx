@@ -2,6 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import Modal from "@/components/ui/Modal";
 
 interface ListSkillFormProps {
@@ -12,6 +13,7 @@ interface ListSkillFormProps {
 
 export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFormProps) {
   const router = useRouter();
+  const t = useTranslations("listSkillForm");
   const [skillSlug, setSkillSlug] = useState("");
   const [skillName, setSkillName] = useState("");
   const [price, setPrice] = useState("");
@@ -31,13 +33,13 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
     async (e: React.FormEvent) => {
       e.preventDefault();
       if (!skillSlug.trim() || !price.trim()) {
-        setError("Skill slug and price are required.");
+        setError(t("slugRequired"));
         return;
       }
 
       const priceNum = Number(price);
       if (Number.isNaN(priceNum) || priceNum <= 0) {
-        setError("Price must be a positive number.");
+        setError(t("pricePositive"));
         return;
       }
 
@@ -57,11 +59,11 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
         });
 
         if (res.status === 401) {
-          throw new Error("Please log in to list a skill.");
+          throw new Error(t("loginRequired"));
         }
         if (!res.ok) {
           const data = await res.json();
-          throw new Error(data.error ?? "Failed to create listing");
+          throw new Error(data.error ?? t("createError"));
         }
 
         reset();
@@ -72,7 +74,7 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
           router.refresh();
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong");
+        setError(err instanceof Error ? err.message : t("genericError"));
       } finally {
         setSubmitting(false);
       }
@@ -86,7 +88,7 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
   }, [reset, onClose]);
 
   return (
-    <Modal open={open} onClose={handleClose} title="List a Skill">
+    <Modal open={open} onClose={handleClose} title={t("title")}>
       <form onSubmit={handleSubmit} className="space-y-4">
         {error && (
           <div className="rounded-lg bg-red-50 px-3 py-2 text-sm text-red-600 dark:bg-red-950 dark:text-red-400">
@@ -99,14 +101,14 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
             htmlFor="skill-slug"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Skill Slug
+            {t("skillSlug")}
           </label>
           <input
             id="skill-slug"
             type="text"
             value={skillSlug}
             onChange={(e) => setSkillSlug(e.target.value)}
-            placeholder="e.g. chain-analyzer"
+            placeholder={t("slugPlaceholder")}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           />
         </div>
@@ -116,18 +118,18 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
             htmlFor="skill-name"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Skill Name
+            {t("skillName")}
           </label>
           <input
             id="skill-name"
             type="text"
             value={skillName}
             onChange={(e) => setSkillName(e.target.value)}
-            placeholder="e.g. @lobster-u/chain-analyzer"
+            placeholder={t("namePlaceholder")}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           />
           <p className="mt-1 text-xs text-zinc-400">
-            Leave blank to auto-generate from slug
+            {t("nameHint")}
           </p>
         </div>
 
@@ -136,7 +138,7 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
             htmlFor="skill-price"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Price (KARMA)
+            {t("price")}
           </label>
           <input
             id="skill-price"
@@ -145,7 +147,7 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
             step="1"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            placeholder="e.g. 50"
+            placeholder={t("pricePlaceholder")}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           />
         </div>
@@ -155,13 +157,13 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
             htmlFor="skill-description"
             className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
           >
-            Description
+            {t("description")}
           </label>
           <textarea
             id="skill-description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="Describe what your skill package does..."
+            placeholder={t("descPlaceholder")}
             rows={4}
             className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:border-zinc-500 dark:focus:ring-zinc-500"
           />
@@ -173,14 +175,14 @@ export default function ListSkillForm({ open, onClose, onSuccess }: ListSkillFor
             onClick={handleClose}
             className="rounded-lg border border-zinc-200 px-4 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             type="submit"
             disabled={submitting}
             className="rounded-lg bg-zinc-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
-            {submitting ? "Listing..." : "List Skill"}
+            {submitting ? t("listing") : t("listButton")}
           </button>
         </div>
       </form>

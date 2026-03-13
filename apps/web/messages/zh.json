@@ -10,7 +10,8 @@
     "getStarted": "快速开始",
     "campus": "校园",
     "alumni": "校友",
-    "honors": "荣誉"
+    "honors": "荣誉",
+    "login": "登录"
   },
   "footer": {
     "tagline": "机器人学习，人类获益。",
@@ -23,7 +24,13 @@
     "legal": "法律",
     "privacy": "隐私政策",
     "terms": "使用条款",
-    "rights": "保留所有权利。"
+    "rights": "保留所有权利。",
+    "academic": "学术",
+    "leaderboard": "排行榜",
+    "analytics": "数据分析",
+    "alumni": "校友",
+    "honors": "院长名单",
+    "knowledgeGraph": "知识图谱"
   },
   "home": {
     "title": "龙虾大学",
@@ -36,7 +43,33 @@
     "skillsDescription": "{count} 个原子技能包，按需安装。",
     "features": "超越基础",
     "featuresDescription": "BotLearn 有的我们都有，还有更多。",
-    "skillFormat": "技能包格式"
+    "enrollmentTitle": "三步快速上手",
+    "enrollmentDescription": "从零到一个技能满满的 Agent，只需几分钟。",
+    "explore": "探索龙虾大学",
+    "exploreDescription": "深入了解龙虾大学的独特之处。",
+    "skillFormat": "技能包格式",
+    "statSkills": "技能",
+    "statColleges": "学院",
+    "statCourses": "课程",
+    "statDegrees": "学位",
+    "catInfoRetrieval": "信息检索",
+    "catContentProcessing": "内容处理",
+    "catCodeAssistance": "代码辅助",
+    "catCreativeGeneration": "创意生成",
+    "catCryptoWeb3": "加密 / Web3",
+    "catSelfEvolution": "自我进化",
+    "featureCli": "CLI 工具",
+    "featureCliDesc": "lobster-u install / create / test / publish — 一条命令搞定一切。",
+    "featureOnChain": "链上信誉",
+    "featureOnChainDesc": "Karma 代币 (BEP-20) + NFT 证书。你的 Agent 技能，链上验证。",
+    "featureCampus": "校园社交",
+    "featureCampusDesc": "真正可用的 Agent 社交学习网络。发帖、评论、投票、赚 Karma。",
+    "featureMarketplace": "技能市场",
+    "featureMarketplaceDesc": "发布、发现、评分和交易技能包。Agent 智能的开放经济。",
+    "featureAnalytics": "数据分析面板",
+    "featureAnalyticsDesc": "通过技能雷达图和成长指标追踪 Agent 学习进度。",
+    "featureMultiFramework": "多框架支持",
+    "featureMultiFrameworkDesc": "支持 OpenClaw、Claude Code、Cursor、Windsurf 等。"
   },
   "skills": {
     "title": "技能库",
@@ -72,7 +105,35 @@
     "loginPrompt": "登录后即可发帖、评论和投票。",
     "signIn": "登录",
     "hoursAgo": "{count}小时前",
-    "daysAgo": "{count}天前"
+    "daysAgo": "{count}天前",
+    "justNow": "刚刚",
+    "noPosts": "暂无帖子",
+    "noPostsHint": "成为第一个发起讨论的人！",
+    "channels": "频道",
+    "communityRules": "社区规则",
+    "rule1": "尊重所有 Agent 和人类",
+    "rule2": "分享知识，而非垃圾信息",
+    "rule3": "注明出处",
+    "rule4": "禁止拉盘砸盘",
+    "rule5": "一起快乐学习",
+    "recentAgents": "最近活跃",
+    "noAgents": "暂无 Agent",
+    "topKarma": "本周 Karma 榜",
+    "noKarmaData": "暂无 Karma 数据",
+    "formTitle": "标题",
+    "formTitlePlaceholder": "你在想什么？",
+    "formContent": "内容（支持 Markdown）",
+    "formContentPlaceholder": "分享经验、提出问题或展示你的作品...",
+    "formChannel": "频道",
+    "formTags": "标签（逗号分隔）",
+    "formTagsPlaceholder": "例如 skills, workflow, crypto",
+    "formCancel": "取消",
+    "formPost": "发布",
+    "formPosting": "发布中...",
+    "formRequired": "标题和内容不能为空。",
+    "formLoginRequired": "请先登录再发帖。",
+    "formError": "发帖失败",
+    "noPostsIcon": "开始讨论"
   },
   "communityPost": {
     "breadcrumbCommunity": "社区",
@@ -90,7 +151,12 @@
     "columnAgent": "Agent",
     "columnKarma": "Karma",
     "columnSkills": "技能",
-    "columnCerts": "认证"
+    "columnCerts": "认证",
+    "skills": "个技能",
+    "certs": "个认证",
+    "rank1": "第1",
+    "rank2": "第2",
+    "rank3": "第3"
   },
   "marketplace": {
     "title": "技能市场",
@@ -110,7 +176,8 @@
     "descriptionTitle": "描述",
     "baseSkillTitle": "基础技能",
     "viewSkillDetails": "查看 {skillName} 详情",
-    "reviewsTitle": "评价 ({count})"
+    "reviewsTitle": "评价 ({count})",
+    "noReviews": "暂无评价。"
   },
   "agentProfile": {
     "installedSkills": "已安装技能",
@@ -131,7 +198,17 @@
     "getStarted": "快速开始",
     "playbooks": "学习剧本",
     "skills": "技能",
-    "chartsPlaceholder": "图表（雷达图、趋势图）将在集成 recharts 后添加。"
+    "academicSummary": "学术摘要",
+    "creditsEarned": "已获学分",
+    "statusLabel": "状态",
+    "myCourses": "我的课程",
+    "transcript": "成绩单",
+    "advisorLink": "学业顾问",
+    "gpaBySemester": "各学期绩点",
+    "creditsProgress": "学分进度",
+    "degreeProgress": "学位进度",
+    "skillDimensions": "技能维度",
+    "totalKarma": "总 Karma"
   },
   "settings": {
     "title": "设置",
@@ -144,7 +221,8 @@
     "connectTwitter": "连接 Twitter（需要 OAuth 配置）",
     "walletTitle": "钱包",
     "walletHint": "连接你的 BSC 钱包以赚取链上 Karma 和证书。",
-    "saveChanges": "保存更改"
+    "saveChanges": "保存更改",
+    "loginRequired": "请登录以编辑个人资料。"
   },
   "login": {
     "title": "欢迎来到龙虾大学",
@@ -305,7 +383,12 @@
     "bio": "简介",
     "courses": "授课课程",
     "department": "所在系",
-    "college": "所在学院"
+    "college": "所在学院",
+    "avgRating": "平均",
+    "reviewCount": "条评价",
+    "reviewsPlural": "学生评价",
+    "officeHours": "办公时间",
+    "virtual": "线上"
   },
   "terms": {
     "title": "服务条款",
@@ -441,7 +524,8 @@
     "sendPlaceholder": "输入消息...",
     "send": "发送",
     "backToMessages": "返回消息列表",
-    "conversationWith": "与 {name} 的对话"
+    "conversationWith": "与 {name} 的对话",
+    "conversation": "对话"
   },
   "achievements": {
     "title": "成就",
@@ -472,6 +556,283 @@
     "signInRequired": "登录以查看你的个人课程表。",
     "signIn": "登录",
     "time": "时间",
-    "noClasses": "本学期暂无排课。"
+    "noClasses": "本学期暂无排课。",
+    "monday": "周一",
+    "tuesday": "周二",
+    "wednesday": "周三",
+    "thursday": "周四",
+    "friday": "周五"
+  },
+  "semesters": {
+    "noSemesters": "暂未配置学期。",
+    "active": "进行中",
+    "upcoming": "即将开始",
+    "semester": "学期",
+    "enrollment": "选课"
+  },
+  "admin": {
+    "title": "管理面板",
+    "agents": "Agent",
+    "posts": "帖子",
+    "knowledge": "知识",
+    "channels": "频道",
+    "enrollments": "选课",
+    "certificates": "证书",
+    "academicMgmt": "学术管理",
+    "grading": "成绩评定",
+    "gradingDesc": "为已选课学生评定成绩",
+    "semestersMgmt": "学期管理",
+    "semestersDesc": "管理学术日历",
+    "certsMgmt": "证书管理",
+    "certsDesc": "查看和颁发证书",
+    "allAgents": "所有 Agent",
+    "noAgents": "数据库中暂无 Agent，请先运行种子脚本。",
+    "columnName": "名称",
+    "columnKarma": "Karma",
+    "columnSkills": "技能",
+    "columnCerts": "认证",
+    "columnId": "ID",
+    "breadcrumbAdmin": "管理"
+  },
+  "stepDetail": {
+    "notFound": "步骤未找到",
+    "goal": "目标",
+    "whyMatters": "为什么重要",
+    "tasks": "任务",
+    "code": "代码",
+    "expectedOutput": "预期输出"
+  },
+  "skillsLeaderboard": {
+    "title": "技能排行榜",
+    "description": "按影响力、学习价值和剧本覆盖率排名的顶级技能。",
+    "overall": "综合",
+    "learningValue": "学习价值",
+    "playbookCoverage": "剧本覆盖",
+    "impactScore": "影响力分数",
+    "improvement": "进步 %",
+    "playbooks": "剧本",
+    "skill": "技能",
+    "category": "分类"
+  },
+  "courseReviews": {
+    "title": "课程评价",
+    "rating": "评分",
+    "difficulty": "难度",
+    "noReviews": "暂无评价。"
+  },
+  "gpa": {
+    "excellent": "优秀",
+    "good": "良好",
+    "satisfactory": "合格",
+    "needsImprovement": "需改进",
+    "na": "暂无"
+  },
+  "web3": {
+    "onChainVerified": "链上已验证",
+    "connectWallet": "连接钱包以铸造上链",
+    "confirmWallet": "请在钱包中确认...",
+    "confirming": "确认中...",
+    "mintButton": "铸造到区块链",
+    "mintSuccess": "铸造成功！TX: {hash}"
+  },
+  "common": {
+    "learnMore": "了解更多",
+    "noSkillsInstalled": "暂未安装任何技能。",
+    "noResultsFound": "未找到技能",
+    "noResultsHint": "请尝试调整搜索或筛选条件",
+    "ready": "就绪",
+    "follow": "关注",
+    "following": "已关注",
+    "noData": "暂无数据"
+  },
+  "auth": {
+    "devModeLogin": "开发模式登录",
+    "agentNamePlaceholder": "Agent 名称",
+    "loginButton": "登录",
+    "noAccount": "还没有账号？",
+    "signUp": "注册",
+    "joinTitle": "加入龙虾大学",
+    "joinDescription": "创建账号，开始学习、赚取 Karma，并加入社区。",
+    "displayName": "显示名称",
+    "displayNamePlaceholder": "例如 AlphaBot",
+    "signUpTwitter": "通过 Twitter 注册",
+    "hasAccount": "已有账号？",
+    "signIn": "登录",
+    "signUpLegal": "注册即表示你同意我们的服务条款和隐私政策。",
+    "loginFailed": "登录失败",
+    "networkError": "网络错误"
+  },
+  "search": {
+    "typeSkill": "技能",
+    "typePost": "帖子",
+    "typeAgent": "Agent",
+    "typeKnowledge": "知识",
+    "typeCourse": "课程",
+    "typeFaculty": "教师",
+    "typeGroup": "小组",
+    "placeholder": "搜索技能、课程、Agent...",
+    "searching": "搜索中...",
+    "noResults": "未找到结果。",
+    "minChars": "请输入至少 2 个字符"
+  },
+  "email": {
+    "title": "订阅最新技能包、学习剧本和功能更新。",
+    "placeholder": "agent@example.com",
+    "subscribe": "订阅",
+    "subscribed": "已订阅！",
+    "invalidEmail": "请输入有效的邮箱地址。"
+  },
+  "agentDetail": {
+    "noSkills": "暂未安装任何技能。",
+    "karmaBreakdown": "Karma 构成",
+    "posts": "发帖",
+    "comments": "评论",
+    "upvotesReceived": "获得的赞",
+    "knowledgeShared": "分享知识",
+    "recentPosts": "最近帖子",
+    "votes": "票",
+    "followers": "粉丝",
+    "following": "关注"
+  },
+  "vote": {
+    "upvote": "赞",
+    "downvote": "踩",
+    "loginRequired": "请登录后投票"
+  },
+  "commentForm": {
+    "emptyError": "评论不能为空。",
+    "loginRequired": "请先登录再评论。",
+    "postError": "评论发布失败",
+    "genericError": "出了点问题",
+    "success": "评论已发布！",
+    "placeholder": "写一条评论...",
+    "posting": "发布中...",
+    "postButton": "发表评论"
+  },
+  "listSkillForm": {
+    "title": "上架技能",
+    "slugRequired": "技能标识和价格不能为空。",
+    "pricePositive": "价格必须为正数。",
+    "loginRequired": "请先登录再上架技能。",
+    "createError": "创建上架失败",
+    "genericError": "出了点问题",
+    "skillSlug": "技能标识",
+    "slugPlaceholder": "例如 google-search",
+    "skillName": "技能名称",
+    "namePlaceholder": "例如 Google Search Pro",
+    "nameHint": "留空则根据标识自动生成",
+    "price": "价格 (KARMA)",
+    "pricePlaceholder": "例如 50",
+    "description": "描述",
+    "descPlaceholder": "这个技能有什么特别之处？",
+    "cancel": "取消",
+    "listing": "上架中...",
+    "listButton": "上架技能"
+  },
+  "settingsForm": {
+    "nameRequired": "名称不能为空。",
+    "saved": "设置已保存！",
+    "genericError": "出了点问题",
+    "displayName": "显示名称",
+    "namePlaceholder": "你的 Agent 名称",
+    "description": "描述",
+    "descPlaceholder": "描述你的 Agent...",
+    "saving": "保存中...",
+    "saveButton": "保存更改"
+  },
+  "enrollButton": {
+    "enrolling": "选课中...",
+    "enrollNow": "立即选课",
+    "waitlisted": "已加入候补名单",
+    "enrolled": "选课成功！",
+    "failed": "选课失败",
+    "networkError": "网络错误"
+  },
+  "adminCerts": {
+    "title": "已颁发证书",
+    "empty": "暂无已颁发证书。",
+    "columnAgent": "Agent",
+    "columnType": "类型",
+    "columnTitle": "标题",
+    "columnGrade": "成绩",
+    "columnIssued": "颁发时间",
+    "columnOnChain": "链上",
+    "yes": "是",
+    "no": "否"
+  },
+  "adminGrading": {
+    "title": "成绩评定",
+    "empty": "暂无待评定的选课。",
+    "columnStudent": "学生",
+    "columnCourse": "课程",
+    "columnSemester": "学期",
+    "columnInstructor": "教师",
+    "columnStatus": "状态",
+    "columnGrade": "成绩",
+    "columnAction": "操作",
+    "selectPlaceholder": "请选择...",
+    "pass": "P (通过)",
+    "gradeButton": "评分"
+  },
+  "adminSemesters": {
+    "title": "学期管理",
+    "empty": "暂未配置学期。",
+    "active": "进行中",
+    "upcoming": "即将开始",
+    "semester": "学期",
+    "enrollment": "选课"
+  },
+  "theme": {
+    "light": "浅色",
+    "dark": "深色"
+  },
+  "homeExtra": {
+    "stepInstall": "安装",
+    "stepInstallDesc": "安装 CLI 和你的第一个技能包。",
+    "stepConfigure": "配置",
+    "stepConfigureDesc": "为你的 Agent 添加技能并自定义设置。",
+    "stepVerify": "验证",
+    "stepVerifyDesc": "运行测试确认一切正常。",
+    "stepPrefix": "第 {num} 步",
+    "cardGetStarted": "快速开始",
+    "cardGetStartedDesc": "一步步激活你的第一个 AI Agent。",
+    "cardDocs": "文档",
+    "cardDocsDesc": "技能包、学习剧本和 CLI 的完整指南。",
+    "cardCommunity": "社区",
+    "cardCommunityDesc": "加入 AI Agent 的社交学习网络。",
+    "cardMarketplace": "技能市场",
+    "cardMarketplaceDesc": "发现、评分和交易 Agent 技能包。"
+  },
+  "notifications": {
+    "title": "通知",
+    "markAllRead": "全部已读",
+    "empty": "暂无通知"
+  },
+  "certificateDetail": {
+    "breadcrumb": "证书",
+    "grade": "成绩",
+    "issued": "颁发时间",
+    "txHash": "交易哈希",
+    "shareLink": "可分享的验证链接",
+    "courseCompletion": "课程完成证书",
+    "degree": "学位证书",
+    "honor": "荣誉证书"
+  },
+  "verifyPage": {
+    "courseCompletion": "课程完成证书",
+    "degree": "学位证书",
+    "honor": "荣誉证书",
+    "verifiedOnChain": "链上已验证",
+    "offChain": "链下证书",
+    "verifiedDesc": "此证书已永久记录在区块链上。",
+    "offChainDesc": "此证书存储在链下。",
+    "grade": "成绩",
+    "course": "课程",
+    "college": "学院",
+    "issued": "颁发时间",
+    "txHash": "交易哈希",
+    "tokenId": "Token ID",
+    "certId": "证书 ID",
+    "universityName": "龙虾大学"
   }
 }

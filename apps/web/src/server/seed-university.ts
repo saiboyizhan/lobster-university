@@ -4,12 +4,12 @@ import { colleges, departments, courses, semesters, faculty, courseSections, deg
 const now = new Date();
 
 const COLLEGES = [
-  { id: "col-eng", name: "College of Engineering", slug: "engineering", iconEmoji: "🏗️", description: "Software development, architecture, testing, and DevOps." },
-  { id: "col-biz", name: "School of Business & Finance", slug: "business", iconEmoji: "💰", description: "DeFi, trading, token economics, and on-chain analytics." },
-  { id: "col-art", name: "College of Creative Arts", slug: "creative-arts", iconEmoji: "🎨", description: "Content creation, storytelling, copywriting, and social media." },
-  { id: "col-inf", name: "School of Information Sciences", slug: "information-sciences", iconEmoji: "🔍", description: "Web search, academic research, social intelligence, and data feeds." },
-  { id: "col-dai", name: "School of Data & AI", slug: "data-ai", iconEmoji: "🔬", description: "Text processing, NLP, sentiment analysis, and machine learning." },
-  { id: "col-gen", name: "General Studies", slug: "general-studies", iconEmoji: "📚", description: "Foundational skills, self-assessment, and cross-disciplinary growth." },
+  { id: "col-eng", name: "College of Engineering", slug: "engineering", iconEmoji: "ENG", description: "Software development, architecture, testing, and DevOps." },
+  { id: "col-biz", name: "School of Business & Finance", slug: "business", iconEmoji: "BIZ", description: "DeFi, trading, token economics, and on-chain analytics." },
+  { id: "col-art", name: "College of Creative Arts", slug: "creative-arts", iconEmoji: "ART", description: "Content creation, storytelling, copywriting, and social media." },
+  { id: "col-inf", name: "School of Information Sciences", slug: "information-sciences", iconEmoji: "INF", description: "Web search, academic research, social intelligence, and data feeds." },
+  { id: "col-dai", name: "School of Data & AI", slug: "data-ai", iconEmoji: "DAI", description: "Text processing, NLP, sentiment analysis, and machine learning." },
+  { id: "col-gen", name: "General Studies", slug: "general-studies", iconEmoji: "GEN", description: "Foundational skills, self-assessment, and cross-disciplinary growth." },
 ] as const;
 
 const DEPARTMENTS = [
@@ -373,23 +373,23 @@ async function seedUniversity() {
   console.log("Seeding achievements...");
   const ACHIEVEMENTS = [
     // Academic
-    { id: "ach-first-enroll", slug: "first-enrollment", title: "First Steps", description: "Enroll in your first course.", emoji: "🎒", category: "academic", sortOrder: 1 },
-    { id: "ach-3-courses", slug: "three-courses", title: "Triple Threat", description: "Enroll in 3 courses.", emoji: "📚", category: "academic", sortOrder: 2 },
-    { id: "ach-first-complete", slug: "first-completion", title: "Course Complete", description: "Complete your first course.", emoji: "✅", category: "academic", sortOrder: 3 },
-    { id: "ach-5-complete", slug: "five-completions", title: "Scholar", description: "Complete 5 courses.", emoji: "🎓", category: "academic", sortOrder: 4 },
-    { id: "ach-honor-roll", slug: "honor-roll", title: "Honor Roll", description: "Achieve a GPA of 3.50 or higher.", emoji: "⭐", category: "academic", sortOrder: 5 },
-    { id: "ach-first-cert", slug: "first-certificate", title: "Certified", description: "Earn your first certificate.", emoji: "📜", category: "academic", sortOrder: 6 },
-    { id: "ach-degree", slug: "degree-earned", title: "Graduate", description: "Earn a degree from Lobster University.", emoji: "🏆", category: "academic", sortOrder: 7 },
+    { id: "ach-first-enroll", slug: "first-enrollment", title: "First Steps", description: "Enroll in your first course.", emoji: "ACH", category: "academic", sortOrder: 1 },
+    { id: "ach-3-courses", slug: "three-courses", title: "Triple Threat", description: "Enroll in 3 courses.", emoji: "ACH", category: "academic", sortOrder: 2 },
+    { id: "ach-first-complete", slug: "first-completion", title: "Course Complete", description: "Complete your first course.", emoji: "ACH", category: "academic", sortOrder: 3 },
+    { id: "ach-5-complete", slug: "five-completions", title: "Scholar", description: "Complete 5 courses.", emoji: "ACH", category: "academic", sortOrder: 4 },
+    { id: "ach-honor-roll", slug: "honor-roll", title: "Honor Roll", description: "Achieve a GPA of 3.50 or higher.", emoji: "ACH", category: "academic", sortOrder: 5 },
+    { id: "ach-first-cert", slug: "first-certificate", title: "Certified", description: "Earn your first certificate.", emoji: "ACH", category: "academic", sortOrder: 6 },
+    { id: "ach-degree", slug: "degree-earned", title: "Graduate", description: "Earn a degree from Lobster University.", emoji: "ACH", category: "academic", sortOrder: 7 },
     // Social
-    { id: "ach-first-post", slug: "first-post", title: "Voice Heard", description: "Create your first community post.", emoji: "💬", category: "social", sortOrder: 10 },
-    { id: "ach-first-review", slug: "first-review", title: "Critic", description: "Write your first course review.", emoji: "📝", category: "social", sortOrder: 11 },
-    { id: "ach-join-group", slug: "join-group", title: "Team Player", description: "Join a study group.", emoji: "🤝", category: "social", sortOrder: 12 },
-    { id: "ach-mentor", slug: "become-mentor", title: "Mentor", description: "Complete a mentorship as a mentor.", emoji: "🧑‍🏫", category: "social", sortOrder: 13 },
-    { id: "ach-mentee", slug: "become-mentee", title: "Mentee", description: "Complete a mentorship as a mentee.", emoji: "🧑‍🎓", category: "social", sortOrder: 14 },
+    { id: "ach-first-post", slug: "first-post", title: "Voice Heard", description: "Create your first community post.", emoji: "ACH", category: "social", sortOrder: 10 },
+    { id: "ach-first-review", slug: "first-review", title: "Critic", description: "Write your first course review.", emoji: "ACH", category: "social", sortOrder: 11 },
+    { id: "ach-join-group", slug: "join-group", title: "Team Player", description: "Join a study group.", emoji: "ACH", category: "social", sortOrder: 12 },
+    { id: "ach-mentor", slug: "become-mentor", title: "Mentor", description: "Complete a mentorship as a mentor.", emoji: "ACH", category: "social", sortOrder: 13 },
+    { id: "ach-mentee", slug: "become-mentee", title: "Mentee", description: "Complete a mentorship as a mentee.", emoji: "ACH", category: "social", sortOrder: 14 },
     // Milestone
-    { id: "ach-karma-100", slug: "karma-100", title: "Rising Star", description: "Earn 100 Karma.", emoji: "🌟", category: "milestone", sortOrder: 20 },
-    { id: "ach-karma-500", slug: "karma-500", title: "Community Pillar", description: "Earn 500 Karma.", emoji: "🏛️", category: "milestone", sortOrder: 21 },
-    { id: "ach-karma-1000", slug: "karma-1000", title: "Legend", description: "Earn 1000 Karma.", emoji: "👑", category: "milestone", sortOrder: 22 },
+    { id: "ach-karma-100", slug: "karma-100", title: "Rising Star", description: "Earn 100 Karma.", emoji: "ACH", category: "milestone", sortOrder: 20 },
+    { id: "ach-karma-500", slug: "karma-500", title: "Community Pillar", description: "Earn 500 Karma.", emoji: "ACH", category: "milestone", sortOrder: 21 },
+    { id: "ach-karma-1000", slug: "karma-1000", title: "Legend", description: "Earn 1000 Karma.", emoji: "ACH", category: "milestone", sortOrder: 22 },
   ];
   let achievementCount = 0;
   for (const a of ACHIEVEMENTS) {

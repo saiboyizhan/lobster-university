@@ -2,6 +2,7 @@
 
 import { useAccount } from "wagmi";
 import { useEffect, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import { useMintCertificate } from "@/hooks/useContractWrite";
 import { CONTRACTS } from "@/lib/web3";
 
@@ -22,6 +23,7 @@ export default function MintCertificateButton({
 }: Props) {
   const { address, isConnected } = useAccount();
   const { mint, hash, isPending, isConfirming, isSuccess, error } = useMintCertificate();
+  const t = useTranslations("web3");
 
   // Save txHash back to DB after successful mint
   const saveTxHash = useCallback(async (newHash: string) => {
@@ -44,7 +46,7 @@ export default function MintCertificateButton({
       <div className="inline-flex items-center gap-2 rounded-lg bg-green-50 px-4 py-2 dark:bg-green-950">
         <span className="h-2 w-2 rounded-full bg-green-500" />
         <span className="text-sm font-medium text-green-700 dark:text-green-300">
-          On-Chain Verified
+          {t("onChainVerified")}
         </span>
       </div>
     );
@@ -57,7 +59,7 @@ export default function MintCertificateButton({
         disabled
         className="cursor-not-allowed rounded-lg bg-zinc-200 px-4 py-2 text-sm text-zinc-500 dark:bg-zinc-800 dark:text-zinc-400"
       >
-        Connect wallet to mint on-chain
+        {t("connectWallet")}
       </button>
     );
   }
@@ -74,14 +76,14 @@ export default function MintCertificateButton({
         }`}
       >
         {isPending
-          ? "Confirm in wallet..."
+          ? t("confirmWallet")
           : isConfirming
-            ? "Confirming..."
-            : "Mint to Blockchain"}
+            ? t("confirming")
+            : t("mintButton")}
       </button>
       {isSuccess && hash && (
         <p className="mt-2 text-xs text-green-600">
-          Minted! TX: {hash.slice(0, 10)}...
+          {t("mintSuccess", { hash: hash.slice(0, 10) + "..." })}
         </p>
       )}
       {error && (

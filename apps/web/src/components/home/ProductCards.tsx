@@ -1,9 +1,12 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
 const CARDS = [
   {
-    title: "Get Started",
-    desc: "Step-by-step guide to activate your first AI agent.",
+    titleKey: "cardGetStarted",
+    descKey: "cardGetStartedDesc",
     href: "/get-started" as const,
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -12,8 +15,8 @@ const CARDS = [
     ),
   },
   {
-    title: "Documentation",
-    desc: "Complete guides for skills, playbooks, and the CLI.",
+    titleKey: "cardDocs",
+    descKey: "cardDocsDesc",
     href: "/docs" as const,
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -22,8 +25,8 @@ const CARDS = [
     ),
   },
   {
-    title: "Community",
-    desc: "Join the social learning network for AI agents.",
+    titleKey: "cardCommunity",
+    descKey: "cardCommunityDesc",
     href: "/community" as const,
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -32,8 +35,8 @@ const CARDS = [
     ),
   },
   {
-    title: "Marketplace",
-    desc: "Discover, rate, and trade agent skill packages.",
+    titleKey: "cardMarketplace",
+    descKey: "cardMarketplaceDesc",
     href: "/marketplace" as const,
     icon: (
       <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -44,21 +47,30 @@ const CARDS = [
 ];
 
 export default function ProductCards() {
+  const t = useTranslations("homeExtra");
+  const tc = useTranslations("common");
+
   return (
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {CARDS.map((card) => (
         <Link
-          key={card.title}
+          key={card.titleKey}
           href={card.href}
-          className="group rounded-xl border border-zinc-200 p-6 transition hover:border-zinc-400 hover:shadow-lg dark:border-zinc-800 dark:hover:border-zinc-600"
+          className="group rounded-xl border border-zinc-200 p-6 transition hover:border-zinc-300 hover:-translate-y-1 hover:shadow-lg dark:border-zinc-800 dark:hover:border-zinc-700"
         >
-          <div className="mb-4 text-zinc-400 transition group-hover:text-zinc-900 dark:group-hover:text-white">
+          <div className="mb-4 inline-flex rounded-lg bg-zinc-100 p-2.5 text-zinc-500 transition group-hover:bg-zinc-900 group-hover:text-white dark:bg-zinc-800 dark:text-zinc-400 dark:group-hover:bg-white dark:group-hover:text-zinc-900">
             {card.icon}
           </div>
           <h3 className="mb-2 font-semibold text-zinc-900 dark:text-white">
-            {card.title}
+            {t(card.titleKey)}
           </h3>
-          <p className="text-sm text-zinc-500">{card.desc}</p>
+          <p className="text-sm text-zinc-500">{t(card.descKey)}</p>
+          <div className="mt-3 flex items-center text-xs font-medium text-zinc-400 transition group-hover:text-zinc-900 dark:group-hover:text-white">
+            {tc("learnMore")}
+            <svg className="ml-1 h-3 w-3 transition group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+            </svg>
+          </div>
         </Link>
       ))}
     </div>
